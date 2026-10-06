@@ -1,0 +1,17 @@
+:root {
+  --font-body: var(--font-roboto);
+  --font-display: var(--font-russo);
+  --font-ui: var(--font-unbounded);
+  --font-editorial: var(--font-oswald);
+  --font-story-display: var(--font-cormorant);
+  --color-background: #020304;
+  --color-surface: #0b1114;
+  --color-text: #f3f6f5;
+  --color-text-muted: #9ca8ad;
+  --color-accent: #58c8ed;
+  --color-cloud-background: #f6f8f8;
+  --header-height: 5rem;
+  --page-gutter: clamp(1.25rem, 3vw, 3rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
+}

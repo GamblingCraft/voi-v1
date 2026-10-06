@@ -1,0 +1,148 @@
+.wideMedia {
+  height: clamp(320px, 50vw, 700px);
+}
+.shapeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 70px;
+}
+.shapeTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  padding: 20px 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+.shapeMedia {
+  display: block;
+  height: clamp(280px, 32vw, 490px);
+  text-decoration: none;
+}
+.shapeTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0 18px;
+  text-decoration: none;
+}
+.shapeTitle h3 {
+  font-size: 56px;
+}
+.shapeTitle > span {
+  font-size: 27px;
+  transition: transform 0.2s;
+}
+.shapeTitle:hover > span {
+  transform: translate(3px, -3px);
+}
+.shapeGrid p {
+  max-width: 330px;
+}
+.servingSection {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  min-height: 760px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.servingCopy {
+  padding: 90px var(--page-gutter);
+  align-self: center;
+}
+.servingCopy h2 {
+  font-size: clamp(58px, 6.5vw, 110px);
+  margin: 70px 0 35px;
+}
+.servingCopy > p {
+  max-width: 330px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #bec9c5;
+}
+.servingCopy a {
+  margin-top: 35px;
+}
+.servingMedia {
+  padding: 35px;
+}
+.storyLink {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8vw;
+  align-items: center;
+}
+.storyMedia {
+  height: 560px;
+}
+.storyLink h2 {
+  font-size: clamp(44px, 5vw, 82px);
+  margin: 45px 0 30px;
+}
+.storyLink p {
+  max-width: 390px;
+  margin-bottom: 35px;
+}
+
+@media (max-width: 1000px) {
+  .servingSection {
+    min-height: 640px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .servingCopy {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  .servingCopy h2 {
+    margin-top: 45px;
+  }
+  .servingMedia {
+    padding: 25px 25px 25px 0;
+  }
+  .storyLink {
+    gap: 35px;
+  }
+  .storyMedia {
+    height: 430px;
+  }
+}
+
+@media (max-width: 650px) {
+  .wideMedia {
+    height: 310px;
+  }
+  .shapeGrid {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+    gap: 35px;
+  }
+  .shapeMedia {
+    height: 360px;
+  }
+  .shapeTitle h3 {
+    font-size: 50px;
+  }
+  .servingSection,
+  .storyLink {
+    grid-template-columns: 1fr;
+  }
+  .servingCopy {
+    padding: 60px var(--page-gutter) 40px;
+  }
+  .servingCopy h2 {
+    font-size: 17vw;
+  }
+  .servingMedia {
+    height: 390px;
+    padding: 0 var(--page-gutter) 25px;
+  }
+  .storyMedia {
+    height: 350px;
+  }
+  .storyLink h2 {
+    font-size: 11vw;
+    margin-top: 25px;
+  }
+}

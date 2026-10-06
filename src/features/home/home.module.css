@@ -1,0 +1,7 @@
+.page {
+  --font-body: var(--font-cormorant);
+  --font-display: var(--font-cormorant);
+  --font-ui: var(--font-cormorant);
+  --font-editorial: var(--font-cormorant);
+  font-family: var(--font-cormorant), Georgia, serif;
+}

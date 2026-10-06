@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ВОЙ
 
-## Getting Started
+Русская версия сайта ВОЙ на Next.js App Router. Проект находится на этапе прототипа: каталог и отзывы содержат согласованные демо-данные, оформление заказа и серверная авторизация пока не подключены.
 
-First, run the development server:
+## Работа с проектом
 
-```bash
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run check
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`check` запускает ESLint, TypeScript и тесты доменной логики. `format` / `format:check` управляют форматированием; `audit:project` ищет кандидатов на неиспользуемые исходники и публичные файлы без изменения файлов.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Где править
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Маршруты и metadata — `src/app`, русские публичные URL сопоставляются с внутренним `[locale]` через `src/proxy.ts`.
+- Общая шапка, меню, подвал — `src/components/layout`.
+- Каталог и товар — `src/features/catalog`, корзина — `src/features/cart`.
+- Главная и анимации — `src/features/home`.
+- Посадочные — `src/features/content`, связи товаров со статьями — `src/features/blog`.
+- Шрифты, токены, базовые стили — `src/styles`.
 
-## Learn More
+Подробная карта модулей и границ Server / Client Components: [архитектура](docs/architecture.md). Сценарий главной: [секции после облаков](docs/home-product-story.md).
 
-To learn more about Next.js, take a look at the following resources:
+Публикуется только русский язык. Переключатель языка сохраняется, остальные версии недоступны. Категории: `/catalog/formed`, `/catalog/loose`, `/catalog/block`. URL товара строится из названия без веса: `/catalog/formed/formovannyj-lyod-kub`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Индексация прототипа закрыта. Публичное включение требует `SITE_INDEXABLE=true` и корректного `NEXT_PUBLIC_SITE_URL`; правила находятся в `src/lib/seo.ts` и `next.config.ts`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Неиспользуемые исходники, медиа и исторические материалы перенесены в соседний `../voi-archive/refactor-2026-10-06`. Они не входят в приложение. Список и контрольные суммы находятся в `manifest.json` архива.

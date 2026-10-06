@@ -1,0 +1,37 @@
+.inquirySection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10vw;
+  background: var(--ice);
+  padding: 90px var(--page-gutter) 110px;
+}
+.inquirySection h2 {
+  font-size: clamp(65px, 7vw, 120px);
+  margin: 40px 0 30px;
+}
+.inquirySection > div > p:last-child {
+  max-width: 360px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+  .inquirySection {
+    gap: 6vw;
+  }
+}
+
+@media (max-width: 650px) {
+  .inquirySection {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 65px var(--page-gutter);
+  }
+  .inquirySection h2 {
+    font-size: 18vw;
+    margin-top: 30px;
+  }
+  .inquirySection > div > p:last-child {
+    font-size: 16px;
+  }
+}

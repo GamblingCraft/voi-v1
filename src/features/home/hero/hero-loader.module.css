@@ -1,0 +1,176 @@
+.loader {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+  color: #eceeee;
+  isolation: isolate;
+}
+
+.opening {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+  color: #eceeee;
+  pointer-events: auto;
+}
+
+.openingTitle {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: 10.5vw;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  perspective: 800px;
+  text-transform: uppercase;
+}
+
+.openingWord {
+  position: absolute;
+  display: block;
+  margin: 0;
+  white-space: nowrap;
+  transform-origin: center bottom;
+  will-change: transform, opacity;
+}
+
+.openingWord:nth-child(1) {
+  top: calc(50% - 13vw);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.openingWord:nth-child(2) {
+  top: calc(50% + 2vw);
+  left: 15vw;
+}
+
+.openingWord:nth-child(3) {
+  top: calc(50% + 2vw);
+  right: 15vw;
+}
+
+.openingWord span {
+  display: inline-block;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+}
+
+.elementAccent {
+  color: #48c5f3;
+}
+
+.openingMedia {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #000;
+  opacity: 0;
+  clip-path: inset(0 50%);
+  contain: layout paint;
+  isolation: isolate;
+  transform: translate3d(0, 0, 0);
+  transform-origin: 0 0;
+  will-change: transform, width, height, clip-path, border-radius, opacity;
+}
+
+.openingMedia video,
+.openingMedia img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  backface-visibility: hidden;
+  transform-origin: 50% 50%;
+}
+
+.openingMedia video {
+  z-index: 1;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.openingMedia img {
+  z-index: 2;
+  display: none;
+  object-fit: cover;
+  background: #000;
+  transform: translateZ(0);
+}
+
+.preloader {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background: #000;
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    visibility 0.9s;
+}
+
+.preloaderDone {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loadBrand {
+  width: 8rem;
+  height: 8rem;
+  color: #fff;
+  filter: invert(1);
+}
+
+.track {
+  width: 12rem;
+  height: 1px;
+  background: rgb(255 255 255 / 15%);
+}
+
+.fill {
+  width: 0;
+  height: 100%;
+  background: #fff;
+}
+
+.counter {
+  color: rgb(255 255 255 / 72%);
+  font-family: var(--font-body, sans-serif), sans-serif;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 47.99rem) {
+  .openingTitle {
+    font-size: 11.5vw;
+  }
+
+  .openingWord:nth-child(2) {
+    left: 6vw;
+  }
+
+  .openingWord:nth-child(3) {
+    right: 6vw;
+  }
+
+  .openingWord:nth-child(2),
+  .openingWord:nth-child(3) {
+    top: 55%;
+  }
+}

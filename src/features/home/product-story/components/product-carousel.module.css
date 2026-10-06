@@ -1,0 +1,238 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--story-paper);
+  color: var(--story-ink);
+}
+.intro {
+  position: absolute;
+  z-index: 2;
+  top: 23%;
+  left: 5%;
+  width: 24%;
+}
+.intro h2 {
+  margin: 0;
+  font:
+    400 clamp(64px, 7.7vw, 148px)/0.88 var(--font-story-display),
+    Georgia,
+    serif;
+  letter-spacing: -0.035em;
+}
+.intro em {
+  font:
+    400 0.75em/1.4 var(--font-story-script),
+    sans-serif;
+  color: var(--story-accent);
+}
+.description {
+  max-width: 260px;
+  margin: 24px 0 0;
+  font-size: clamp(18px, 1.4vw, 24px);
+  line-height: 1.6;
+  color: var(--story-muted);
+}
+.visual {
+  position: absolute;
+  inset: 13% 25% 9% 23%;
+  touch-action: pan-y;
+}
+.surface {
+  position: absolute;
+  inset: 12% 4% 5%;
+  background: #edf1f2;
+  border-radius: 42% 26% 35% 24%;
+  transform: rotate(-7deg);
+}
+.pack {
+  object-fit: contain;
+  transform: translate(-8%, -1%) rotate(-8deg) scale(1.13);
+  filter: drop-shadow(0 20px 24px #182e3a16);
+}
+.ice {
+  position: absolute;
+  width: 54%;
+  height: 53%;
+  bottom: -2%;
+  right: -4%;
+  animation: arrive 0.5s ease both;
+  filter: drop-shadow(0 17px 18px #182e3a14);
+}
+.ice img {
+  object-fit: contain;
+}
+.purchase {
+  --catalog-card-title-size: 32px;
+  --catalog-card-mobile-title-size: 26px;
+  position: absolute;
+  width: 280px;
+  top: 18%;
+  right: 4%;
+}
+.controls {
+  position: absolute;
+  bottom: 7%;
+  left: 5%;
+  right: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.arrows {
+  display: flex;
+  gap: 10px;
+}
+.arrows button {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid #cbd8dd;
+  background: transparent;
+  color: var(--story-ink);
+  font-size: 26px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.arrows button:last-child {
+  background: var(--story-ink);
+  color: #fff;
+  border-color: var(--story-ink);
+}
+.arrows button:hover {
+  background: var(--story-accent);
+  color: #fff;
+}
+.carousel button:focus-visible {
+  outline: 2px solid var(--story-accent);
+  outline-offset: 5px;
+}
+.status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.carousel[data-compact] :is(.intro, .purchase, .controls) {
+  visibility: hidden;
+}
+.carousel[data-compact] .surface {
+  background: transparent;
+}
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@media (max-width: 60rem) {
+  .intro {
+    top: 13%;
+    left: 6%;
+    width: 88%;
+  }
+  .intro h2 {
+    font-size: 40px;
+    line-height: 0.92;
+  }
+  .intro h2 br {
+    display: none;
+  }
+  .intro h2 br::after {
+    content: " ";
+  }
+  .intro h2 em {
+    display: block;
+  }
+  .description {
+    max-width: 240px;
+    font-size: 11px;
+    margin-top: 8px;
+  }
+  .visual {
+    top: 29%;
+    bottom: auto;
+    height: 35%;
+    left: 4%;
+    right: 8%;
+  }
+  .purchase {
+    top: 32%;
+    right: 6%;
+    width: 260px;
+  }
+  .controls {
+    bottom: 2%;
+    left: 6%;
+    right: 6%;
+  }
+  .arrows button {
+    width: 44px;
+    height: 44px;
+  }
+}
+@media (max-width: 60rem) and (max-height: 740px) {
+  .description {
+    display: none;
+  }
+  .intro h2 {
+    font-size: 34px;
+  }
+  .intro {
+    top: 15%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ice {
+    animation: none;
+  }
+  .arrows button {
+    transition: none;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .intro {
+    top: 12%;
+    width: 58%;
+  }
+  .intro h2 {
+    font-size: clamp(30px, 8vw, 40px);
+  }
+  .description {
+    display: none;
+  }
+  .visual {
+    top: 20%;
+    height: 35%;
+    left: 4%;
+    right: 8%;
+  }
+  .purchase {
+    top: auto;
+    bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+    left: 6%;
+    right: 6%;
+    width: auto;
+    z-index: 2;
+  }
+  .controls {
+    top: 12%;
+    bottom: auto;
+    left: auto;
+    right: 6%;
+    z-index: 3;
+  }
+}

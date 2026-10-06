@@ -1,0 +1,86 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { ShoppingCart } from "@deemlol/next-icons";
+import type { Locale } from "@/i18n/config";
+import { useShop, cartQuantity, cartTotal } from "@/features/cart/shop-store";
+import { CartPreview } from "@/features/cart/components/cart-preview";
+import triggerStyles from "./header-cart-trigger.module.css";
+export function HeaderCartButton({
+  locale,
+  label,
+}: {
+  locale: Locale;
+  label: string;
+  itemCount?: number;
+}) {
+  const { items } = useShop();
+  const count = cartQuantity(items);
+  const total = cartTotal(items);
+  const [open, setOpen] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    function outside(event: PointerEvent) {
+      if (!root.current?.contains(event.target as Node)) setOpen(false);
+    }
+    function escape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setOpen(false);
+        trigger.current?.focus();
+      }
+    }
+    document.addEventListener("pointerdown", outside);
+    document.addEventListener("keydown", escape);
+    return () => {
+      document.removeEventListener("pointerdown", outside);
+      document.removeEventListener("keydown", escape);
+    };
+  }, [open]);
+  return (
+    <div
+      ref={root}
+      className={triggerStyles.root}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => {
+        if (!root.current?.contains(document.activeElement)) setOpen(false);
+      }}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node))
+          setOpen(false);
+      }}
+    >
+      <button
+        ref={trigger}
+        className={triggerStyles.cartButton}
+        type="button"
+        aria-label={`${label.replace("{count}", String(count))}. Сумма ${total} рублей`}
+        aria-expanded={open}
+        aria-controls="header-cart-preview"
+        onClick={() => setOpen(true)}
+      >
+        <span className={triggerStyles.iconWrap}>
+          <ShoppingCart size={22} strokeWidth={1.6} aria-hidden="true" />
+          <span className={triggerStyles.badge} aria-hidden="true">
+            {count > 99 ? "99+" : count}
+          </span>
+        </span>
+        {count > 0 && (
+          <span className={triggerStyles.total}>
+            {total.toLocaleString("ru-RU")} ₽
+          </span>
+        )}
+      </button>
+      {open && (
+        <CartPreview
+          locale={locale}
+          onClose={() => {
+            setOpen(false);
+            trigger.current?.focus();
+          }}
+        />
+      )}
+    </div>
+  );
+}

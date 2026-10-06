@@ -1,0 +1,80 @@
+.media {
+  --media-bg: #e5e8e5;
+  --media-fg: #65736e;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--media-bg);
+  color: var(--media-fg);
+  border: 1px solid color-mix(in srgb, var(--media-fg) 15%, transparent);
+}
+
+.dark {
+  --media-bg: #242e2e;
+  --media-fg: #a9b7b4;
+}
+.ice {
+  --media-bg: #c9dfe2;
+  --media-fg: #45686c;
+}
+.top,
+.bottom {
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  font:
+    10px/1.5 var(--font-body, sans-serif),
+    sans-serif;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.bottom {
+  align-items: end;
+}
+.bottom span:first-child {
+  max-width: 75%;
+}
+.corner {
+  font-size: 18px;
+}
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.cross {
+  font:
+    200 42px/1 var(--font-body, sans-serif),
+    sans-serif;
+  opacity: 0.5;
+}
+.centerLabel {
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+.shape {
+  width: min(66%, 270px);
+  max-height: 65%;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+@media (max-width: 600px) {
+  .top,
+  .bottom {
+    padding: 14px;
+    font-size: 9px;
+  }
+}

@@ -1,0 +1,198 @@
+.backdrop {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  background: #020304;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 300ms ease,
+    visibility 0s linear 900ms;
+}
+
+.backdropOpen {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 300ms ease,
+    visibility 0s;
+}
+
+.navigation {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
+  background: transparent;
+  color: #f6f8f8;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 300ms ease,
+    visibility 0s linear 900ms;
+}
+.navigationOpen {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 300ms ease,
+    visibility 0s;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1.5rem;
+  right: var(--page-gutter);
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.8rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.closeButton span:last-child {
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+.links {
+  position: absolute;
+  top: 15%;
+  right: var(--page-gutter);
+  display: flex;
+  width: min(48vw, 54rem);
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+}
+
+.link {
+  overflow: hidden;
+  color: inherit;
+  font-family: var(--font-ui), sans-serif;
+  font-size: clamp(1.75rem, 3.35vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  text-align: right;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.link > span {
+  display: block;
+  transform: translateY(115%) rotate(3deg);
+  transform-origin: right bottom;
+  transition:
+    color 180ms ease,
+    transform 650ms var(--ease-out);
+}
+
+.navigationOpen .link > span {
+  transform: translateY(0) rotate(0);
+  transition-delay: calc(180ms + var(--link-index) * 55ms);
+}
+
+.link:hover > span {
+  color: var(--color-accent);
+}
+.mobileTools {
+  display: none;
+}
+
+@media (max-width: 47.99rem) {
+  .navigation {
+    overflow-y: auto;
+    padding: 100px var(--page-gutter) 32px;
+  }
+  .closeButton {
+    top: 1rem;
+    font-size: 0.75rem;
+  }
+
+  .links {
+    position: static;
+    width: 100%;
+    gap: 1.2rem;
+  }
+
+  .link {
+    font-size: clamp(1.375rem, 7.2vw, 2.625rem);
+  }
+  .mobileTools {
+    display: block;
+    margin-top: 36px;
+  }
+  .searchForm {
+    display: flex;
+    border-bottom: 1px solid #ffffff50;
+  }
+  .searchForm input {
+    min-width: 0;
+    flex: 1;
+    border: 0;
+    padding: 12px 0;
+    background: transparent;
+    color: inherit;
+    font:
+      16px/1.4 var(--font-body),
+      sans-serif;
+  }
+  .searchForm input::placeholder {
+    color: #c5cdcf;
+  }
+  .searchForm button {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    min-height: 48px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+  .mobileContacts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .mobileContacts > a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    color: inherit;
+    font-size: 15px;
+  }
+  .mobileTools :is(a, input, button):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .navigation,
+  .link > span {
+    transition-duration: 1ms;
+    transition-delay: 0s;
+  }
+}
