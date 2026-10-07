@@ -46,15 +46,20 @@ export const productStoryContent = {
   blog: {
     title: "Lorem ipsum",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    actionLabel: "Lorem",
     items: [
       {
         id: "feature",
+        readingMinutes: 5,
+        tags: ["Lorem", "Ipsum"],
         title: "Lorem ipsum dolor sit amet",
         excerpt: paragraph,
         media,
       },
       {
         id: "second",
+        readingMinutes: 3,
+        tags: ["Dolor", "Sit amet"],
         title: "Consectetur adipiscing elit",
         excerpt:
           "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
@@ -62,6 +67,8 @@ export const productStoryContent = {
       },
       {
         id: "third",
+        readingMinutes: 4,
+        tags: ["Lorem", "Consectetur"],
         title: "Sed do eiusmod tempor",
         excerpt:
           "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",

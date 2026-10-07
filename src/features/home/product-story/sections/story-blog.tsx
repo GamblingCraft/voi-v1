@@ -1,5 +1,5 @@
 import type { ProductStoryContent } from "../story.types";
-import { MediaPlaceholder } from "../components/media-placeholder";
+import { BlogCard } from "../components/blog-card";
 import styles from "./story-blog.module.css";
 
 export function StoryBlog({
@@ -20,16 +20,12 @@ export function StoryBlog({
       </div>
       <div className={styles.layout}>
         {content.items.map((item, index) => (
-          <article
+          <BlogCard
             key={item.id}
+            article={item}
+            actionLabel={content.actionLabel}
             className={index === 0 ? styles.feature : styles.article}
-          >
-            <div className={styles.content}>
-              <MediaPlaceholder label={item.media} className={styles.media} />
-              <h3>{item.title}</h3>
-              <p>{item.excerpt}</p>
-            </div>
-          </article>
+          />
         ))}
       </div>
     </section>
