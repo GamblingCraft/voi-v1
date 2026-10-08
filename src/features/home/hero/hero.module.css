@@ -2,8 +2,8 @@
   position: relative;
   min-height: 100svh;
   overflow: hidden;
-  background: #eceeee;
-  color: #161818;
+  background: #000;
+  color: #eceeee;
   cursor: grab;
   touch-action: pan-y;
 }
@@ -31,4 +31,12 @@
   border: 0;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+.soundControl {
+  position: absolute;
+  z-index: 3;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  color: #fff;
 }

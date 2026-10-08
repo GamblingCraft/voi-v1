@@ -1,9 +1,6 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
-import { useEffect, useMemo, useRef, useState } from "react";
-import { BrandMark } from "@/components/brand/brand-mark";
+import { useMemo, useRef, type ReactNode } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { useHeroIntroAnimation } from "./use-hero-intro-animation";
 import styles from "./hero-loader.module.css";
@@ -12,35 +9,33 @@ type HeroLoaderProps = {
   isHeroReady: boolean;
   dictionary: Dictionary["intro"];
   onComplete: () => void;
+  onReveal: () => void;
+  soundControl: ReactNode;
 };
 
 const openingShots = [
-  "/media/hero/opening/1.png",
-  "/media/hero/opening/2.png",
-  "/media/hero/opening/3.png",
-  "/media/hero/opening/4.png",
-  "/media/hero/opening/5.png",
-  "/media/hero/opening/6.png",
-  "/media/hero/opening/7.png",
+  "#f6f8f8",
+  "#d4d8da",
+  "#a1a8ac",
+  "#687279",
+  "#303a40",
+  "#000000",
 ];
 
 export function HeroLoader({
   isHeroReady,
   dictionary,
   onComplete,
+  onReveal,
+  soundControl,
 }: HeroLoaderProps) {
-  const [loadedShots, setLoadedShots] = useState(0);
-  const fillRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const wordRefs = useRef<Array<HTMLParagraphElement | null>>([]);
   const letterRefs = useRef<Array<Array<HTMLSpanElement | null>>>([]);
-  const shotRefs = useRef<Array<HTMLImageElement | null>>([]);
+  const shotRefs = useRef<Array<HTMLDivElement | null>>([]);
   const animationRefs = useMemo(
     () => ({
-      fill: fillRef,
-      counter: counterRef,
       media: mediaRef,
       video: videoRef,
       words: wordRefs,
@@ -49,28 +44,18 @@ export function HeroLoader({
     }),
     [],
   );
-  const { preloaderDone } = useHeroIntroAnimation({
-    isReady: isHeroReady && loadedShots === openingShots.length,
+  useHeroIntroAnimation({
+    isReady: isHeroReady,
     iceText: dictionary.ice,
     refs: animationRefs,
     onComplete,
+    onReveal,
   });
   const words = [dictionary.lead, dictionary.ice, dictionary.element];
 
-  useEffect(() => {
-    const completedShots = shotRefs.current.reduce(
-      (count, image) => count + (image?.complete ? 1 : 0),
-      0,
-    );
-    setLoadedShots((count) => Math.max(count, completedShots));
-  }, []);
-
-  const registerShotLoad = () => {
-    setLoadedShots((count) => Math.min(count + 1, openingShots.length));
-  };
-
   return (
     <div className={styles.loader} aria-label={dictionary.ariaLabel}>
+      {soundControl}
       <div className={styles.opening} aria-hidden="true">
         <div className={styles.openingTitle}>
           {words.map((word, wordIndex) => (
@@ -103,30 +88,16 @@ export function HeroLoader({
           <video ref={videoRef} muted playsInline preload="auto">
             <source src="/media/hero/main.mp4" type="video/mp4" />
           </video>
-          {openingShots.map((source, index) => (
-            <img
-              key={source}
+          {openingShots.map((color, index) => (
+            <div
+              key={color}
               ref={(node) => {
                 shotRefs.current[index] = node;
               }}
-              src={source}
-              alt=""
-              onLoad={registerShotLoad}
-              onError={registerShotLoad}
+              className={styles.openingShot}
+              style={{ backgroundColor: color }}
             />
           ))}
-        </div>
-      </div>
-
-      <div
-        className={`${styles.preloader} ${preloaderDone ? styles.preloaderDone : ""}`}
-      >
-        <BrandMark className={styles.loadBrand} priority />
-        <div className={styles.track} aria-hidden="true">
-          <div ref={fillRef} className={styles.fill} />
-        </div>
-        <div ref={counterRef} className={styles.counter} aria-live="polite">
-          0%
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { localizePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import styles from "./navigation-overlay.module.css";
 import { LanguageSelector } from "./header/language-selector";
-import { Search } from "@deemlol/next-icons";
+import { SoundToggle } from "./site-audio";
 
 const primaryLinks = [
   { href: "/product", key: "product" },
@@ -126,36 +126,13 @@ export function NavigationOverlay({
           ))}
         </div>
         <div className={styles.mobileTools}>
-          <form
-            role="search"
-            className={styles.searchForm}
-            onSubmit={(event) => {
-              event.preventDefault();
-              const query = String(
-                new FormData(event.currentTarget).get("q") ?? "",
-              ).trim();
-              if (query)
-                onNavigate(
-                  `${localizePath("/catalog", locale)}?q=${encodeURIComponent(query)}#discover`,
-                );
-            }}
-          >
-            <input
-              name="q"
-              type="search"
-              aria-label={headerDictionary.searchPlaceholder}
-              placeholder={headerDictionary.searchPlaceholder}
-            />
-            <button
-              type="submit"
-              aria-label={headerDictionary.searchSubmitLabel}
-            >
-              <Search size={22} aria-hidden="true" />
-            </button>
-          </form>
-          <div className={styles.mobileContacts}>
-            <a href="tel:+73952000000">+7 (3952) 00-00-00</a>
+          <a className={styles.mobilePhone} href="tel:+73952000000">
+            +7 (3952) 00-00-00
+          </a>
+          <div className={styles.utilityRow}>
+            <SoundToggle />
             <LanguageSelector
+              theme="dark"
               currentLocale={locale}
               label={headerDictionary.languageLabel}
               groupLabel={headerDictionary.languageGroupLabel}

@@ -1,7 +1,8 @@
 .page {
-  --font-body: var(--font-cormorant);
-  --font-display: var(--font-cormorant);
-  --font-ui: var(--font-cormorant);
-  --font-editorial: var(--font-cormorant);
-  font-family: var(--font-cormorant), Georgia, serif;
+  --font-body: var(--font-myriad-pro);
+  --font-display: var(--font-tt-norms-expanded);
+  --font-ui: var(--font-myriad-pro);
+  --font-editorial: var(--font-tt-norms-expanded);
+  font-family: var(--font-myriad-pro), Arial, sans-serif;
+  font-synthesis: none;
 }

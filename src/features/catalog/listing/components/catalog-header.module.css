@@ -40,6 +40,6 @@
     padding: 8px 0 24px;
   }
   .heading h1 {
-    font-size: 38px;
+    font-size: clamp(24px, 6.5vw, 32px);
   }
 }

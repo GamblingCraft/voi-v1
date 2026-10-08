@@ -46,7 +46,7 @@ export function ProductLanding() {
             обращении.
           </p>
         </div>
-        <div className={productStyles.shapeGrid}>
+        <div className={productStyles.formatList}>
           {iceFormats.map((format) => (
             <article key={format.id}>
               <h3>{format.name}</h3>
@@ -67,7 +67,10 @@ export function ProductLanding() {
           />
         </div>
       </section>
-      <section className={sharedStyles.section} data-header-theme="light">
+      <section
+        className={`${sharedStyles.section} ${productStyles.formsSection}`}
+        data-header-theme="light"
+      >
         <SectionHeading
           label="Ассортимент"
           title={
@@ -92,6 +95,7 @@ export function ProductLanding() {
                 <MediaPlaceholder
                   label={`${product.form} · предметная съёмка`}
                   shape={product.id}
+                  src={product.image}
                   index={`0${index + 3}`}
                   tone={index === 1 ? "ice" : "light"}
                 />

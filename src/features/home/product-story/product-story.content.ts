@@ -1,7 +1,6 @@
 import "server-only";
 
 const heading = ["Lorem", "ipsum"];
-const script = "dolor sit amet";
 const paragraph =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 const media = "Lorem ipsum";
@@ -9,16 +8,31 @@ const media = "Lorem ipsum";
 // Placeholder copy for the Russian prototype; CMS content will replace it later.
 export const productStoryContent = {
   ariaLabel: "Lorem ipsum",
-  origin: { title: heading, script, note: paragraph, waterMedia: media },
+  origin: { title: heading, note: paragraph, waterMedia: media },
   production: {
     eyebrow: "Lorem ipsum",
     steps: [
-      { id: "water", title: heading, description: paragraph, media },
-      { id: "freezing", title: heading, description: paragraph, media },
-      { id: "shaping", title: heading, description: paragraph, media },
+      {
+        id: "water",
+        title: heading,
+        description: paragraph,
+        media: "Видео: вода для производства льда",
+      },
+      {
+        id: "freezing",
+        title: heading,
+        description: paragraph,
+        media: "Видео: заморозка льда",
+      },
+      {
+        id: "shaping",
+        title: heading,
+        description: paragraph,
+        media: "Видео: упаковка готового льда",
+      },
     ],
   },
-  ritual: { title: "Lorem ipsum", script, media },
+  ritual: { title: "Lorem ipsum", media },
   text: {
     title: "Lorem ipsum",
     paragraphs: [
@@ -28,13 +42,13 @@ export const productStoryContent = {
   },
   journey: {
     title: "Lorem ipsum",
-    script,
+
     ariaLabel: "Lorem ipsum",
     baikal: { description: paragraph, media },
     water: { title: heading, description: paragraph, media },
     production: {
       title: heading,
-      script,
+
       description: paragraph,
       media,
       teamMedia: media,
@@ -42,24 +56,27 @@ export const productStoryContent = {
     form: { title: heading, description: paragraph, media, detailMedia: media },
     glass: { title: heading, description: paragraph, media },
   },
-  finale: { title: heading, script, media, note: paragraph },
+  finale: { title: heading, media, note: paragraph },
   blog: {
     title: "Lorem ipsum",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    actionLabel: "Lorem",
     items: [
       {
         id: "feature",
+        tags: ["Lorem", "Ipsum", "Dolor"],
+        date: "2025-02-19",
+        dateLabel: "19.02.2025",
         readingMinutes: 5,
-        tags: ["Lorem", "Ipsum"],
         title: "Lorem ipsum dolor sit amet",
         excerpt: paragraph,
         media,
       },
       {
         id: "second",
+        tags: ["Dolor", "Sit amet", "Lorem"],
+        date: "2025-02-19",
+        dateLabel: "19.02.2025",
         readingMinutes: 3,
-        tags: ["Dolor", "Sit amet"],
         title: "Consectetur adipiscing elit",
         excerpt:
           "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
@@ -67,11 +84,35 @@ export const productStoryContent = {
       },
       {
         id: "third",
+        tags: ["Consectetur", "Elit", "Lorem"],
+        date: "2025-02-19",
+        dateLabel: "19.02.2025",
         readingMinutes: 4,
-        tags: ["Lorem", "Consectetur"],
         title: "Sed do eiusmod tempor",
         excerpt:
           "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+        media,
+      },
+      {
+        id: "fourth",
+        tags: ["Lorem", "Ipsum", "Amet"],
+        date: "2025-02-19",
+        dateLabel: "19.02.2025",
+        readingMinutes: 6,
+        title: "Ut enim ad minim veniam",
+        excerpt:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        media,
+      },
+      {
+        id: "fifth",
+        tags: ["Dolor", "Lorem", "Elit"],
+        date: "2025-02-19",
+        dateLabel: "19.02.2025",
+        readingMinutes: 4,
+        title: "Duis aute irure dolor in reprehenderit",
+        excerpt:
+          "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         media,
       },
     ],

@@ -21,10 +21,6 @@
   top: var(--scene-offset, 0px);
   width: 100%;
 }
-.origin {
-  --story-paper: var(--color-cloud-background);
-  --scene-height: 450svh;
-}
 .production {
   --story-paper: var(--color-cloud-background);
 }

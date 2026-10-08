@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useLayoutEffect, useRef } from "react";
 import { BrandMark } from "@/components/brand/brand-mark";
 import { HeaderCartButton } from "./header/header-cart-button";
 import { LanguageSelector } from "./header/language-selector";
 import { HeaderSearchButton } from "./header/header-search-button";
-import { useHeaderSurface } from "./header/use-header-surface";
 import { localizePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { useSiteNavigation } from "./site-shell";
@@ -21,14 +20,31 @@ type SiteHeaderProps = {
 export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
   const { isMenuOpen, openMenu } = useSiteNavigation();
   const router = useRouter();
+  const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
-  const { isLightSurface, isScrolled } = useHeaderSurface(headerRef);
+  useLayoutEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const update = () => {
+      const following = document.querySelector<HTMLElement>(
+        "[data-hero-following]",
+      );
+      header.dataset.onHero = String(
+        !!following &&
+          following.getBoundingClientRect().top > header.offsetHeight,
+      );
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [pathname]);
 
   return (
-    <header
-      ref={headerRef}
-      className={`${styles.header} ${isLightSurface ? styles.lightSurface : ""} ${isScrolled ? styles.scrolled : ""}`}
-    >
+    <header ref={headerRef} className={styles.header}>
       <a className={styles.phone} href="tel:+73952000000">
         +7 (3952) 00-00-00
       </a>

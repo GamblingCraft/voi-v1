@@ -1,5 +1,5 @@
 .story {
-  --font-story-script: var(--font-body), sans-serif;
+  --font-story-display: var(--font-tt-norms-expanded);
   --story-paper: #fff;
   --story-ink: #182e3a;
   --story-muted: #58717b;
@@ -16,38 +16,27 @@
 .heading {
   margin: 0;
   font:
-    400 var(--story-heading-size, clamp(52px, 7.7vw, 148px))/0.9
+    400 var(--story-heading-size, clamp(40px, 6vw, 112px))/1.05
       var(--font-story-display),
-    Georgia,
-    serif;
-  letter-spacing: -0.055em;
+    Arial,
+    sans-serif;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
   text-wrap: balance;
 }
 .heading > span {
   display: block;
 }
-.script {
-  font-style: normal;
-  display: block;
-  color: var(--story-accent);
-  font:
-    400 clamp(32px, 4.1vw, 78px)/0.9 var(--font-story-script),
-    sans-serif;
-  letter-spacing: -0.045em;
-}
 .copy {
   margin: 0;
   font:
-    400 clamp(18px, 1.4vw, 24px)/1.4 var(--font-body, serif),
+    400 clamp(18px, 1.4vw, 20px)/1.5 var(--font-body, sans-serif),
     sans-serif;
   white-space: pre-line;
 }
 @media (max-width: 43.75rem) {
   .heading {
-    font-size: var(--story-heading-size, 15vw);
-  }
-  .script {
-    font-size: 9vw;
+    font-size: var(--story-heading-size, 12vw);
   }
   .copy {
     font-size: 18px;

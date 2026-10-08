@@ -1,148 +1,155 @@
+.formatList {
+  margin: 48px 0;
+}
+.formatList article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto;
+  gap: 32px;
+  align-items: start;
+  border-top: 1px solid var(--line);
+  padding: 32px 0;
+}
+.formatList h3 {
+  font-size: clamp(20px, 2vw, 28px);
+}
+.formatList p {
+  margin: 0;
+}
 .wideMedia {
-  height: clamp(320px, 50vw, 700px);
+  height: 60svh;
+  min-height: 360px;
+}
+.wideMedia > div {
+  border: 0;
+}
+.formsSection {
+  background: #e5edee;
 }
 .shapeGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  margin-top: 70px;
+  gap: 32px;
+  margin-top: 48px;
+}
+.shapeGrid article:nth-child(2) {
+  padding-top: 64px;
 }
 .shapeTop {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
+  padding: 16px 0;
   border-top: 1px solid var(--line);
-  padding: 20px 0;
-  font-size: 11px;
+  font-size: 14px;
   color: var(--muted);
 }
 .shapeMedia {
   display: block;
-  height: clamp(280px, 32vw, 490px);
-  text-decoration: none;
+  height: clamp(280px, 30vw, 480px);
+}
+.shapeMedia > div {
+  border: 0;
 }
 .shapeTitle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 25px 0 18px;
-  text-decoration: none;
+  display: block;
+  padding: 24px 0 16px;
 }
 .shapeTitle h3 {
-  font-size: 56px;
-}
-.shapeTitle > span {
-  font-size: 27px;
-  transition: transform 0.2s;
-}
-.shapeTitle:hover > span {
-  transform: translate(3px, -3px);
+  font-size: clamp(24px, 2.5vw, 40px);
 }
 .shapeGrid p {
-  max-width: 330px;
+  max-width: 40ch;
 }
 .servingSection {
   display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  min-height: 760px;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   background: var(--ink);
   color: var(--paper);
+  min-height: 85svh;
 }
 .servingCopy {
-  padding: 90px var(--page-gutter);
+  padding: 80px var(--page-gutter);
   align-self: center;
 }
 .servingCopy h2 {
-  font-size: clamp(58px, 6.5vw, 110px);
-  margin: 70px 0 35px;
+  font-size: clamp(28px, 3.2vw, 56px);
+  margin: 0 0 32px;
 }
-.servingCopy > p {
-  max-width: 330px;
+.servingCopy p {
+  max-width: 38ch;
   font-size: 18px;
-  line-height: 1.6;
-  color: #bec9c5;
+  line-height: 1.5;
+  color: #bdcbcf;
 }
 .servingCopy a {
-  margin-top: 35px;
+  margin-top: 16px;
 }
 .servingMedia {
-  padding: 35px;
+  min-height: 65svh;
+}
+.servingMedia > div {
+  border: 0;
+  --media-bg: #344b53;
 }
 .storyLink {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
   gap: 8vw;
   align-items: center;
 }
 .storyMedia {
-  height: 560px;
+  height: 60svh;
+  min-height: 360px;
+}
+.storyMedia > div {
+  border: 0;
 }
 .storyLink h2 {
-  font-size: clamp(44px, 5vw, 82px);
-  margin: 45px 0 30px;
+  font-size: clamp(28px, 3.2vw, 56px);
+  margin: 0 0 24px;
 }
 .storyLink p {
-  max-width: 390px;
-  margin-bottom: 35px;
+  margin-bottom: 32px;
 }
-
-@media (max-width: 1000px) {
-  .servingSection {
-    min-height: 640px;
-    grid-template-columns: 1fr 1fr;
+@media (max-width: 800px) {
+  .formatList article {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding: 24px 0;
   }
-  .servingCopy {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-  .servingCopy h2 {
-    margin-top: 45px;
-  }
-  .servingMedia {
-    padding: 25px 25px 25px 0;
-  }
-  .storyLink {
-    gap: 35px;
-  }
-  .storyMedia {
-    height: 430px;
-  }
-}
-
-@media (max-width: 650px) {
-  .wideMedia {
-    height: 310px;
+  .formatList article a {
+    justify-self: start;
   }
   .shapeGrid {
-    grid-template-columns: 1fr;
-    margin-top: 40px;
-    gap: 35px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+  .shapeGrid article:nth-child(2) {
+    padding-top: 0;
   }
   .shapeMedia {
-    height: 360px;
+    height: 44svh;
   }
-  .shapeTitle h3 {
-    font-size: 50px;
+  .wideMedia {
+    height: 44svh;
+    min-height: 0;
   }
   .servingSection,
   .storyLink {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .servingCopy {
-    padding: 60px var(--page-gutter) 40px;
+    padding: 64px var(--page-gutter);
   }
-  .servingCopy h2 {
-    font-size: 17vw;
+  .servingCopy h2,
+  .storyLink h2 {
+    font-size: clamp(24px, 6.5vw, 40px);
   }
   .servingMedia {
-    height: 390px;
-    padding: 0 var(--page-gutter) 25px;
+    min-height: 44svh;
   }
   .storyMedia {
-    height: 350px;
+    min-height: 0;
+    height: 44svh;
   }
-  .storyLink h2 {
-    font-size: 11vw;
-    margin-top: 25px;
+  .storyLink {
+    gap: 32px;
   }
 }

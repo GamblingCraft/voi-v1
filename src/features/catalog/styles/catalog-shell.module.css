@@ -12,7 +12,7 @@
 .catalog :where(h1, h2, h3) {
   margin: 0;
   font-family: var(--font-editorial), sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -31,7 +31,7 @@
   background: #142f40;
   color: #fff;
   font:
-    500 14px/1.4 var(--font-body),
+    400 14px/1.4 var(--font-body),
     sans-serif;
   text-decoration: none;
   transition:
@@ -62,6 +62,7 @@
 }
 .breadcrumb {
   display: flex;
+  flex-wrap: wrap;
   gap: 14px;
   align-items: center;
   font-size: 12px;

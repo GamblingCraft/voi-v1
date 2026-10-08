@@ -1,7 +1,7 @@
 .filters h3 {
   font-family: var(--font-body), sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   margin: 8px 0 28px;
 }
 .filters fieldset {
@@ -12,7 +12,7 @@
 }
 .filters legend {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 12px;
   padding: 0;
 }
@@ -36,7 +36,7 @@
   flex-direction: column;
   gap: 10px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .sort select {
   width: 100%;

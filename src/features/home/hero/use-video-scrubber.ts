@@ -18,8 +18,10 @@ export function useVideoScrubber({
 }) {
   const [ready, setReady] = useState(false);
   const enabledRef = useRef(enabled);
+  const syncPlaybackRef = useRef<(() => void) | null>(null);
   useEffect(() => {
     enabledRef.current = enabled;
+    syncPlaybackRef.current?.();
   }, [enabled]);
 
   useEffect(() => {
@@ -34,15 +36,22 @@ export function useVideoScrubber({
     let renderedTime = 0;
     let duration = 0;
     let visible = true;
+    let covered = false;
     let unlocked = false;
     let initialized = false;
     let dragging = false;
     let pointerId: number | null = null;
     let pointerX = 0;
     let stageWidth = 1;
-    let direction = 1;
     let lastInput = 0;
     let previousFrame = 0;
+    let objectUrl: string | undefined;
+    let readyTimeout: number | undefined;
+    const preloadController = new AbortController();
+    const preloadTimeout = window.setTimeout(
+      () => preloadController.abort(),
+      15000,
+    );
 
     const measure = () => {
       stageWidth = hero.clientWidth;
@@ -74,14 +83,15 @@ export function useVideoScrubber({
     };
     const unlockEvents = ["touchstart", "pointerdown", "keydown"] as const;
     const moveTime = (delta: number) => {
-      targetTime = Math.min(
-        Math.max(0, duration - 0.025),
-        Math.max(0, targetTime + delta),
-      );
-      if (delta !== 0) direction = delta > 0 ? 1 : -1;
+      const end = Math.max(0, duration - 0.025);
+      // The clip is a loop: manual input wraps across either boundary too.
+      targetTime = end > 0 ? (((targetTime + delta) % end) + end) % end : 0;
       lastInput = performance.now();
+      syncPlayback();
     };
     const pointerDown = (event: PointerEvent) => {
+      if (event.target instanceof Element && event.target.closest("button"))
+        return;
       if (event.button !== 0 || !enabledRef.current || duration <= 0) return;
       dragging = true;
       pointerId = event.pointerId;
@@ -109,6 +119,8 @@ export function useVideoScrubber({
         hero.releasePointerCapture(event.pointerId);
     };
     const keyboard = (event: KeyboardEvent) => {
+      if (event.target instanceof Element && event.target.closest("button"))
+        return;
       if (
         !enabledRef.current ||
         !["ArrowLeft", "ArrowRight"].includes(event.key)
@@ -117,7 +129,30 @@ export function useVideoScrubber({
       event.preventDefault();
       moveTime(event.key === "ArrowRight" ? 0.3 : -0.3);
     };
+    const canAnimate = () =>
+      active &&
+      enabledRef.current &&
+      visible &&
+      !covered &&
+      !document.hidden &&
+      !document.body.classList.contains("is-menu-open");
+    const syncPlayback = () => {
+      if (canAnimate()) {
+        if (!frame) frame = requestAnimationFrame(tick);
+      } else {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        previousFrame = 0;
+        video.pause();
+      }
+    };
+    syncPlaybackRef.current = syncPlayback;
     const tick = (now: number) => {
+      frame = 0;
+      if (!canAnimate()) {
+        previousFrame = 0;
+        return;
+      }
       const elapsed = previousFrame
         ? Math.min(0.05, (now - previousFrame) / 1000)
         : 0;
@@ -129,21 +164,14 @@ export function useVideoScrubber({
         !document.hidden &&
         !document.body.classList.contains("is-menu-open")
       ) {
-        // User-requested idle pendulum overrides the default paused-at-rest rule.
+        // Default counterclockwise rotation follows the source timeline backwards.
         // Pointer/keyboard take priority; page scrolling never changes video time.
         const idle =
           !dragging && !reducedMotion.matches && now - lastInput > 1200;
         if (idle) {
           const end = Math.max(0, duration - 0.025);
-          targetTime += elapsed * direction;
-          if (targetTime >= end) {
-            targetTime = end;
-            direction = -1;
-          }
-          if (targetTime <= 0) {
-            targetTime = 0;
-            direction = 1;
-          }
+          targetTime =
+            end > 0 ? (((targetTime - elapsed) % end) + end) % end : 0;
         }
         const gap = targetTime - renderedTime;
         renderedTime +=
@@ -162,10 +190,9 @@ export function useVideoScrubber({
           }
         }
       }
-      if (active) frame = requestAnimationFrame(tick);
+      if (canAnimate()) frame = requestAnimationFrame(tick);
     };
 
-    const readyTimeout = window.setTimeout(drawable, 12000);
     video.addEventListener("loadedmetadata", metadata);
     video.addEventListener("loadeddata", drawable);
     video.addEventListener("canplay", drawable);
@@ -185,20 +212,64 @@ export function useVideoScrubber({
     resizeObserver.observe(hero);
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
+      syncPlayback();
     });
     visibilityObserver.observe(hero);
+    // A sticky hero can still intersect the viewport while the next section covers it.
+    const following = document.querySelector("[data-hero-following]");
+    const coverObserver = new IntersectionObserver(
+      ([entry]) => {
+        covered = entry.isIntersecting;
+        syncPlayback();
+      },
+      { rootMargin: "0px 0px -99% 0px" },
+    );
+    if (following) coverObserver.observe(following);
+    const menuObserver = new MutationObserver(syncPlayback);
+    menuObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    document.addEventListener("visibilitychange", syncPlayback);
     measure();
-    // Local MP4: native preload/range requests avoid a second full Blob copy in memory.
-    video.src = window.innerWidth <= 768 && mobileSrc ? mobileSrc : src;
-    video.load();
-    frame = requestAnimationFrame(tick);
+    const selectedSrc = window.innerWidth <= 768 && mobileSrc ? mobileSrc : src;
+    // Buffer before random seeks, with a bounded direct-URL fallback (§10 of the scrub rules).
+    const attach = (url: string) => {
+      if (!active) return;
+      readyTimeout = window.setTimeout(drawable, 12000);
+      video.src = url;
+      video.load();
+    };
+    void (async () => {
+      try {
+        const response = await fetch(selectedSrc, {
+          signal: preloadController.signal,
+        });
+        if (!response.ok) throw new Error("Video preload failed");
+        const blob = await response.blob();
+        if (!active) return;
+        objectUrl = URL.createObjectURL(blob);
+        attach(objectUrl);
+      } catch {
+        attach(selectedSrc);
+      } finally {
+        clearTimeout(preloadTimeout);
+      }
+    })();
+    syncPlayback();
 
     return () => {
       active = false;
+      syncPlaybackRef.current = null;
       cancelAnimationFrame(frame);
+      preloadController.abort();
+      clearTimeout(preloadTimeout);
       clearTimeout(readyTimeout);
       resizeObserver.disconnect();
       visibilityObserver.disconnect();
+      coverObserver.disconnect();
+      menuObserver.disconnect();
+      document.removeEventListener("visibilitychange", syncPlayback);
       video.pause();
       if (pointerId !== null && hero.hasPointerCapture(pointerId))
         hero.releasePointerCapture(pointerId);
@@ -220,6 +291,7 @@ export function useVideoScrubber({
       );
       video.removeAttribute("src");
       video.load();
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
   }, [heroRef, videoRef, src, mobileSrc]);
 

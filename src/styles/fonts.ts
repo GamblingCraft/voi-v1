@@ -1,37 +1,21 @@
-import {
-  Cormorant_Garamond,
-  Oswald,
-  Roboto,
-  Russo_One,
-  Unbounded,
-} from "next/font/google";
+import localFont from "next/font/local";
 
-const siteFont = Cormorant_Garamond({
-  subsets: ["cyrillic", "latin"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-const bodyFont = Roboto({
-  subsets: ["cyrillic", "latin"],
-  variable: "--font-roboto",
-  display: "swap",
-});
-const displayFont = Russo_One({
-  subsets: ["cyrillic", "latin"],
+const myriadFont = localFont({
+  src: "./fonts/MyriadPro-Regular.otf",
+  variable: "--font-myriad-pro",
   weight: "400",
-  variable: "--font-russo",
+  style: "normal",
   display: "swap",
+  preload: true,
 });
-const uiFont = Unbounded({
-  subsets: ["cyrillic", "latin"],
-  variable: "--font-unbounded",
+const ttNormsFont = localFont({
+  src: "./fonts/TT_Norms_Pro_Trial_Expanded_Regular.ttf",
+  variable: "--font-tt-norms-expanded",
+  weight: "400",
+  style: "normal",
   display: "swap",
-});
-const editorialFont = Oswald({
-  subsets: ["cyrillic", "latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-oswald",
-  display: "swap",
+  preload: true,
 });
 
-export const siteFontClassName = `${siteFont.variable} ${bodyFont.variable} ${displayFont.variable} ${uiFont.variable} ${editorialFont.variable}`;
+export const localFontClassName = `${myriadFont.variable} ${ttNormsFont.variable}`;
+export const siteFontClassName = localFontClassName;

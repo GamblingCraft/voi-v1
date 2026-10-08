@@ -1,9 +1,9 @@
 :root {
-  --font-body: var(--font-roboto);
-  --font-display: var(--font-russo);
-  --font-ui: var(--font-unbounded);
-  --font-editorial: var(--font-oswald);
-  --font-story-display: var(--font-cormorant);
+  --font-body: var(--font-myriad-pro);
+  --font-display: var(--font-tt-norms-expanded);
+  --font-ui: var(--font-tt-norms-expanded);
+  --font-editorial: var(--font-tt-norms-expanded);
+  --font-story-display: var(--font-tt-norms-expanded);
   --color-background: #020304;
   --color-surface: #0b1114;
   --color-text: #f3f6f5;
@@ -12,6 +12,10 @@
   --color-cloud-background: #f6f8f8;
   --header-height: 5rem;
   --page-gutter: clamp(1.25rem, 3vw, 3rem);
+  --control-height: 3rem;
+  --control-radius: 6px;
+  --control-ink: #182e3a;
+  --control-focus: #176585;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
 }

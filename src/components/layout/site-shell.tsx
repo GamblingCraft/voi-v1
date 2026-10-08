@@ -6,6 +6,7 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { NavigationOverlay } from "./navigation-overlay";
 import { useMenuSnapshot } from "./navigation/use-menu-snapshot";
 import styles from "./site-shell.module.css";
+import { SiteAudioProvider } from "./site-audio";
 
 type NavigationContextValue = {
   isMenuOpen: boolean;
@@ -32,7 +33,15 @@ type SiteShellProps = {
   headerDictionary: Dictionary["header"];
 };
 
-export function SiteShell({
+export function SiteShell(props: SiteShellProps) {
+  return (
+    <SiteAudioProvider>
+      <SiteShellContent {...props} />
+    </SiteAudioProvider>
+  );
+}
+
+function SiteShellContent({
   children,
   locale,
   navigationDictionary,

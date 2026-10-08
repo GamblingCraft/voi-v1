@@ -14,23 +14,9 @@ const mix = (a: number, b: number, p: number) => a + (b - a) * p;
 export function getSceneVariables(
   kind: StorySceneKind,
   p: number,
-  { width, height, travel, itemCount }: SceneMeasurements,
+  { travel, itemCount }: SceneMeasurements,
 ): SceneVariables {
   switch (kind) {
-    case "origin": {
-      const shrink = smooth(range(p, 0.4, 0.66));
-      const reveal = smooth(range(p, 0.59, 0.77));
-      return {
-        "--card-scale": String(mix(1, 0.23, shrink)),
-        "--card-x": `${width * 0.73 * shrink}px`,
-        "--card-y": `${height * 0.15 * shrink}px`,
-        "--water-reveal": String(reveal),
-        "--water-y": `${(1 - reveal) * height * 0.48}px`,
-        "--title-y": `${(1 - reveal) * 65}px`,
-        "--title-clip": `${(1 - reveal) * 100}%`,
-        "--detail-opacity": String(smooth(range(p, 0.76, 0.9))),
-      };
-    }
     case "production": {
       const position = p * itemCount;
       const index = Math.min(itemCount - 1, Math.floor(position));

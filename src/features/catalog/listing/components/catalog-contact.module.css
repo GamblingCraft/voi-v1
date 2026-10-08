@@ -1,6 +1,6 @@
 .contact {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: 10%;
   padding: 48px 0 64px;
   border-top: 1px solid var(--line);
@@ -26,7 +26,7 @@
 }
 @media (max-width: 600px) {
   .contact {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
     padding: 32px 0 48px;
   }

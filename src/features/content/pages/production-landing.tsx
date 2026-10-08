@@ -57,9 +57,10 @@ export function ProductionLanding() {
         {productionSteps.map((step, index) => (
           <section
             className={productionStyles.processScene}
+            data-layout={index % 2 ? "split" : "wide"}
             id={step.id}
             key={step.id}
-            data-header-theme={index % 2 ? "light" : "dark"}
+            data-header-theme="light"
           >
             <div className={productionStyles.processCopy}>
               <h2>{step.title}</h2>
@@ -69,7 +70,7 @@ export function ProductionLanding() {
               <MediaPlaceholder
                 kind="video"
                 label={step.media}
-                tone={index % 2 ? "light" : "dark"}
+                tone={index % 2 ? "ice" : "light"}
                 index={`0${index + 2}`}
               />
             </div>

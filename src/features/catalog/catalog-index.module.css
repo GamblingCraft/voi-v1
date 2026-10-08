@@ -48,12 +48,12 @@
   position: relative;
   padding: 26px;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 14px;
 }
 .caption h2 {
-  font-size: clamp(26px, 2.7vw, 38px);
-  max-width: 200px;
+  font-size: clamp(20px, 1.6vw, 24px);
+  max-width: 100%;
 }
 .caption p {
   grid-column: 1 / -1;
@@ -122,7 +122,7 @@
 .editorial {
   margin-top: 48px;
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: 24px;
 }
 .editorial > article {
@@ -131,7 +131,7 @@
 }
 .production {
   display: grid;
-  grid-template-columns: 0.9fr 1fr;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
   background: white;
 }
 .editorialMedia {
@@ -206,7 +206,7 @@
     margin-top: auto;
   }
   .editorial {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (max-width: 580px) {
@@ -214,7 +214,7 @@
     padding: 20px 0 28px;
   }
   .categories {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
   }
   .category {
@@ -257,7 +257,7 @@
     margin-top: 32px;
   }
   .production {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .editorialMedia {
     min-height: 170px;

@@ -1,6 +1,6 @@
 "use client";
 import { useId } from "react";
-import { ShoppingCart, Star, Check } from "@deemlol/next-icons";
+import { ShoppingCart, Star, Minus, Plus } from "@deemlol/next-icons";
 import {
   productWeights,
   previewPackPrice,
@@ -9,7 +9,7 @@ import {
   type CatalogProduct,
   type ProductWeight,
 } from "../catalog-data";
-import { addToCart, useShop } from "@/features/cart/shop-store";
+import { addToCart, changeQuantity, useShop } from "@/features/cart/shop-store";
 import styles from "./product-purchase.module.css";
 export function ProductRating() {
   return (
@@ -61,23 +61,42 @@ export function ProductPurchase({
         </div>
       </fieldset>
       <div className={styles.buyRow}>
-        <button
-          className={styles.buy}
-          type="button"
-          onClick={() => addToCart(product.id, weight)}
-          disabled={quantity >= 99}
-          aria-label={`Купить ${productTitle(product, weight)} за ${previewPackPrice} рублей`}
-        >
-          <span>{previewPackPrice} ₽</span>
-          <ShoppingCart size={19} strokeWidth={1.6} aria-hidden="true" />
-        </button>
-        <span className={styles.feedback} role="status">
-          {quantity > 0 && (
-            <>
-              <Check size={15} aria-hidden="true" />В корзине: {quantity}
-            </>
-          )}
-        </span>
+        {quantity > 0 ? (
+          <div
+            className={styles.quantity}
+            role="group"
+            aria-label={`Количество: ${productTitle(product, weight)}`}
+          >
+            <button
+              type="button"
+              aria-label={`Уменьшить количество: ${productTitle(product, weight)}`}
+              onClick={() => changeQuantity(product.id, weight, quantity - 1)}
+            >
+              <Minus size={16} strokeWidth={1.5} aria-hidden="true" />
+            </button>
+            <span aria-live="polite" aria-atomic="true">
+              {quantity}
+            </span>
+            <button
+              type="button"
+              aria-label={`Увеличить количество: ${productTitle(product, weight)}`}
+              disabled={quantity >= 99}
+              onClick={() => changeQuantity(product.id, weight, quantity + 1)}
+            >
+              <Plus size={16} strokeWidth={1.5} aria-hidden="true" />
+            </button>
+          </div>
+        ) : (
+          <button
+            className={styles.buy}
+            type="button"
+            onClick={() => addToCart(product.id, weight)}
+            aria-label={`Купить ${productTitle(product, weight)} за ${previewPackPrice} рублей`}
+          >
+            <span>{previewPackPrice} ₽</span>
+            <ShoppingCart size={19} strokeWidth={1.6} aria-hidden="true" />
+          </button>
+        )}
       </div>
     </div>
   );

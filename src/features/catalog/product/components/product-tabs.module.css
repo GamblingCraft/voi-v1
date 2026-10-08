@@ -15,7 +15,7 @@
   min-height: 52px;
   padding: 12px 24px;
   font:
-    500 18px/1.4 var(--font-editorial),
+    400 18px/1.4 var(--font-editorial),
     sans-serif;
   cursor: pointer;
 }

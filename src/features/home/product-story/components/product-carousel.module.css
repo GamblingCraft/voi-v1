@@ -15,9 +15,9 @@
 .intro h2 {
   margin: 0;
   font:
-    400 clamp(42px, 5vw, 82px)/0.88 var(--font-story-display),
-    Georgia,
-    serif;
+    400 clamp(32px, 4vw, 64px)/1.05 var(--font-story-display),
+    sans-serif;
+  overflow-wrap: anywhere;
   letter-spacing: -0.035em;
 }
 .intro em {
@@ -63,8 +63,8 @@
   object-fit: contain;
 }
 .purchase {
-  --font-body: var(--font-roboto);
-  --font-editorial: var(--font-oswald);
+  --font-body: var(--font-myriad-pro);
+  --font-editorial: var(--font-tt-norms-expanded);
   position: absolute;
   width: 280px;
   top: 18%;

@@ -9,11 +9,6 @@ export function ContactsPage() {
   return (
     <main id="top" className={sharedStyles.page}>
       <section className={contactsStyles.contactHero} data-header-theme="dark">
-        <MediaPlaceholder
-          className={contactsStyles.contactMedia}
-          label="Контакты ВОЙ"
-          tone="dark"
-        />
         <div className={contactsStyles.contactTitle}>
           <p>Поставки льда и сотрудничество</p>
           <h1>
@@ -42,6 +37,21 @@ export function ContactsPage() {
           </div>
         </div>
       </section>
+      <section
+        id="inquiry"
+        className={inquiryStyles.inquirySection}
+        data-header-theme="light"
+      >
+        <div>
+          <h2>
+            ЗАЯВКА
+            <br />
+            НА ПОСТАВКУ
+          </h2>
+          <p>Несколько деталей о проекте помогут подготовить ваше обращение.</p>
+        </div>
+        <InquiryForm />
+      </section>
       <section className={contactsStyles.contactBody} data-header-theme="light">
         <div className={contactsStyles.contactDirections}>
           {[
@@ -51,9 +61,8 @@ export function ContactsPage() {
               "Постоянное сотрудничество и совместные проекты.",
             ],
             ["Обсудить событие", "Расчёт объёма льда по числу гостей и меню."],
-          ].map(([title, text], index) => (
+          ].map(([title, text]) => (
             <a href="#inquiry" key={title}>
-              <span>0{index + 1}</span>
               <div>
                 <h2>{title}</h2>
                 <p>{text}</p>
@@ -75,21 +84,6 @@ export function ContactsPage() {
             </p>
           </div>
         </div>
-      </section>
-      <section
-        id="inquiry"
-        className={inquiryStyles.inquirySection}
-        data-header-theme="light"
-      >
-        <div>
-          <h2>
-            ЗАЯВКА
-            <br />
-            НА ПОСТАВКУ
-          </h2>
-          <p>Несколько деталей о проекте помогут подготовить ваше обращение.</p>
-        </div>
-        <InquiryForm />
       </section>
     </main>
   );

@@ -60,6 +60,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
+      data-site="public"
       dir={getLocaleDirection(locale)}
       className={siteFontClassName}
     >

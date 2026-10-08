@@ -1,6 +1,7 @@
 import type { ProductStoryContent } from "../story.types";
 import { ScrollScene } from "../components/scroll-scene";
 import { StoryHeading } from "../components/story-heading";
+import { ViewportVideo } from "../components/viewport-video";
 import styles from "./serving-ritual.module.css";
 
 export function ServingRitual({
@@ -9,28 +10,14 @@ export function ServingRitual({
   content: ProductStoryContent["ritual"];
 }) {
   return (
-    <ScrollScene
-      kind="ritual"
-      id="serving-ritual"
-      label={`${content.title} ${content.script}`}
-    >
-      <StoryHeading
-        className={styles.title}
-        lines={content.title}
-        script={content.script}
-      />
+    <ScrollScene kind="ritual" id="serving-ritual" label={content.title}>
+      <StoryHeading className={styles.title} lines={content.title} />
       <div className={styles.media}>
-        <video
+        <ViewportVideo
           className={styles.video}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-label="Подача напитков со льдом ВОЙ"
-        >
-          <source src="/media/start/section_start.mp4" type="video/mp4" />
-        </video>
+          src="/media/start/section_start.mp4"
+          label="Подача напитков со льдом ВОЙ"
+        />
       </div>
     </ScrollScene>
   );

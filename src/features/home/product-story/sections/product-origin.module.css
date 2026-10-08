@@ -1,69 +1,83 @@
-.screen {
-  --origin-water-offset: 100svh;
-  min-height: 200svh;
+.baikalTrack {
+  position: relative;
+  height: 150svh;
 }
-[data-motion="scroll"] .screen {
-  --origin-water-offset: 0svh;
-  min-height: 100svh;
-}
-.card {
-  position: absolute;
-  z-index: 2;
+.baikal {
+  position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
   height: 100svh;
   overflow: hidden;
-  background: var(--story-paper);
-  transform: translate(var(--card-x, 0px), var(--card-y, 0px))
-    scale(var(--card-scale, 1));
-  transform-origin: 0 0;
-  will-change: transform;
+  background: var(--color-cloud-background);
+  isolation: isolate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .baikalTrack {
+    height: auto;
+  }
+  .baikal {
+    position: relative;
+  }
+}
+.landscape {
+  z-index: 1;
+  top: 14% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center top;
+}
+.sceneCloudRear {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center top;
+}
+.sceneCloudRight {
+  z-index: 0;
+  width: 100% !important;
+  height: 100% !important;
+  left: auto !important;
+  right: 0 !important;
+  top: 0 !important;
+  object-fit: cover;
+  object-position: right top;
 }
 .title {
   position: absolute;
-  z-index: 1;
-  top: calc(var(--origin-water-offset) + 18svh);
+  z-index: 2;
+  top: 18svh;
   left: 4%;
   width: 58%;
-  opacity: var(--water-reveal, 1);
+  color: var(--story-ink);
+  --story-heading-size: clamp(40px, 6vw, 112px);
 }
-.title em {
-  margin-top: 20px;
-}
-.water {
-  position: absolute;
-  top: var(--origin-water-offset);
-  left: 0;
-  width: 100%;
-  height: 100svh;
-  opacity: var(--water-reveal, 1);
-  --media-tint: var(--story-paper);
-}
-.water::before,
-.water::after {
-  content: none;
+.heading {
+  white-space: nowrap;
 }
 .note {
   max-width: 34rem;
   margin-top: 28px;
   color: var(--story-muted);
+  font-size: 20px;
   text-wrap: pretty;
 }
-@media (max-width: 43.75rem) {
+@media (max-width: 700px) {
   .title {
-    top: calc(var(--origin-water-offset) + 20svh);
     left: 6%;
     width: 88%;
+    top: 10svh;
+    --story-heading-size: clamp(24px, 8vw, 36px);
+  }
+  .landscape {
+    top: 25% !important;
+    height: 75% !important;
+    object-position: 45% top;
+  }
+  .sceneCloudRight {
+    width: 70% !important;
+    right: -18% !important;
   }
   .note {
-    max-width: 25rem;
-    margin-top: 24px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .card,
-  .water {
-    will-change: auto;
+    max-width: 28ch;
+    margin-top: 16px;
+    font-size: 16px;
   }
 }

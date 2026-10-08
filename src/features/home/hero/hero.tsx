@@ -8,6 +8,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { SoundToggle, useSiteAudio } from "@/components/layout/site-audio";
 import { HeroLoader } from "./hero-loader";
 import { useVideoScrubber } from "./use-video-scrubber";
 import styles from "./hero.module.css";
@@ -36,6 +37,9 @@ const serverReady = () => false;
 export function Hero({ dictionary, introDictionary }: HeroProps) {
   const [fontsReady, setFontsReady] = useState(false);
   const [finished, setIntroComplete] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+  const { play: playSound } = useSiteAudio();
+
   const introChecked = useSyncExternalStore(
     subscribeToSession,
     clientReady,
@@ -53,7 +57,6 @@ export function Hero({ dictionary, introDictionary }: HeroProps) {
     videoRef,
     heroRef,
     src: "/media/hero/main-scrub.mp4",
-    mobileSrc: "/media/hero/main-scrub-mobile.mp4",
     enabled: introComplete,
   });
 
@@ -96,6 +99,15 @@ export function Hero({ dictionary, introDictionary }: HeroProps) {
     setIntroComplete(true);
   }, []);
 
+  const revealHero = useCallback(() => {
+    setRevealed(true);
+    playSound();
+  }, [playSound]);
+
+  const soundControl = (revealed || introComplete) && (
+    <SoundToggle className={styles.soundControl} />
+  );
+
   return (
     <section
       ref={heroRef}
@@ -128,8 +140,11 @@ export function Hero({ dictionary, introDictionary }: HeroProps) {
           isHeroReady={videoReady && fontsReady}
           dictionary={introDictionary}
           onComplete={completeIntro}
+          onReveal={revealHero}
+          soundControl={soundControl}
         />
       )}
+      {introComplete && soundControl}
     </section>
   );
 }

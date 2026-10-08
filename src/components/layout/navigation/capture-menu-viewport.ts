@@ -62,9 +62,13 @@ export function captureMenuViewport(surface: HTMLElement) {
     }
     clone.removeAttribute("id");
     clone.removeAttribute("autofocus");
-    // Runtime selectors must continue to find only the real page.
+    // Runtime selectors must continue to find only the real page. Keep the
+    // header's visual state: its ::before backdrop depends on this attribute.
     for (const attribute of Array.from(clone.attributes)) {
-      if (attribute.name.startsWith("data-"))
+      if (
+        attribute.name.startsWith("data-") &&
+        attribute.name !== "data-on-hero"
+      )
         clone.removeAttribute(attribute.name);
     }
     if (

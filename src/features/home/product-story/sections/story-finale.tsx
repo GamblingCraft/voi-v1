@@ -12,14 +12,10 @@ export function StoryFinale({
   return (
     <section
       className={styles.section}
-      aria-label={`${content.title.join(" ")} ${content.script}`}
+      aria-label={content.title.join(" ")}
       data-header-theme="light"
     >
-      <StoryHeading
-        className={styles.title}
-        lines={content.title}
-        script={content.script}
-      />
+      <StoryHeading className={styles.title} lines={content.title} />
       <MediaPlaceholder label={content.media} className={styles.city} />
       <p className={`${shared.copy} ${styles.note}`}>{content.note}</p>
     </section>

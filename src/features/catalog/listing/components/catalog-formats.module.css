@@ -57,7 +57,7 @@
 }
 .formatLabel strong {
   font:
-    500 clamp(20px, 1.9vw, 28px)/1.1 var(--font-editorial),
+    400 clamp(20px, 1.9vw, 28px)/1.1 var(--font-editorial),
     sans-serif;
   text-transform: uppercase;
 }
@@ -119,6 +119,8 @@
   }
   .formatLabel strong {
     font-size: clamp(12px, 3.45vw, 17px);
+    font-family: var(--font-body), sans-serif;
+    font-weight: 400;
   }
   .formatLabel > span {
     font-size: 11px;

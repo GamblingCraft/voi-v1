@@ -21,7 +21,7 @@
 .previewTitle h2 {
   margin: 0;
   font:
-    500 25px/1.2 var(--font-editorial),
+    400 25px/1.2 var(--font-editorial),
     sans-serif;
 }
 .preview button {

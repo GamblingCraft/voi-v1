@@ -19,19 +19,20 @@ export function ProductionStory({
       label={content.eyebrow}
       screenClassName={styles.screen}
     >
-      <div className={styles.left}>
-        <p className={styles.sectionCaption}>{content.eyebrow}</p>
-        {content.steps.map((step, index) => (
-          <article
-            key={step.id}
-            className={styles.step}
-            style={
-              {
-                "--step-opacity": `var(--step-${index}-opacity, 1)`,
-                "--step-y": `var(--step-${index}-y, 0px)`,
-              } as CSSProperties
-            }
-          >
+      <p className={styles.sectionCaption}>{content.eyebrow}</p>
+      {content.steps.map((step, index) => (
+        <div
+          key={step.id}
+          className={styles.stage}
+          data-production-stage={step.id}
+          style={
+            {
+              "--step-opacity": `var(--step-${index}-opacity, 1)`,
+              "--media-tint": ["#b5cbd3", "#d0e2e7", "#738e9e"][index],
+            } as CSSProperties
+          }
+        >
+          <article className={styles.step}>
             <svg className={styles.icon} viewBox="0 0 64 64" aria-hidden="true">
               {index === 0 ? (
                 <path d="M32 7C24 21 12 32 12 43a20 20 0 0 0 40 0C52 32 40 21 32 7Z M21 43q0 10 10 10" />
@@ -46,23 +47,11 @@ export function ProductionStory({
               {step.description}
             </p>
           </article>
-        ))}
-      </div>
-      <div className={styles.right}>
-        {content.steps.map((step, index) => (
-          <div
-            key={step.id}
-            className={styles.media}
-            style={
-              {
-                "--step-opacity": `var(--step-${index}-opacity, 1)`,
-              } as CSSProperties
-            }
-          >
+          <div className={styles.media}>
             <MediaPlaceholder label={step.media} className={styles.mediaFill} />
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </ScrollScene>
   );
 }

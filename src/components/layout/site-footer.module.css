@@ -3,6 +3,9 @@
   padding: clamp(44px, 4vw, 72px) var(--page-gutter) 24px;
   background: #030303;
   color: #f5f6f5;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
 }
 .navigationGrid {
   display: grid;
@@ -34,7 +37,7 @@
 }
 .columnTitle {
   margin: 0 0 18px;
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-ui), sans-serif;
   font-size: 16px;
   font-weight: 400;
   text-transform: uppercase;

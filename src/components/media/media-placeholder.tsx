@@ -1,8 +1,10 @@
 import clsx from "clsx";
+import Image from "next/image";
 import styles from "./media-placeholder.module.css";
 
 type Props = {
   label: string;
+  src?: string;
   kind?: "photo" | "video";
   tone?: "light" | "dark" | "ice";
   shape?: "cube" | "sphere" | "cylinder";
@@ -13,6 +15,7 @@ type Props = {
 /** Reserves the composition and gives the future media a clear editorial brief. */
 export function MediaPlaceholder({
   label,
+  src,
   tone = "light",
   shape,
   className,
@@ -20,10 +23,19 @@ export function MediaPlaceholder({
   return (
     <div
       className={clsx(styles.media, styles[tone], className)}
-      role="img"
-      aria-label={`Плейсхолдер: ${label}`}
+      role={src ? undefined : "img"}
+      aria-label={src ? undefined : `Плейсхолдер: ${label}`}
     >
-      {shape && (
+      {src && (
+        <Image
+          src={src}
+          alt={label}
+          fill
+          sizes="(max-width: 650px) 100vw, 33vw"
+          className={styles.image}
+        />
+      )}
+      {!src && shape && (
         <div className={styles.center} aria-hidden="true">
           <svg className={styles.shape} viewBox="0 0 240 240" fill="none">
             {shape === "cube" && (

@@ -34,12 +34,12 @@
 }
 
 .toggle:hover {
-  background: rgb(255 255 255 / 10%);
+  background: rgb(0 0 0 / 6%);
   transform: translateY(-1px);
 }
 
 .search[data-open="true"] .toggle {
-  color: rgb(255 255 255 / 78%);
+  color: #182e3a;
 }
 
 .form {
@@ -53,9 +53,9 @@
   align-items: center;
   overflow: hidden;
   border: 0;
-  border-bottom: 1px solid rgb(255 255 255 / 44%);
+  border-bottom: 1px solid #9aadb1;
   border-radius: 0;
-  background: rgb(7 16 20 / 34%);
+  background: #f6f8f8;
   opacity: 0;
   pointer-events: none;
   backdrop-filter: blur(12px);
@@ -71,7 +71,7 @@
   position: absolute;
   left: 0.8rem;
   flex: 0 0 auto;
-  color: rgb(255 255 255 / 72%);
+  color: #58717b;
 }
 
 .input {
@@ -81,16 +81,16 @@
   padding: 0 3.5rem 0 2.45rem;
   outline: 0;
   background: transparent;
-  color: #fff;
+  color: #182e3a;
   font:
-    500 0.7rem/1 var(--font-ui),
+    400 0.7rem/1 var(--font-ui),
     sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .input::placeholder {
-  color: rgb(255 255 255 / 66%);
+  color: #58717b;
 }
 
 .input::-webkit-search-cancel-button {

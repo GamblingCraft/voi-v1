@@ -69,14 +69,16 @@ export function CooperationLanding() {
               </div>
               <div className={cooperationStyles.audienceTitle}>
                 <h3>{item.title}</h3>
-                <span>0{index + 1}</span>
               </div>
               <p className={sharedStyles.copy}>{item.text}</p>
             </article>
           ))}
         </div>
       </section>
-      <section className={sharedStyles.section} data-header-theme="light">
+      <section
+        className={cooperationStyles.briefSection}
+        data-header-theme="light"
+      >
         <SectionHeading
           label="Перед заказом"
           title={

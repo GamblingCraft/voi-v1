@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
-  advanceLoaderSpring,
   measureOpening,
   renderOpeningFrame,
   type OpeningElements,
@@ -10,13 +9,11 @@ import {
 } from "./hero-intro-animation";
 
 type HeroIntroRefs = {
-  fill: React.RefObject<HTMLDivElement | null>;
-  counter: React.RefObject<HTMLDivElement | null>;
   media: React.RefObject<HTMLDivElement | null>;
   video: React.RefObject<HTMLVideoElement | null>;
   words: React.RefObject<Array<HTMLParagraphElement | null>>;
   letters: React.RefObject<Array<Array<HTMLSpanElement | null>>>;
-  shots: React.RefObject<Array<HTMLImageElement | null>>;
+  shots: React.RefObject<Array<HTMLDivElement | null>>;
 };
 
 type UseHeroIntroAnimationOptions = {
@@ -24,6 +21,7 @@ type UseHeroIntroAnimationOptions = {
   iceText: string;
   refs: HeroIntroRefs;
   onComplete: () => void;
+  onReveal: () => void;
 };
 
 export function useHeroIntroAnimation({
@@ -31,10 +29,11 @@ export function useHeroIntroAnimation({
   iceText,
   refs,
   onComplete,
+  onReveal,
 }: UseHeroIntroAnimationOptions) {
-  const [preloaderDone, setPreloaderDone] = useState(false);
   const readyRef = useRef(isReady);
   const completeRef = useRef(onComplete);
+  const revealRef = useRef(onReveal);
 
   useEffect(() => {
     readyRef.current = isReady;
@@ -43,16 +42,21 @@ export function useHeroIntroAnimation({
   useEffect(() => {
     completeRef.current = onComplete;
   }, [onComplete]);
+  useEffect(() => {
+    revealRef.current = onReveal;
+  }, [onReveal]);
 
   useEffect(() => {
     let frameId = 0;
-    let lastTimestamp = performance.now();
-    let loadSpring = 0;
-    let loadVelocity = 0;
-    let preloaderCompleteAt = 0;
+    let active = true;
+    let fontsReady = false;
+    void document.fonts.ready.then(() => {
+      if (active) fontsReady = true;
+    });
     let handedAt = 0;
     let openingLayout: OpeningLayout | null = null;
     let completed = false;
+    let revealed = false;
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -81,56 +85,31 @@ export function useHeroIntroAnimation({
     };
 
     const frame = (timestamp: number) => {
-      const deltaSeconds = Math.min(0.05, (timestamp - lastTimestamp) / 1000);
-      lastTimestamp = timestamp;
-
-      const springState = advanceLoaderSpring(
-        loadSpring,
-        loadVelocity,
-        readyRef.current ? 1 : 0,
-        deltaSeconds,
-      );
-      loadSpring = springState.spring;
-      loadVelocity = springState.velocity;
-
-      const loadComplete = readyRef.current && loadSpring >= 0.995;
-      const percent = loadComplete
-        ? 100
-        : Math.min(99, Math.floor(loadSpring * 100));
-      if (refs.fill.current) refs.fill.current.style.width = `${percent}%`;
-      if (refs.counter.current) {
-        refs.counter.current.textContent = `${percent}%`;
-      }
-
-      if (loadComplete && !preloaderCompleteAt) {
-        preloaderCompleteAt = timestamp;
-      }
-
-      if (
-        preloaderCompleteAt &&
-        !handedAt &&
-        timestamp - preloaderCompleteAt > 500
-      ) {
-        handedAt = timestamp;
-        setPreloaderDone(true);
-      }
+      if (fontsReady && !handedAt) handedAt = timestamp;
 
       if (handedAt) {
         const elements = getOpeningElements();
         if (elements) {
           if (!openingLayout) openingLayout = getOpeningLayout(elements);
           if (openingLayout) {
+            if (!revealed && (reduceMotion || timestamp - handedAt >= 4000)) {
+              revealed = true;
+              revealRef.current();
+            }
             completed = renderOpeningFrame(
               elements,
               openingLayout,
-              (timestamp - handedAt) / 1000,
+              Math.min(
+                (timestamp - handedAt) / 1000,
+                readyRef.current ? Infinity : 5.399,
+              ),
               reduceMotion,
             );
           }
         }
       }
 
-      if (completed) {
+      if (completed && readyRef.current) {
         refs.video.current?.pause();
         completeRef.current();
         return;
@@ -143,10 +122,9 @@ export function useHeroIntroAnimation({
     frameId = requestAnimationFrame(frame);
 
     return () => {
+      active = false;
       cancelAnimationFrame(frameId);
       window.removeEventListener("resize", handleResize);
     };
   }, [iceText, refs]);
-
-  return { preloaderDone };
 }

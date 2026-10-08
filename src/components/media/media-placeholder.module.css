@@ -71,6 +71,10 @@
   stroke: currentColor;
   stroke-width: 1;
 }
+.image {
+  object-fit: contain;
+  padding: 15%;
+}
 @media (max-width: 600px) {
   .top,
   .bottom {

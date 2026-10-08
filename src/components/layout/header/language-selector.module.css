@@ -14,7 +14,7 @@
   cursor: pointer;
   font-family: var(--font-ui), sans-serif;
   font-size: 0.7rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.08em;
 }
 
@@ -78,6 +78,16 @@
 .optionCode {
   font-size: 0.68rem;
   opacity: 0.55;
+}
+
+.languageSelector[data-theme="dark"] .options {
+  background: #020304;
+  color: #f6f8f8;
+  box-shadow: none;
+}
+.languageSelector[data-theme="dark"] .option:hover,
+.languageSelector[data-theme="dark"] .option[aria-pressed="true"] {
+  background: #ffffff14;
 }
 
 @media (max-width: 47.99rem) {

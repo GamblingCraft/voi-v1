@@ -15,12 +15,14 @@ type LanguageSelectorProps = {
   currentLocale: Locale;
   label: string;
   groupLabel: string;
+  theme?: "light" | "dark";
 };
 
 export function LanguageSelector({
   currentLocale,
   label,
   groupLabel,
+  theme = "light",
 }: LanguageSelectorProps) {
   const pathname = usePathname();
   const optionsId = useId();
@@ -65,7 +67,7 @@ export function LanguageSelector({
   };
 
   return (
-    <div ref={rootRef} className={styles.languageSelector}>
+    <div ref={rootRef} className={styles.languageSelector} data-theme={theme}>
       <button
         ref={triggerRef}
         className={styles.trigger}

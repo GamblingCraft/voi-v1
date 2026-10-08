@@ -17,7 +17,7 @@ export type OpeningElements = {
   video: HTMLVideoElement;
   words: Array<HTMLParagraphElement | null>;
   letters: Array<Array<HTMLSpanElement | null>>;
-  shots: Array<HTMLImageElement | null>;
+  shots: Array<HTMLDivElement | null>;
 };
 
 const clamp = (value: number, min = 0, max = 1) =>
@@ -136,14 +136,17 @@ export function renderOpeningFrame(
   );
   elements.video.style.transform = `translateZ(0) scale(${mix(1, coverScale, expand)})`;
 
-  const shotsAreVisible = time >= 0.7 && time < 2.7;
+  const shotsAreVisible = time >= 1.1 && time < 2.7;
   const activeShotIndex = shotsAreVisible
-    ? Math.floor((time - 0.7) / 0.333) % elements.shots.length
+    ? Math.min(
+        elements.shots.length - 1,
+        Math.floor(((time - 1.1) / 1.6) * elements.shots.length),
+      )
     : -1;
 
-  elements.shots.forEach((image, index) => {
-    if (!image) return;
-    image.style.display = index === activeShotIndex ? "block" : "none";
+  elements.shots.forEach((shot, index) => {
+    if (!shot) return;
+    shot.style.display = index === activeShotIndex ? "block" : "none";
   });
 
   elements.words.forEach((word, wordIndex) => {
@@ -181,18 +184,4 @@ export function renderOpeningFrame(
   });
 
   return false;
-}
-
-export function advanceLoaderSpring(
-  spring: number,
-  velocity: number,
-  target: number,
-  deltaSeconds: number,
-) {
-  const nextVelocity =
-    (velocity + (target - spring) * 260 * deltaSeconds) *
-    Math.exp(-34 * deltaSeconds);
-  const nextSpring = clamp(spring + nextVelocity * deltaSeconds);
-
-  return { spring: nextSpring, velocity: nextVelocity };
 }

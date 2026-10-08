@@ -1,6 +1,6 @@
 .author {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
 }
 .authorRow {
   display: flex;
@@ -17,7 +17,7 @@
   background: #d3e0e7;
   color: #254556;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .adminAvatar {
   background: #153749;

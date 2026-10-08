@@ -70,11 +70,11 @@
   padding: 12px 22px;
   background: #10191e;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--control-radius);
   color: white;
   cursor: pointer;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
 }
 .buy:hover {
   background: #24485c;
@@ -83,11 +83,43 @@
   opacity: 0.55;
   cursor: default;
 }
-.feedback {
+.quantity {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  min-height: 20px;
-  font-size: 12px;
-  color: #435e4f;
+  min-height: 48px;
+  border: 1px solid #d4dee8;
+  border-radius: var(--control-radius);
+  background: #fff;
+  color: #183342;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+}
+.quantity span {
+  min-width: 36px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.quantity button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  min-height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: #58717b;
+  cursor: pointer;
+}
+.quantity button:hover {
+  background: #f2f4f5;
+}
+.quantity button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.quantity button:focus-visible,
+.buy:focus-visible {
+  outline: 2px solid #227eaa;
+  outline-offset: 3px;
 }

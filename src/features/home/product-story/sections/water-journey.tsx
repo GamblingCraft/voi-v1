@@ -20,11 +20,7 @@ export function WaterJourney({
     >
       <div className={styles.track} data-story-track>
         <div className={styles.introBlock}>
-          <StoryHeading
-            className={styles.title}
-            lines={content.title}
-            script={content.script}
-          />
+          <StoryHeading className={styles.title} lines={content.title} />
           <p className={`${shared.copy} ${styles.intro}`}>
             {baikal.description}
           </p>
@@ -53,7 +49,6 @@ export function WaterJourney({
           <StoryHeading
             className={styles.secondTitle}
             lines={production.title}
-            script={production.script}
           />
           <p className={`${shared.copy} ${styles.note}`}>
             {production.description}
