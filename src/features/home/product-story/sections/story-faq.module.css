@@ -16,14 +16,15 @@
 .intro h2 {
   margin: 0;
   font:
-    400 clamp(32px, 3.6vw, 64px)/1.1 var(--font-story-display),
+    400 var(--type-section-title-size)/var(--type-heading-leading)
+      var(--font-story-display),
     sans-serif;
   overflow-wrap: anywhere;
   letter-spacing: -0.035em;
 }
 .intro p {
   margin: 24px 0 0;
-  font-size: clamp(18px, 1.4vw, 20px);
+  font-size: var(--type-body-size);
   line-height: 1.5;
   color: var(--story-muted);
   text-wrap: pretty;
@@ -109,7 +110,7 @@
   max-width: 48ch;
   margin: 0;
   padding: 0 42px 28px 0;
-  font-size: clamp(18px, 1.4vw, 20px);
+  font-size: var(--type-body-size);
   line-height: 1.5;
   color: var(--story-muted);
   text-wrap: pretty;

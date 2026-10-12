@@ -1,22 +1,14 @@
 import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n/config";
-import { pageMetadata } from "@/lib/seo";
-import { getLandingContent } from "@/features/content/landing.content";
-import { LandingPage } from "@/features/content/landing-page";
+import { landingMetadata } from "@/features/content/landing-metadata";
+import { ProductLanding } from "@/features/content/pages/product-landing";
+
 type Props = { params: Promise<{ locale: string }> };
-export async function generateMetadata({ params }: Props) {
-  const { locale } = await params;
-  if (!hasLocale(locale)) notFound();
-  const content = getLandingContent("product");
-  return pageMetadata(
-    locale,
-    "/product",
-    content.seoTitle,
-    content.description,
-  );
+export function generateMetadata({ params }: Props) {
+  return landingMetadata("product", params);
 }
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   if (!hasLocale(locale)) notFound();
-  return <LandingPage locale={locale} slug="product" />;
+  return <ProductLanding locale={locale} />;
 }

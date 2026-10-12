@@ -1,4 +1,4 @@
-import type { CatalogProduct } from "../../catalog-data";
+import type { CatalogProduct } from "../../catalog-model";
 import type { BlogArticle } from "@/features/blog/article-relations";
 import { ProductVariantProvider } from "./product-variant";
 import { ProductHero } from "./product-hero";

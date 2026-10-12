@@ -1,17 +1,15 @@
 import type { NextConfig } from "next";
+import { getSiteConfig } from "./src/lib/site-config";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   async headers() {
+    const { isIndexable } = getSiteConfig();
     return [
       {
         source: "/:path*",
         headers: [
-          ...(process.env.SITE_INDEXABLE === "true" &&
-          process.env.NEXT_PUBLIC_SITE_URL &&
-          !/^https?:\/\/(localhost|127\.0\.0\.1)(:|\/|$)/.test(
-            process.env.NEXT_PUBLIC_SITE_URL,
-          )
+          ...(isIndexable
             ? []
             : [
                 {

@@ -1,3 +1,4 @@
 import "server-only";
-export { getCatalogProducts, usageOptions } from "./catalog-data";
-export type { CatalogProduct, ProductId } from "./catalog-data";
+export { getCatalogProducts } from "./catalog-data";
+export { usageOptions } from "./catalog-model";
+export type { CatalogProduct, ProductId } from "./catalog-model";

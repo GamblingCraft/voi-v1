@@ -1,11 +1,16 @@
 import "server-only";
-import { selectProductArticles, type BlogArticle } from "./article-relations";
+import { selectProductArticles } from "./article-relations";
+import { blogArticles } from "./blog.content";
 
-// Replace this source with the blog CMS repository when articles are connected.
-const articles: BlogArticle[] = [];
+export function getArticles() {
+  return blogArticles.filter((article) => article.status === "published");
+}
+export function getArticle(slug: string) {
+  return getArticles().find((article) => article.slug === slug);
+}
 export function getProductArticles(product: {
   id: string;
   tags: readonly string[];
 }) {
-  return selectProductArticles(articles, product);
+  return selectProductArticles(getArticles(), product);
 }

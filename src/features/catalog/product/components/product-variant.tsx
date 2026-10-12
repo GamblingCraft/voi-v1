@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ProductWeight } from "../../catalog-data";
+import type { ProductWeight } from "../../catalog-model";
 
 type ProductVariant = {
   weight: ProductWeight;

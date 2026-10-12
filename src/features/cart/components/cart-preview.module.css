@@ -99,7 +99,7 @@
   display: flex;
   align-items: center;
   border: 1px solid #dce3e7;
-  border-radius: 5px;
+  border-radius: var(--button-radius);
 }
 .quantity button {
   display: grid;
@@ -131,12 +131,15 @@
 }
 .checkout {
   width: 100%;
-  min-height: 48px;
+  min-height: var(--button-height);
   border: 0;
-  border-radius: 7px;
+  border-radius: var(--button-radius);
   background: #142d3d;
   color: white;
-  font-size: 15px;
+  font-size: 16px;
+
+  text-align: center;
+  font-family: var(--font-body), sans-serif;
 }
 .checkout:disabled {
   cursor: default;

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Upstream Basis Universal WebAssembly loader (vendored with its license).
+    "public/media/product/media/optimized/basis-r151/**",
   ]),
 ]);
 

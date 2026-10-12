@@ -2,13 +2,9 @@ import "server-only";
 import type { Metadata } from "next";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getLocalizedAlternates } from "@/i18n/metadata";
+import { getSiteConfig } from "./site-config";
 
-export const siteUrl = new URL(
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-);
-export const isIndexable =
-  process.env.SITE_INDEXABLE === "true" &&
-  !["localhost", "127.0.0.1"].includes(siteUrl.hostname);
+export const { siteUrl, isIndexable } = getSiteConfig();
 export function pageMetadata(
   locale: Locale,
   path: string,

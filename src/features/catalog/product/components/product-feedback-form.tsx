@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Star } from "@deemlol/next-icons";
-import type { ProductId } from "../../catalog-data";
+import type { ProductId } from "../../catalog-model";
 import formStyles from "./product-feedback-form.module.css";
 
 export function ProductFeedbackForm({

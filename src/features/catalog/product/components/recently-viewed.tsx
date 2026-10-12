@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
-import type { CatalogProduct } from "../../catalog-data";
-import { rememberProduct, useShop } from "@/features/cart/shop-store";
+import type { CatalogProduct } from "../../catalog-model";
+import { rememberProduct, useRecentlyViewed } from "@/features/cart/shop-store";
 import { CatalogCard } from "../../components/catalog-card";
 import recommendationsStyles from "./product-recommendations.module.css";
 export function RecentlyViewed({
@@ -11,7 +11,7 @@ export function RecentlyViewed({
   current: CatalogProduct;
   products: CatalogProduct[];
 }) {
-  const { viewed } = useShop();
+  const viewed = useRecentlyViewed();
   useEffect(() => {
     rememberProduct(current.id);
   }, [current.id]);

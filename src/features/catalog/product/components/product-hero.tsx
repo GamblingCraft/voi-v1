@@ -1,7 +1,7 @@
 "use client";
 import type { ReactNode } from "react";
 import { Package } from "@deemlol/next-icons";
-import { productTitle, type CatalogProduct } from "../../catalog-data";
+import { productTitle, type CatalogProduct } from "../../catalog-model";
 import { ProductGallery } from "./product-gallery";
 import {
   ProductPurchase,

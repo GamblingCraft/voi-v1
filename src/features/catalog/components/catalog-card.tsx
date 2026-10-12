@@ -8,7 +8,7 @@ import {
   usageOptions,
   type CatalogProduct,
   type ProductWeight,
-} from "../catalog-data";
+} from "../catalog-model";
 import { ProductPurchase, ProductRating } from "./product-purchase";
 import cardStyles from "./catalog-card.module.css";
 export function CatalogCard({

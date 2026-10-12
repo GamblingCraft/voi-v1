@@ -1,24 +1,5 @@
 import { productSlug } from "./product-slug";
-import type { IceCategoryId } from "./ice-formats";
-
-export type ProductId = "cube" | "sphere" | "cylinder";
-export type CatalogProduct = {
-  id: ProductId;
-  category: IceCategoryId;
-  name: string;
-  form: string;
-  image: string;
-  packImage: string;
-  description: string;
-  serving: string;
-  usage: string[];
-  tags: string[];
-  occasion: string;
-  glass: string;
-  catalogHref: string;
-  slug: string;
-  code: string;
-};
+import type { CatalogProduct } from "./catalog-model";
 
 const productRecords: Omit<CatalogProduct, "slug" | "catalogHref">[] = [
   {
@@ -81,22 +62,6 @@ const products: CatalogProduct[] = productRecords.map((product) => {
   };
 });
 
-export const usageOptions = [
-  { id: "all", label: "Любая подача" },
-  { id: "cocktails", label: "Коктейли" },
-  { id: "spirits", label: "Крепкие напитки" },
-  { id: "longdrinks", label: "Высокая подача" },
-];
-
 export function getCatalogProducts() {
   return products;
-}
-
-// Temporary prototype values explicitly requested by the user; not review data.
-export const productWeights = [1, 2, 3] as const;
-export type ProductWeight = (typeof productWeights)[number];
-export const previewPackPrice = 100;
-export const previewRating = 5;
-export function productTitle(product: CatalogProduct, weight: number) {
-  return `${product.name} ${weight} кг`;
 }

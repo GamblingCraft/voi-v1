@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, type KeyboardEvent, type TouchEvent } from "react";
+import { useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
 import Image from "next/image";
-import type { CatalogProduct } from "@/features/catalog/catalog-data";
+import type { CatalogProduct } from "@/features/catalog/catalog-model";
 import { CatalogCard } from "@/features/catalog/components/catalog-card";
 import styles from "./product-carousel.module.css";
 
@@ -14,7 +14,7 @@ export function ProductCarousel({
   compact: boolean;
 }) {
   const [active, setActive] = useState(0);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const gesture = useRef<{ id: number; x: number; y: number } | null>(null);
   const product = products[active];
   if (!product) return null;
   const change = (direction: number) =>
@@ -29,12 +29,47 @@ export function ProductCarousel({
       change(event.key === "ArrowRight" ? 1 : -1);
     }
   };
+  const onTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    gesture.current = null;
+    if (
+      compact ||
+      event.touches.length !== 1 ||
+      (event.target as HTMLElement).closest(
+        "a, button, input, select, textarea",
+      )
+    )
+      return;
+    const touch = event.touches[0];
+    gesture.current = {
+      id: touch.identifier,
+      x: touch.clientX,
+      y: touch.clientY,
+    };
+  };
+  const onTouchMove = (event: TouchEvent<HTMLDivElement>) => {
+    const start = gesture.current;
+    const touch = Array.from(event.touches).find(
+      (item) => item.identifier === start?.id,
+    );
+    if (!start || !touch) return;
+    const dx = Math.abs(touch.clientX - start.x);
+    const dy = Math.abs(touch.clientY - start.y);
+    // Once the user starts scrolling vertically, this gesture cannot change a product.
+    if (event.touches.length !== 1 || (dy > 12 && dy > dx))
+      gesture.current = null;
+  };
   const onTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
-    if (touchStart !== null) {
-      const delta = event.changedTouches[0].clientX - touchStart;
-      if (Math.abs(delta) > 45) change(delta < 0 ? 1 : -1);
+    const start = gesture.current;
+    gesture.current = null;
+    const touch = Array.from(event.changedTouches).find(
+      (item) => item.identifier === start?.id,
+    );
+    if (!start || !touch) return;
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    if (Math.abs(dx) >= 45 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+      change(dx < 0 ? 1 : -1);
     }
-    setTouchStart(null);
   };
   return (
     <div
@@ -46,6 +81,12 @@ export function ProductCarousel({
       aria-roledescription="карусель"
       aria-label="Товары из каталога ВОЙ"
       onKeyDown={onKeyDown}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+      onTouchCancel={() => {
+        gesture.current = null;
+      }}
     >
       <div className={styles.intro}>
         <h2>
@@ -56,12 +97,7 @@ export function ProductCarousel({
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
       </div>
-      <div
-        className={styles.visual}
-        onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
-        onTouchEnd={onTouchEnd}
-        onTouchCancel={() => setTouchStart(null)}
-      >
+      <div className={styles.visual}>
         <div className={styles.surface} />
         <Image
           className={styles.pack}

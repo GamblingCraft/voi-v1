@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import type { CatalogProduct } from "../../catalog-data";
+import type { CatalogProduct } from "../../catalog-model";
 import styles from "./product-gallery.module.css";
 
 export function ProductGallery({ product }: { product: CatalogProduct }) {

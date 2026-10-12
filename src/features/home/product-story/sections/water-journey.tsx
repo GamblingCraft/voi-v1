@@ -1,5 +1,5 @@
 import type { ProductStoryContent } from "../story.types";
-import { MediaPlaceholder } from "../components/media-placeholder";
+import { StoryMedia } from "../components/story-media";
 import { ScrollScene } from "../components/scroll-scene";
 import { StoryHeading } from "../components/story-heading";
 import shared from "../product-story.module.css";
@@ -25,11 +25,11 @@ export function WaterJourney({
             {baikal.description}
           </p>
         </div>
-        <MediaPlaceholder
+        <StoryMedia
           className={`${styles.photo} ${styles.product}`}
           label={baikal.media}
         />
-        <MediaPlaceholder
+        <StoryMedia
           className={`${styles.photo} ${styles.production}`}
           label={water.media}
         />
@@ -41,7 +41,7 @@ export function WaterJourney({
           </h3>
           <p className={shared.copy}>{water.description}</p>
         </div>
-        <MediaPlaceholder
+        <StoryMedia
           className={`${styles.photo} ${styles.shape}`}
           label={production.media}
         />
@@ -54,11 +54,11 @@ export function WaterJourney({
             {production.description}
           </p>
         </div>
-        <MediaPlaceholder
+        <StoryMedia
           className={`${styles.photo} ${styles.drink}`}
           label={production.teamMedia}
         />
-        <MediaPlaceholder
+        <StoryMedia
           className={`${styles.photo} ${styles.final}`}
           label={form.media}
         />
@@ -68,7 +68,7 @@ export function WaterJourney({
             {form.description}
           </p>
         </div>
-        <MediaPlaceholder
+        <StoryMedia
           className={`${styles.photo} ${styles.formPhoto}`}
           label={form.detailMedia}
         />
@@ -78,7 +78,7 @@ export function WaterJourney({
             {glass.description}
           </p>
         </div>
-        <MediaPlaceholder
+        <StoryMedia
           className={`${styles.photo} ${styles.glassPhoto}`}
           label={glass.media}
         />

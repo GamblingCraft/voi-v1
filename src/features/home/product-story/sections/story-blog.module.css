@@ -15,7 +15,8 @@
 .heading h2 {
   margin: 0;
   font:
-    400 clamp(36px, 5vw, 80px)/1.05 var(--font-story-display),
+    400 var(--type-section-title-size)/var(--type-heading-leading)
+      var(--font-story-display),
     sans-serif;
   letter-spacing: -0.035em;
 }
@@ -23,7 +24,7 @@
   max-width: 30ch;
   margin: 0;
   color: var(--story-muted);
-  font-size: 18px;
+  font-size: var(--type-body-size);
   line-height: 1.5;
 }
 .layout {
@@ -40,10 +41,12 @@
   min-width: 0;
 }
 .media {
+  display: block;
+  position: relative;
+  overflow: hidden;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 8px;
-  --media-tint: #e9eef0;
 }
 .feature .media {
   aspect-ratio: auto;
@@ -52,22 +55,6 @@
 .article:nth-child(2) .media {
   aspect-ratio: auto;
   height: clamp(220px, 20vw, 360px);
-}
-.article:nth-child(2) .media {
-  --media-tint: #d5e1e4;
-}
-.article:nth-child(3) .media {
-  --media-tint: #bacdd2;
-}
-.article:nth-child(4) .media {
-  --media-tint: #dce4e1;
-}
-.article:nth-child(5) .media {
-  --media-tint: #c7d5df;
-}
-.media::before,
-.media::after {
-  content: none;
 }
 .content {
   padding-top: 12px;
@@ -91,9 +78,10 @@
 .content h3 {
   margin: 12px 0 0;
   font:
-    400 clamp(18px, 1.5vw, 24px)/1.3 var(--font-story-display),
+    400 var(--type-card-title-size)/var(--type-heading-leading)
+      var(--font-story-display),
     sans-serif;
-  letter-spacing: -0.025em;
+  letter-spacing: var(--type-heading-tracking);
 }
 .feature h3 {
   font-size: clamp(24px, 2.3vw, 36px);
@@ -103,35 +91,8 @@
   margin: 8px 0 0;
   color: var(--story-muted);
   font-size: 16px;
-  line-height: 1.4;
+  line-height: var(--type-body-leading);
   text-wrap: pretty;
-}
-.metadata {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 16px;
-  margin-top: 12px;
-  color: var(--story-muted);
-  font:
-    400 13px/1.4 var(--font-body),
-    sans-serif;
-}
-.readingTime,
-.metadata time {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-.metadata svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 @media (min-width: 701px) and (max-width: 1000px) {
   .layout {
@@ -171,4 +132,22 @@
   .feature h3 {
     font-size: 24px;
   }
+}
+
+.media img {
+  object-fit: cover;
+}
+.allArticles {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  margin-top: 12px;
+}
+.content h3 a:hover {
+  color: var(--story-accent);
+}
+.content > div:last-child {
+  margin-top: 16px;
 }

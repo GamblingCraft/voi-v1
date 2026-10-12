@@ -4,6 +4,7 @@
   height: 100%;
   background: var(--story-paper);
   color: var(--story-ink);
+  touch-action: pan-y pinch-zoom;
 }
 .intro {
   position: absolute;
@@ -36,7 +37,6 @@
 .visual {
   position: absolute;
   inset: 13% 25% 9% 23%;
-  touch-action: pan-y;
 }
 .surface {
   position: absolute;

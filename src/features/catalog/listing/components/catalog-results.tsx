@@ -2,7 +2,7 @@ import Link from "next/link";
 import resultsStyles from "./catalog-results.module.css";
 import shellStyles from "../../styles/catalog-shell.module.css";
 import { CatalogCard } from "../../components/catalog-card";
-import { usageOptions } from "../../catalog-data";
+import { usageOptions } from "../../catalog-model";
 import {
   catalogFilterHref,
   type CatalogSelection,

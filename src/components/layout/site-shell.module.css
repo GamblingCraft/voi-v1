@@ -10,6 +10,9 @@
   visibility: hidden;
   pointer-events: none;
 }
+.pageSurface:has(.product-root) {
+  background: var(--color-cloud-background);
+}
 
 .snapshotViewport {
   display: none;

@@ -23,7 +23,7 @@ export function ProductStory({ content }: { content: ProductStoryContent }) {
         <div className={closingStyles.backdrop}>
           <StoryFinale content={content.finale} />
         </div>
-        <StoryBlog content={content.blog} />
+        <StoryBlog />
         <StoryFaq content={content.faq} />
       </div>
     </div>

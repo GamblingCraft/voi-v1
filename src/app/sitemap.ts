@@ -1,4 +1,5 @@
 import { iceFormats } from "@/features/catalog/ice-formats";
+import { getArticles } from "@/features/blog/articles";
 import { getCatalogProducts } from "@/features/catalog/catalog.content";
 import type { MetadataRoute } from "next";
 import { locales, localizePath } from "@/i18n/config";
@@ -10,6 +11,8 @@ const paths = [
   "/cooperation",
   "/contacts",
   "/catalog",
+  "/blog",
+  ...getArticles().map((article) => `/blog/${article.slug}`),
   ...iceFormats.map((item) => item.href),
   ...getCatalogProducts().map((item) => item.catalogHref),
 ];

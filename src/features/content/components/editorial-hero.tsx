@@ -1,59 +1,43 @@
 import Link from "next/link";
-import clsx from "clsx";
-import { MediaPlaceholder } from "@/components/media/media-placeholder";
-import heroStyles from "./editorial-hero.module.css";
+import { ImageTrailHero } from "@/components/media/image-trail-hero";
+import styles from "./editorial-hero.module.css";
 import sharedStyles from "../styles/landing.module.css";
 
 type Props = {
   label: string;
   title: string[];
   description: string;
-  media: string;
   href: string;
   cta: string;
-  variant?: "product" | "production" | "business";
+  introduction: string[];
+  media?: readonly string[];
 };
-
 export function EditorialHero({
   label,
   title,
   description,
-  media,
   href,
   cta,
-  variant = "product",
+  introduction,
+  media,
 }: Props) {
-  const dark = variant !== "product";
   return (
-    <section
-      className={clsx(heroStyles.hero, heroStyles[variant])}
-      data-header-theme={dark ? "dark" : "light"}
-    >
-      <div className={heroStyles.heroCopy}>
-        <p className={heroStyles.eyebrow}>{label}</p>
-        <div className={heroStyles.heroTitle}>
-          <h1>
-            {title.map((line) => (
-              <span key={line}>{line}</span>
-            ))}
-          </h1>
-        </div>
-        <div className={heroStyles.heroBottom}>
+    <>
+      <ImageTrailHero title={title} media={media} />
+      <section className={styles.introduction}>
+        <p className={styles.eyebrow}>{label}</p>
+        <h2>
+          {introduction.map((line) => (
+            <span key={line}>{line}</span>
+          ))}
+        </h2>
+        <div className={styles.bottom}>
           <p>{description}</p>
-          <Link
-            className={dark ? sharedStyles.lightButton : sharedStyles.button}
-            href={href}
-          >
+          <Link className={sharedStyles.button} href={href}>
             {cta}
           </Link>
         </div>
-      </div>
-      <MediaPlaceholder
-        className={heroStyles.heroMedia}
-        label={media}
-        kind="video"
-        tone={dark ? "dark" : "ice"}
-      />
-    </section>
+      </section>
+    </>
   );
 }

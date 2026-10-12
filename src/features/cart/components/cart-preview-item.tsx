@@ -1,13 +1,13 @@
 "use client";
+import { getCatalogProducts } from "@/features/catalog/catalog-data";
 import Image from "next/image";
 import Link from "next/link";
 import { Plus, Minus, X } from "@deemlol/next-icons";
 import { localizePath, type Locale } from "@/i18n/config";
 import {
-  getCatalogProducts,
   productTitle,
   previewPackPrice,
-} from "@/features/catalog/catalog-data";
+} from "@/features/catalog/catalog-model";
 import { changeQuantity } from "../shop-store";
 import type { CartLine } from "../cart-model";
 import cartStyles from "./cart-preview.module.css";

@@ -57,66 +57,6 @@ export const productStoryContent = {
     glass: { title: heading, description: paragraph, media },
   },
   finale: { title: heading, media, note: paragraph },
-  blog: {
-    title: "Lorem ipsum",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    items: [
-      {
-        id: "feature",
-        tags: ["Lorem", "Ipsum", "Dolor"],
-        date: "2025-02-19",
-        dateLabel: "19.02.2025",
-        readingMinutes: 5,
-        title: "Lorem ipsum dolor sit amet",
-        excerpt: paragraph,
-        media,
-      },
-      {
-        id: "second",
-        tags: ["Dolor", "Sit amet", "Lorem"],
-        date: "2025-02-19",
-        dateLabel: "19.02.2025",
-        readingMinutes: 3,
-        title: "Consectetur adipiscing elit",
-        excerpt:
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        media,
-      },
-      {
-        id: "third",
-        tags: ["Consectetur", "Elit", "Lorem"],
-        date: "2025-02-19",
-        dateLabel: "19.02.2025",
-        readingMinutes: 4,
-        title: "Sed do eiusmod tempor",
-        excerpt:
-          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
-        media,
-      },
-      {
-        id: "fourth",
-        tags: ["Lorem", "Ipsum", "Amet"],
-        date: "2025-02-19",
-        dateLabel: "19.02.2025",
-        readingMinutes: 6,
-        title: "Ut enim ad minim veniam",
-        excerpt:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        media,
-      },
-      {
-        id: "fifth",
-        tags: ["Dolor", "Lorem", "Elit"],
-        date: "2025-02-19",
-        dateLabel: "19.02.2025",
-        readingMinutes: 4,
-        title: "Duis aute irure dolor in reprehenderit",
-        excerpt:
-          "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        media,
-      },
-    ],
-  },
   faq: {
     title: "Lorem ipsum",
     description: paragraph,

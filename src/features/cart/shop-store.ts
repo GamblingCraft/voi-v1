@@ -1,58 +1,35 @@
 "use client";
-import { useEffect, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import {
-  getCatalogProducts,
+  productIds,
   productWeights,
   previewPackPrice,
   type ProductId,
   type ProductWeight,
-} from "../catalog/catalog-data";
+} from "../catalog/catalog-model";
 import {
   addCartItem,
   setCartQuantity,
   cartQuantity,
   type CartLine,
 } from "./cart-model";
+import {
+  decodeShopState,
+  emptyShopState,
+  type ShopState,
+} from "./shop-storage";
 
-type ShopState = { items: CartLine[]; viewed: ProductId[] };
-const empty: ShopState = { items: [], viewed: [] };
-let state = empty;
+let state = emptyShopState;
 let hydrated = false;
 const key = "voi-shop-v1";
 const listeners = new Set<() => void>();
-const ids = new Set(getCatalogProducts().map((item) => item.id));
-function decode(raw: string | null): ShopState {
-  try {
-    const data = JSON.parse(raw ?? "null");
-    if (!data || !Array.isArray(data.items) || !Array.isArray(data.viewed))
-      return empty;
-    const items: CartLine[] = [];
-    for (const line of data.items.slice(0, 30)) {
-      if (
-        ids.has(line?.productId) &&
-        productWeights.includes(line.weight) &&
-        Number.isInteger(line.quantity) &&
-        line.quantity > 0 &&
-        line.quantity <= 99 &&
-        !items.some(
-          (item) =>
-            item.productId === line.productId && item.weight === line.weight,
-        )
-      )
-        items.push({
-          productId: line.productId,
-          weight: line.weight,
-          quantity: line.quantity,
-        });
-    }
-    const viewed = [
-      ...new Set<ProductId>(data.viewed.filter((id: ProductId) => ids.has(id))),
-    ].slice(0, 8);
-    return { items, viewed };
-  } catch {
-    return empty;
-  }
-}
+const ids = new Set<string>(productIds);
+const decode = (raw: string | null) =>
+  decodeShopState(
+    raw,
+    (value): value is ProductId => typeof value === "string" && ids.has(value),
+    productWeights,
+  );
 function emit() {
   listeners.forEach((listener) => listener());
 }
@@ -62,15 +39,15 @@ function hydrate() {
   try {
     state = decode(localStorage.getItem(key));
   } catch {
-    state = empty;
+    /* Keep in-memory state when browser storage is unavailable. */
   }
-  window.addEventListener("storage", (event) => {
-    if (event.key === key || event.key === null) {
-      state = decode(event.key === null ? null : event.newValue);
-      emit();
-    }
-  });
-  emit();
+}
+function storageChanged(event: StorageEvent) {
+  if (event.storageArea !== localStorage) return;
+  if (event.key === key || event.key === null) {
+    state = decode(event.key === null ? null : event.newValue);
+    emit();
+  }
 }
 function commit(next: ShopState) {
   state = next;
@@ -82,19 +59,28 @@ function commit(next: ShopState) {
   emit();
 }
 const subscribe = (listener: () => void) => {
+  if (listeners.size === 0) {
+    // Re-read after a period without subscribers: another tab may have changed it.
+    hydrated = false;
+    hydrate();
+    window.addEventListener("storage", storageChanged);
+  }
   listeners.add(listener);
   return () => {
     listeners.delete(listener);
+    if (listeners.size === 0)
+      window.removeEventListener("storage", storageChanged);
   };
 };
-export function useShop() {
-  const snapshot = useSyncExternalStore(
-    subscribe,
-    () => state,
-    () => empty,
-  );
-  useEffect(hydrate, []);
-  return snapshot;
+const getItems = () => state.items;
+const getViewed = () => state.viewed;
+const getServerItems = () => emptyShopState.items;
+const getServerViewed = () => emptyShopState.viewed;
+export function useCartItems() {
+  return useSyncExternalStore(subscribe, getItems, getServerItems);
+}
+export function useRecentlyViewed() {
+  return useSyncExternalStore(subscribe, getViewed, getServerViewed);
 }
 export function addToCart(productId: ProductId, weight: ProductWeight) {
   hydrate();

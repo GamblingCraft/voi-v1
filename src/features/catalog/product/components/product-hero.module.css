@@ -8,14 +8,14 @@
   padding: 20px 0;
 }
 .info h1 {
-  font-size: clamp(30px, 3.4vw, 52px);
+  font-size: var(--type-section-title-size);
   margin: 18px 0 !important;
   max-width: 540px;
 }
 .lead {
   color: #53636e;
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
   max-width: 470px;
 }
 .facts {
@@ -49,7 +49,7 @@
     padding: 0;
   }
   .info h1 {
-    font-size: 36px;
+    font-size: var(--type-section-title-size);
   }
   .facts {
     font-size: 13px;

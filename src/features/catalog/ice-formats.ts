@@ -3,6 +3,8 @@ export const iceFormats = [
   {
     id: "formed",
     name: "Формованный лёд",
+    shortName: "Формованный",
+    image: "/media/hero/opening/4.png",
     description:
       "Для коктейлей и авторской подачи. Куб, сфера и цилиндр — примеры форм этого направления.",
     href: "/catalog/formed",
@@ -10,12 +12,16 @@ export const iceFormats = [
   {
     id: "loose",
     name: "Рассыпной лёд",
+    shortName: "Рассыпной",
+    image: "/media/product/img/section/back1st.jpg",
     description: "Лёд в зип-упаковке для охлаждения, работы кухни и бара.",
     href: "/catalog/loose",
   },
   {
     id: "block",
     name: "Блочный лёд",
+    shortName: "Блочный",
+    image: "/media/product/img/section/back2st1.jpg",
     description:
       "Для ледяной резьбы, оформления подачи и событийных инсталляций.",
     href: "/catalog/block",

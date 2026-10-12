@@ -2,8 +2,8 @@ import Link from "next/link";
 import sidebarStyles from "./catalog-sidebar.module.css";
 import shellStyles from "../../styles/catalog-shell.module.css";
 import { CatalogFilters } from "./catalog-filters";
-import type { CatalogProduct } from "../../catalog-data";
-import { usageOptions } from "../../catalog-data";
+import type { CatalogProduct } from "../../catalog-model";
+import { usageOptions } from "../../catalog-model";
 import type { CatalogSelection } from "../../catalog-selection";
 
 export function CatalogSidebar({

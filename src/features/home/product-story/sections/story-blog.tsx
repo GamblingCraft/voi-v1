@@ -1,12 +1,11 @@
-import type { ProductStoryContent } from "../story.types";
-import { MediaPlaceholder } from "../components/media-placeholder";
+import Image from "next/image";
+import Link from "next/link";
+import { getArticles } from "@/features/blog/articles";
+import { ArticleMeta } from "@/features/blog/components/article-meta";
 import styles from "./story-blog.module.css";
 
-export function StoryBlog({
-  content,
-}: {
-  content: ProductStoryContent["blog"];
-}) {
+export function StoryBlog() {
+  const articles = getArticles().slice(0, 5);
   return (
     <section
       id="story-blog"
@@ -15,41 +14,51 @@ export function StoryBlog({
       data-header-theme="light"
     >
       <div className={styles.heading}>
-        <h2 id="story-blog-title">{content.title}</h2>
-        <p>{content.description}</p>
+        <h2 id="story-blog-title">Журнал ВОЙ</h2>
+        <div>
+          <p>
+            Лёд, рецепты и культура подачи. Практика для бара и вашего
+            следующего события.
+          </p>
+          <Link className={styles.allArticles} href="/blog">
+            Все статьи
+          </Link>
+        </div>
       </div>
       <div className={styles.layout}>
-        {content.items.map((item, index) => (
+        {articles.map((article, index) => (
           <article
-            key={item.id}
+            key={article.slug}
             className={index === 0 ? styles.feature : styles.article}
-            aria-labelledby={`story-blog-${item.id}-title`}
           >
-            <MediaPlaceholder label={item.media} className={styles.media} />
+            <Link
+              href={`/blog/${article.slug}`}
+              className={styles.media}
+              tabIndex={-1}
+              aria-hidden="true"
+            >
+              <Image
+                src={article.image}
+                alt=""
+                fill
+                sizes={
+                  index === 0
+                    ? "(max-width: 700px) 90vw, 60vw"
+                    : "(max-width: 700px) 90vw, 30vw"
+                }
+              />
+            </Link>
             <div className={styles.content}>
               <ul className={styles.tags} aria-label="Темы статьи">
-                {item.tags.map((tag) => (
+                {[...new Set([article.topic, ...article.tags])].map((tag) => (
                   <li key={tag}>{tag}</li>
                 ))}
               </ul>
-              <h3 id={`story-blog-${item.id}-title`}>{item.title}</h3>
-              <p className={styles.excerpt}>{item.excerpt}</p>
-              <div className={styles.metadata}>
-                <span className={styles.readingTime}>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M12 7v5h4" />
-                  </svg>
-                  {item.readingMinutes} мин чтения
-                </span>
-                <time dateTime={item.date}>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="3" y="5" width="18" height="16" rx="3" />
-                    <path d="M7 3v4m10-4v4M3 10h18" />
-                  </svg>
-                  {item.dateLabel}
-                </time>
-              </div>
+              <h3>
+                <Link href={`/blog/${article.slug}`}>{article.title}</Link>
+              </h3>
+              <p className={styles.excerpt}>{article.excerpt}</p>
+              <ArticleMeta article={article} />
             </div>
           </article>
         ))}

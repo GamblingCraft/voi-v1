@@ -4,7 +4,7 @@ import { getCatalogProducts, usageOptions } from "./catalog.content";
 import { iceFormats, type IceCategoryId } from "./ice-formats";
 import { selectCatalogProducts, type CatalogQuery } from "./catalog-selection";
 import { CatalogHeader } from "./listing/components/catalog-header";
-import { CatalogFormats } from "./listing/components/catalog-formats";
+import { CategoryNavigation } from "./components/category-navigation";
 import { CatalogContact } from "./listing/components/catalog-contact";
 import { CatalogSidebar } from "./listing/components/catalog-sidebar";
 import { CatalogResults } from "./listing/components/catalog-results";
@@ -34,7 +34,7 @@ export function CatalogPage({
         <span aria-current="page">{format.name}</span>
       </nav>
       <CatalogHeader format={format} />
-      <CatalogFormats format={format} />
+      <CategoryNavigation active={format.id} />
       <section
         className={layoutStyles.collection}
         aria-labelledby="collection-title"

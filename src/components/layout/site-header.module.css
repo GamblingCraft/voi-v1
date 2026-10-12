@@ -52,7 +52,8 @@
 .header[data-on-hero="true"] {
   color: #f6f8f8;
 }
-.header[data-on-hero="true"]::before {
+.header[data-on-hero="true"]::before,
+.header[data-on-hero="light"]::before {
   opacity: 0;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;

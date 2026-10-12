@@ -1,5 +1,5 @@
 import "server-only";
-import type { ProductId } from "../catalog-data";
+import type { ProductId } from "../catalog-model";
 
 export type PublishedProductQuestion = {
   id: string;

@@ -1,22 +1,35 @@
 .closing {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: start;
   gap: 48px;
   padding: 96px var(--page-gutter);
-  background: var(--ink);
-  color: var(--paper);
+  background: #111;
+  color: #fff;
 }
 .closing h2 {
   max-width: 20ch;
-  font-size: clamp(28px, 4vw, 64px);
+  font-size: var(--type-section-title-size);
   margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 400;
+  line-height: var(--type-heading-leading);
+  letter-spacing: var(--type-heading-tracking);
+  text-transform: uppercase;
 }
 .closing h2 span {
   display: block;
 }
 .closing a {
   flex-shrink: 0;
+}
+.closing[data-compact] {
+  flex-direction: column;
+  padding: 32px;
+  gap: 28px;
+}
+.closing[data-compact] h2 {
+  font-size: var(--type-card-title-size);
 }
 @media (max-width: 800px) {
   .closing {
@@ -26,6 +39,6 @@
     gap: 32px;
   }
   .closing h2 {
-    font-size: clamp(24px, 6.5vw, 40px);
+    font-size: var(--type-section-title-size);
   }
 }

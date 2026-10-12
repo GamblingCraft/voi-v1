@@ -1,148 +1,212 @@
-import { MediaPlaceholder } from "@/components/media/media-placeholder";
-import { InquiryForm } from "@/features/inquiries/inquiry-form";
+import Image from "next/image";
+import Link from "next/link";
+import { company } from "@/lib/company";
+import { InquirySection } from "../components/inquiry-section";
 import { EditorialHero } from "../components/editorial-hero";
 import { SectionHeading } from "../components/section-heading";
 import { Faq } from "../components/faq";
-import { businessFaq } from "../landing.content";
+import { ClosingCta } from "../components/closing-cta";
+import {
+  cooperationHeroMedia,
+  cooperationAudiences,
+  cooperationAdvantages,
+  cooperationSteps,
+  cooperationFaq,
+} from "../cooperation.content";
 import sharedStyles from "../styles/landing.module.css";
-import cooperationStyles from "./cooperation-landing.module.css";
-import inquiryStyles from "../components/inquiry-section.module.css";
-
-const audiences = [
-  {
-    title: "Бары",
-    text: "Лёд как часть рецепта. Подбираем форму под коктейльную карту и вашу посуду.",
-    media: "Барная стойка · вечерняя подача",
-  },
-  {
-    title: "Рестораны",
-    text: "Лёд для аперитивов, коктейлей и крепких напитков из вашей карты.",
-    media: "Ресторан · сервировка стола",
-  },
-  {
-    title: "Отели",
-    text: "Поставки для лобби-бара, ресторана и банкетной службы.",
-    media: "Отель · подача в лобби-баре",
-  },
-  {
-    title: "События",
-    text: "Разовая поставка с учётом даты, числа гостей и меню напитков.",
-    media: "Мероприятие · коктейльный бар",
-  },
-];
+import styles from "../styles/editorial-layout.module.css";
 
 export function CooperationLanding() {
   return (
     <main id="top" className={sharedStyles.page}>
       <EditorialHero
-        variant="business"
         label="Сотрудничество"
-        title={["ЛЁД ДЛЯ БАРОВ", "И РЕСТОРАНОВ"]}
-        media="Бар в работе · лёд как часть сервиса"
-        description="Обсудим формы льда для вашего меню, объём заказа и график поставок в Иркутске."
+        media={cooperationHeroMedia}
+        title={["ВАША ПОДАЧА.", "НАШ ЛЁД."]}
+        introduction={["Станьте партнёром", "ВОЙ."]}
+        description="Премиальный лёд из байкальской воды для баров, ресторанов, отелей и событий. За продуктом ВОЙ стоят собственное производство в Иркутске, склады хранения и логистика. Объединяем их, чтобы работать с партнёрами напрямую — от выбора льда до поставки."
         href="#inquiry"
-        cta="Обсудить сотрудничество"
+        cta="Начать сотрудничество"
       />
+      <nav className={styles.sectionNav} aria-label="Сотрудничество с ВОЙ">
+        <a href="#partners">Для кого</a>
+        <a href="#advantages">Преимущества</a>
+        <a href="#start">Как начать</a>
+        <a href="#delivery">Где работаем</a>
+      </nav>
       <section
-        id="discover"
+        id="partners"
         className={sharedStyles.section}
         data-header-theme="light"
+        aria-labelledby="partners-title"
       >
         <SectionHeading
-          label="Для вашего формата"
+          label="Форматы партнёрства"
           title={
-            <>
-              ДЛЯ ЗАВЕДЕНИЙ
-              <br />И МЕРОПРИЯТИЙ
-            </>
+            <span id="partners-title">
+              ОТ БАРНОЙ СТОЙКИ
+              <br />
+              ДО БОЛЬШОГО СОБЫТИЯ
+            </span>
           }
         />
-        <div className={cooperationStyles.audienceGrid}>
-          {audiences.map((item, index) => (
-            <article key={item.title}>
-              <div className={cooperationStyles.audienceMedia}>
-                <MediaPlaceholder
-                  label={item.media}
-                  index={`0${index + 2}`}
-                  tone={index % 2 ? "ice" : "light"}
-                />
-              </div>
-              <div className={cooperationStyles.audienceTitle}>
+        <div className={styles.partnerLayout}>
+          <div className={styles.partnerPhoto}>
+            <Image
+              src="/media/cooperation/7.webp"
+              alt="Подача ледяных кубов в бокал за барной стойкой"
+              fill
+              sizes="(max-width: 800px) 100vw, 48vw"
+              className={styles.photo}
+            />
+          </div>
+          <div className={styles.audiences}>
+            {cooperationAudiences.map((item) => (
+              <article key={item.title}>
                 <h3>{item.title}</h3>
-              </div>
-              <p className={sharedStyles.copy}>{item.text}</p>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section
+        id="advantages"
+        className={sharedStyles.section}
+        data-header-theme="light"
+        aria-labelledby="advantages-title"
+      >
+        <SectionHeading
+          label="Почему ВОЙ"
+          title={
+            <span id="advantages-title">
+              ПРОДУКТ И ПОСТАВКА.
+              <br />В ОДНИХ РУКАХ.
+            </span>
+          }
+        />
+        <div className={styles.advantages}>
+          {cooperationAdvantages.map((item, index) => (
+            <article key={item.title}>
+              <span className={styles.index}>0{index + 1}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </article>
           ))}
         </div>
+        <div className={styles.photoPair}>
+          <div>
+            <Image
+              src="/media/cooperation/2.webp"
+              alt="Прозрачные кубы льда на производственной линии"
+              fill
+              sizes="(max-width: 800px) 100vw, 56vw"
+              className={styles.photo}
+            />
+          </div>
+          <div>
+            <Image
+              src="/media/cooperation/3.webp"
+              alt="Лёд в транспортной упаковке ВОЙ"
+              fill
+              sizes="(max-width: 800px) 80vw, 36vw"
+              className={styles.photo}
+            />
+          </div>
+        </div>
+        <div className={styles.productLink}>
+          <Link href="/product" className={sharedStyles.button}>
+            О нашем льде
+          </Link>
+        </div>
       </section>
       <section
-        className={cooperationStyles.briefSection}
+        id="start"
+        className={sharedStyles.section}
         data-header-theme="light"
+        aria-labelledby="start-title"
       >
         <SectionHeading
-          label="Перед заказом"
+          label="Начало работы"
           title={
-            <>
-              ЧТО НУЖНО
+            <span id="start-title">
+              ОТ ЗНАКОМСТВА
               <br />
-              ДЛЯ РАСЧЁТА
-            </>
+              ДО ПЕРВОЙ ПОСТАВКИ
+            </span>
           }
         />
-        <dl className={cooperationStyles.orderDetails}>
-          <div>
-            <dt>Меню и посуда</dt>
-            <dd>
-              Какие напитки вы подаёте и в каких бокалах. Укажите нужную форму
-              льда или попросите помочь с выбором.
-            </dd>
-          </div>
-          <div>
-            <dt>Объём и частота</dt>
-            <dd>
-              Примерный расход льда и частота заказов. Для мероприятия укажите
-              дату и количество гостей.
-            </dd>
-          </div>
-          <div>
-            <dt>Адрес поставки</dt>
-            <dd>
-              Город, адрес и удобное время получения. Стоимость, упаковку и
-              возможность доставки согласуем до заказа.
-            </dd>
-          </div>
-        </dl>
+        <ol className={styles.steps}>
+          {cooperationSteps.map((step, index) => (
+            <li key={step.title}>
+              <span className={styles.index}>0{index + 1}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
       </section>
       <section
-        className={cooperationStyles.faqSection}
+        id="delivery"
+        className={sharedStyles.section}
         data-header-theme="light"
+        aria-labelledby="delivery-title"
       >
-        <div>
-          <h2>
-            ВОПРОСЫ
-            <br />О ПОСТАВКАХ
-          </h2>
+        <SectionHeading
+          label="География и логистика"
+          title={<span id="delivery-title">НАША БАЗА — ИРКУТСК</span>}
+        />
+        <div className={styles.deliveryLayout}>
+          <div className={styles.deliveryPhoto}>
+            <Image
+              src="/media/cooperation/5.webp"
+              alt="Партия ВОЙ в автомобиле перед отгрузкой"
+              fill
+              sizes="(max-width: 800px) 100vw, 56vw"
+              className={styles.photo}
+            />
+          </div>
+          <div className={styles.deliveryCopy}>
+            <p className={sharedStyles.lead}>
+              Производим, храним и организуем поставки из Иркутска.
+            </p>
+            <p>
+              Собственные склады и логистика позволяют связывать подготовку
+              партии с её отгрузкой. Для регулярных заказов обсуждаем график под
+              расход заведения, для события — поставку к согласованной дате.
+            </p>
+            <p>
+              Партнёрство в другом городе начинается с обсуждения маршрута и
+              объёма. Географию, сроки и условия подтверждаем для конкретной
+              поставки.
+            </p>
+            <a className={styles.phone} href={company.phoneHref}>
+              {company.phone}
+            </a>
+          </div>
         </div>
-        <Faq items={businessFaq} />
       </section>
-      <section
-        id="inquiry"
-        className={inquiryStyles.inquirySection}
-        data-header-theme="light"
-      >
-        <div>
-          <h2>
-            РАССКАЖИТЕ
-            <br />О ВАШЕМ
+      <section className={styles.faqSection} data-header-theme="light">
+        <h2>
+          О СОТРУДНИЧЕСТВЕ
+          <br />В ДЕТАЛЯХ
+        </h2>
+        <Faq items={cooperationFaq} />
+      </section>
+      <InquirySection
+        title={
+          <>
+            НАЧНЁМ
             <br />
-            ПРОЕКТЕ.
-          </h2>
-          <p>
-            Укажите название заведения, нужные формы и примерный объём льда.
-          </p>
-        </div>
-        <InquiryForm />
-      </section>
+            СОТРУДНИЧЕСТВО
+          </>
+        }
+      />
+      <ClosingCta
+        title={"СТАНЬТЕ\nПАРТНЁРОМ ВОЙ"}
+        href="#inquiry"
+        action="Начать сотрудничество"
+      />
     </main>
   );
 }

@@ -1,7 +1,6 @@
 .page {
   --font-body: var(--font-myriad-pro);
   --font-display: var(--font-tt-norms-expanded);
-  --font-ui: var(--font-myriad-pro);
   --font-editorial: var(--font-tt-norms-expanded);
   font-family: var(--font-myriad-pro), Arial, sans-serif;
   font-synthesis: none;

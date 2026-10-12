@@ -1,20 +1,28 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { ShoppingCart } from "@deemlol/next-icons";
 import type { Locale } from "@/i18n/config";
-import { useShop, cartQuantity, cartTotal } from "@/features/cart/shop-store";
-import { CartPreview } from "@/features/cart/components/cart-preview";
+import {
+  useCartItems,
+  cartQuantity,
+  cartTotal,
+} from "@/features/cart/shop-store";
 import triggerStyles from "./header-cart-trigger.module.css";
+const CartPreview = dynamic(() =>
+  import("@/features/cart/components/cart-preview").then(
+    (module) => module.CartPreview,
+  ),
+);
 export function HeaderCartButton({
   locale,
   label,
 }: {
   locale: Locale;
   label: string;
-  itemCount?: number;
 }) {
-  const { items } = useShop();
+  const items = useCartItems();
   const count = cartQuantity(items);
   const total = cartTotal(items);
   const [open, setOpen] = useState(false);

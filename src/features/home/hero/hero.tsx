@@ -10,8 +10,8 @@ import {
 import type { Dictionary } from "@/i18n/dictionaries";
 import { SoundToggle, useSiteAudio } from "@/components/layout/site-audio";
 import { HeroLoader } from "./hero-loader";
-import { useVideoScrubber } from "./use-video-scrubber";
-import styles from "./hero.module.css";
+import { useVideoScrubber } from "@/components/media/use-video-scrubber";
+import styles from "@/components/media/video-hero.module.css";
 
 type HeroProps = {
   dictionary: Dictionary["home"]["hero"];

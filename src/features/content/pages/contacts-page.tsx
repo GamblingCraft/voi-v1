@@ -1,90 +1,109 @@
 import Link from "next/link";
-import { MediaPlaceholder } from "@/components/media/media-placeholder";
-import { InquiryForm } from "@/features/inquiries/inquiry-form";
-import sharedStyles from "../styles/landing.module.css";
-import contactsStyles from "./contacts-page.module.css";
-import inquiryStyles from "../components/inquiry-section.module.css";
+import { BreadcrumbSeparator } from "@/components/ui/breadcrumb-separator";
+import { company } from "@/lib/company";
+import { ContactData } from "@/components/seo/contact-data";
+import { InquirySection } from "../components/inquiry-section";
+import { ContactMap } from "../components/contact-map";
+import shared from "../styles/landing.module.css";
+import styles from "./contacts-page.module.css";
 
 export function ContactsPage() {
+  const channels = [
+    {
+      name: "Telegram",
+      value: company.telegramUrl,
+      href: company.telegramUrl,
+    },
+    {
+      name: "MAX",
+      value: company.maxUrl,
+      href: company.maxUrl,
+    },
+    {
+      name: "Email",
+      value: company.email,
+      href: company.email ? `mailto:${company.email}` : null,
+    },
+  ];
+  const requisites = [
+    ["Наименование", company.legalName],
+    ["ИНН", company.inn],
+    ["ОГРН / ОГРНИП", company.ogrn],
+    ["Адрес", company.streetAddress],
+  ].filter(([, value]) => value);
   return (
-    <main id="top" className={sharedStyles.page}>
-      <section className={contactsStyles.contactHero} data-header-theme="dark">
-        <div className={contactsStyles.contactTitle}>
-          <p>Поставки льда и сотрудничество</p>
-          <h1>
-            СВЯЗАТЬСЯ
-            <br />
-            <span>С ВОЙ</span>
-          </h1>
-          <Link href="#inquiry" className={sharedStyles.lightButton}>
-            Подготовить заявку
-          </Link>
-        </div>
-        <div className={contactsStyles.contactChannels}>
-          <div>
-            <span>Поставки и сотрудничество</span>
-            <a href="#inquiry">Перейти к заявке </a>
-          </div>
-          <div>
-            <span>Город</span>
-            <p>Иркутск, Россия</p>
-          </div>
-          <div>
-            <span>Прямая связь</span>
-            <p className={contactsStyles.contactPending}>
-              Телефон и email — скоро
-            </p>
-          </div>
-        </div>
-      </section>
+    <main id="top" className={shared.page}>
+      <ContactData />
+      <nav className={styles.breadcrumb} aria-label="Хлебные крошки">
+        <Link href="/">Главная</Link>
+        <BreadcrumbSeparator />
+        <span aria-current="page">Контакты</span>
+      </nav>
       <section
-        id="inquiry"
-        className={inquiryStyles.inquirySection}
-        data-header-theme="light"
+        className={styles.contactSection}
+        aria-labelledby="contacts-heading"
       >
-        <div>
-          <h2>
-            ЗАЯВКА
+        <div className={styles.intro}>
+          <h1 id="contacts-heading">
+            Контакты
             <br />
-            НА ПОСТАВКУ
-          </h2>
-          <p>Несколько деталей о проекте помогут подготовить ваше обращение.</p>
+            ВОЙ
+          </h1>
         </div>
-        <InquiryForm />
-      </section>
-      <section className={contactsStyles.contactBody} data-header-theme="light">
-        <div className={contactsStyles.contactDirections}>
-          {[
-            ["Заказать лёд", "Подбор формы, объёма и условий поставки."],
-            [
-              "Стать партнёром",
-              "Постоянное сотрудничество и совместные проекты.",
-            ],
-            ["Обсудить событие", "Расчёт объёма льда по числу гостей и меню."],
-          ].map(([title, text]) => (
-            <a href="#inquiry" key={title}>
-              <div>
-                <h2>{title}</h2>
-                <p>{text}</p>
-              </div>
-            </a>
-          ))}
-        </div>
-        <div className={contactsStyles.contactLocation}>
-          <MediaPlaceholder
-            label="Карта · адрес производства после подтверждения"
-            tone="ice"
-            index="01"
-          />
-          <div>
-            <p>
-              Адрес и режим работы уточняются.
-              <br />
-              Визит и получение заказа — по согласованию.
-            </p>
+        <div className={styles.channels}>
+          <div className={styles.phone}>
+            <span>Поставки и сотрудничество</span>
+            <a href={company.phoneHref}>{company.phone}</a>
           </div>
+          {channels.length > 0 && (
+            <div className={styles.messengers}>
+              {channels.map((channel) => (
+                <div className={styles.channel} key={channel.name}>
+                  <h3>{channel.name}</h3>
+                  {channel.href && (
+                    <a href={channel.href}>
+                      {channel.name === "Email" ? channel.value : "Написать"}
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          <a className={shared.textLink} href="#inquiry">
+            Перейти к форме
+          </a>
         </div>
       </section>
+      <ContactMap />
+      <InquirySection
+        title={
+          <>
+            Давайте
+            <br />
+            обсудим
+            <br />
+            детали.
+          </>
+        }
+      />
+      {requisites.length > 0 && (
+        <section
+          className={styles.requisites}
+          aria-labelledby="company-heading"
+        >
+          <div>
+            <h2 id="company-heading">Реквизиты</h2>
+          </div>
+          <dl>
+            {requisites.map(([label, value]) => (
+              <div key={label}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
     </main>
   );
 }

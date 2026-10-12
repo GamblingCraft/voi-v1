@@ -5,10 +5,8 @@ import styles from "./media-placeholder.module.css";
 type Props = {
   label: string;
   src?: string;
-  kind?: "photo" | "video";
   tone?: "light" | "dark" | "ice";
   shape?: "cube" | "sphere" | "cylinder";
-  index?: string;
   className?: string;
 };
 

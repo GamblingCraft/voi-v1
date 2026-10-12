@@ -73,14 +73,17 @@
   gap: 12px;
 }
 .actions button {
-  min-height: var(--control-height);
-  padding: 12px 18px;
+  min-height: var(--button-height);
+  padding: var(--button-padding);
   border: 1px solid #153749;
-  border-radius: var(--control-radius);
+  border-radius: var(--button-radius);
   background: #153749;
   color: white;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+
+  text-align: center;
+  font-family: var(--font-body), sans-serif;
 }
 .actions button + button {
   background: transparent;

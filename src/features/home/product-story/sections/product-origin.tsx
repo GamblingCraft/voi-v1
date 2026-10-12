@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import type { CatalogProduct } from "@/features/catalog/catalog-data";
+import type { CatalogProduct } from "@/features/catalog/catalog-model";
 import type { ProductStoryContent } from "../story.types";
 import { ProductCarousel } from "../components/product-carousel";
 import { CloudTransition } from "../../cloud-transition/cloud-transition";

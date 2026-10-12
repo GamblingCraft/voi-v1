@@ -89,3 +89,7 @@ a {
 a {
   text-decoration: none;
 }
+
+html[data-site="public"] main :where(p, li, dd) {
+  font-weight: var(--type-body-weight);
+}

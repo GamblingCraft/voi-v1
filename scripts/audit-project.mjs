@@ -28,17 +28,46 @@ const convention =
   /(?:^|\/)(?:page|layout|template|loading|error|global-error|not-found|default|route|robots|sitemap|manifest|opengraph-image|twitter-image|icon|apple-icon)\.[cm]?[jt]sx?$/;
 const roots = sources.filter(
   (file) =>
-    convention.test(relative(file)) || relative(file) === "src/proxy.ts",
+    convention.test(relative(file)) ||
+    relative(file) === "src/proxy.ts" ||
+    /^src\/app\/(?:icon|apple-icon)\.(?:svg|png|jpg|ico)$/.test(relative(file)),
 );
 const reachable = new Set();
 const packages = new Set();
 const assetPaths = new Set();
 const assetPrefixes = new Set();
+function recordAsset(value) {
+  if (!/^\/(media|brand)\//.test(value)) return;
+  assetPaths.add(value);
+  const target = path.join(root, "public", value);
+  if (
+    value !== "/media/" &&
+    value !== "/brand/" &&
+    fs.existsSync(target) &&
+    fs.statSync(target).isDirectory()
+  )
+    assetPrefixes.add(value.endsWith("/") ? value : `${value}/`);
+}
 function visit(file) {
   if (reachable.has(file)) return;
   reachable.add(file);
+  if (file.endsWith(".json")) {
+    const walkJson = (value) => {
+      if (typeof value === "string") recordAsset(value);
+      else if (value && typeof value === "object") {
+        for (const [key, entry] of Object.entries(value)) {
+          recordAsset(key);
+          walkJson(entry);
+        }
+      }
+    };
+    walkJson(JSON.parse(fs.readFileSync(file, "utf8")));
+    return;
+  }
   if (file.endsWith(".css")) {
     const css = fs.readFileSync(file, "utf8");
+    for (const match of css.matchAll(/url\(\s*["']?([^\s"')]+)["']?\s*\)/g))
+      recordAsset(match[1]);
     for (const match of css.matchAll(/@import\s+["']([^"']+)["']/g)) {
       if (match[1].startsWith("."))
         visit(path.resolve(path.dirname(file), match[1]));
@@ -53,8 +82,15 @@ function visit(file) {
     true,
   );
   function walk(node) {
-    if (ts.isStringLiteralLike(node) && /^\/(media|brand)\//.test(node.text))
-      assetPaths.add(node.text);
+    if (ts.isStringLiteralLike(node)) {
+      recordAsset(node.text);
+      // Static new URL(..., import.meta.url), next/font sources and imports.
+      if (node.text.startsWith("./") || node.text.startsWith("../")) {
+        const target = path.resolve(path.dirname(file), node.text);
+        if (fs.existsSync(target) && fs.statSync(target).isFile())
+          visit(target);
+      }
+    }
     if (
       ts.isTemplateExpression(node) &&
       /^\/(media|brand)\//.test(node.head.text)

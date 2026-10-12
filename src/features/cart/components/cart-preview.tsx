@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { X } from "@deemlol/next-icons";
 import { localizePath, type Locale } from "@/i18n/config";
-import { useShop, cartQuantity, cartTotal } from "../shop-store";
+import { useCartItems, cartQuantity, cartTotal } from "../shop-store";
 import { CartPreviewItem } from "./cart-preview-item";
 import cartStyles from "./cart-preview.module.css";
 export function CartPreview({
@@ -12,7 +12,7 @@ export function CartPreview({
   locale: Locale;
   onClose: () => void;
 }) {
-  const { items } = useShop();
+  const items = useCartItems();
   const count = cartQuantity(items);
   const total = cartTotal(items);
   return (

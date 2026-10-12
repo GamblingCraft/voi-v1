@@ -16,11 +16,14 @@
 .heading {
   margin: 0;
   font:
-    400 var(--story-heading-size, clamp(40px, 6vw, 112px))/1.05
+    400
+      var(--story-heading-size, var(--type-story-heading-size))/var(
+        --type-story-heading-leading
+      )
       var(--font-story-display),
     Arial,
     sans-serif;
-  letter-spacing: -0.035em;
+  letter-spacing: var(--type-story-heading-tracking);
   overflow-wrap: anywhere;
   text-wrap: balance;
 }
@@ -30,7 +33,8 @@
 .copy {
   margin: 0;
   font:
-    400 clamp(18px, 1.4vw, 20px)/1.5 var(--font-body, sans-serif),
+    400 var(--type-story-copy-size)/var(--type-story-copy-leading)
+      var(--font-body, sans-serif),
     sans-serif;
   white-space: pre-line;
 }

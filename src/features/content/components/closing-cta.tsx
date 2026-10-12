@@ -6,13 +6,19 @@ export function ClosingCta({
   title = "ЗАКАЗ ЛЬДА\nДЛЯ ВАШЕГО БАРА",
   href = "/contacts#inquiry",
   action = "Обсудить поставки",
+  compact = false,
 }: {
   title?: string;
   href?: string;
   action?: string;
+  compact?: boolean;
 }) {
   return (
-    <section className={closingStyles.closing} data-header-theme="dark">
+    <section
+      className={closingStyles.closing}
+      data-header-theme="dark"
+      data-compact={compact || undefined}
+    >
       <h2>
         {title.split("\n").map((line) => (
           <span key={line}>{line}</span>

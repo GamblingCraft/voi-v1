@@ -1,5 +1,5 @@
 import { Star } from "@deemlol/next-icons";
-import type { ProductId } from "../../catalog-data";
+import type { ProductId } from "../../catalog-model";
 import { getPublishedProductQuestions } from "../product-questions";
 import { getPublishedProductReviews } from "../product-reviews";
 import { FeedbackAuthor } from "./feedback-author";

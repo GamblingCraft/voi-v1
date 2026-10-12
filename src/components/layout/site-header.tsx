@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { company } from "@/lib/company";
 import { usePathname, useRouter } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 import { BrandMark } from "@/components/brand/brand-mark";
@@ -29,10 +30,14 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
       const following = document.querySelector<HTMLElement>(
         "[data-hero-following]",
       );
-      header.dataset.onHero = String(
+      const onHero =
         !!following &&
-          following.getBoundingClientRect().top > header.offsetHeight,
-      );
+        following.getBoundingClientRect().top > header.offsetHeight;
+      header.dataset.onHero = onHero
+        ? following.dataset.heroTheme === "light"
+          ? "light"
+          : "true"
+        : "false";
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -45,8 +50,8 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
 
   return (
     <header ref={headerRef} className={styles.header}>
-      <a className={styles.phone} href="tel:+73952000000">
-        +7 (3952) 00-00-00
+      <a className={styles.phone} href={company.phoneHref}>
+        {company.phone}
       </a>
       <Link
         className={styles.brand}

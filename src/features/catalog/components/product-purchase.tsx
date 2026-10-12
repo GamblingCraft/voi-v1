@@ -8,8 +8,12 @@ import {
   productTitle,
   type CatalogProduct,
   type ProductWeight,
-} from "../catalog-data";
-import { addToCart, changeQuantity, useShop } from "@/features/cart/shop-store";
+} from "../catalog-model";
+import {
+  addToCart,
+  changeQuantity,
+  useCartItems,
+} from "@/features/cart/shop-store";
 import styles from "./product-purchase.module.css";
 export function ProductRating() {
   return (
@@ -37,7 +41,7 @@ export function ProductPurchase({
   onWeightChange: (weight: ProductWeight) => void;
 }) {
   const groupId = useId();
-  const { items } = useShop();
+  const items = useCartItems();
   const quantity =
     items.find(
       (item) => item.productId === product.id && item.weight === weight,

@@ -1,103 +1,196 @@
+import Image from "next/image";
 import Link from "next/link";
-import { MediaPlaceholder } from "@/components/media/media-placeholder";
 import { EditorialHero } from "../components/editorial-hero";
 import { SectionHeading } from "../components/section-heading";
 import { ClosingCta } from "../components/closing-cta";
-import { productionSteps } from "../landing.content";
+import {
+  productionHeroMedia,
+  productionPrinciples,
+  productionSteps,
+  productionPackaging,
+} from "../production.content";
 import sharedStyles from "../styles/landing.module.css";
-import productionStyles from "./production-landing.module.css";
+import styles from "../styles/editorial-layout.module.css";
 
 export function ProductionLanding() {
   return (
     <main id="top" className={sharedStyles.page}>
       <EditorialHero
-        variant="production"
         label="Производство"
-        title={["ПРОИЗВОДСТВО", "БАРНОГО ЛЬДА"]}
-        media="Общий план производства · от воды до упаковки"
-        description="Подготовка воды, замораживание, формовка и упаковка. Показываем каждый этап производства."
+        media={productionHeroMedia}
+        title={["ПРОИЗВОДСТВО ЛЬДА", "В ИРКУТСКЕ"]}
+        introduction={["Вода Байкала.", "Характер ВОЙ."]}
+        description="Мы создаём лёд для баров, ресторанов и домашней подачи. Собственное производство, склады и логистика позволяют нам работать с продуктом на всём пути — от воды до поставки."
         href="#water"
-        cta="Смотреть процесс"
+        cta="О производстве"
       />
+      <nav className={styles.sectionNav} aria-label="О производстве ВОЙ">
+        <a href="#water">Основа продукта</a>
+        <a href="#process">Как производим</a>
+        <a href="#packaging">Упаковка</a>
+        <a href="#storage">Хранение и доставка</a>
+      </nav>
       <section
-        id="discover"
+        id="water"
         className={sharedStyles.section}
         data-header-theme="light"
+        aria-labelledby="water-title"
       >
         <SectionHeading
-          label="Производство"
+          label="Основа продукта"
           title={
-            <>
+            <span id="water-title">
+              ПРОЗРАЧНЫЙ ЛЁД.
+              <br />
+              ВЫРАЗИТЕЛЬНАЯ ПОДАЧА.
+            </span>
+          }
+        />
+        <div className={styles.partnerLayout}>
+          <div className={styles.partnerPhoto}>
+            <Image
+              src="/media/production/sections/33.webp"
+              alt="Прозрачные кубы льда на производственной линии"
+              fill
+              sizes="(max-width: 800px) 100vw, 50vw"
+              className={styles.photo}
+            />
+          </div>
+          <div className={styles.audiences}>
+            {productionPrinciples.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+            <Link className={sharedStyles.button} href="/product">
+              О продукте
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section
+        id="process"
+        className={sharedStyles.section}
+        data-header-theme="light"
+        aria-labelledby="process-title"
+      >
+        <SectionHeading
+          label="Путь продукта"
+          title={
+            <span id="process-title">
               ОТ ВОДЫ
               <br />
-              ДО УПАКОВКИ
-            </>
+              ДО ГОТОВОЙ УПАКОВКИ
+            </span>
           }
         />
-        <div className={sharedStyles.introSplit}>
-          <p className={sharedStyles.lead}>
-            Вода, холод, форма, упаковка. На каждом этапе мы думаем о том, как
-            лёд будет выглядеть и работать в подаче.
-          </p>
-          <nav
-            className={productionStyles.processNav}
-            aria-label="Этапы производства"
-          >
-            {productionSteps.map((step, index) => (
-              <a href={`#${step.id}`} key={step.id}>
-                <span>0{index + 1}</span>
-                {step.title}
-                <span aria-hidden="true">↓</span>
-              </a>
-            ))}
-          </nav>
-        </div>
+        <ol className={styles.steps}>
+          {productionSteps.map((item, index) => (
+            <li key={item.title}>
+              <span className={styles.index}>0{index + 1}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </li>
+          ))}
+        </ol>
       </section>
-      <div>
-        {productionSteps.map((step, index) => (
-          <section
-            className={productionStyles.processScene}
-            data-layout={index % 2 ? "split" : "wide"}
-            id={step.id}
-            key={step.id}
-            data-header-theme="light"
-          >
-            <div className={productionStyles.processCopy}>
-              <h2>{step.title}</h2>
-              <p>{step.text}</p>
-            </div>
-            <div className={productionStyles.processMedia}>
-              <MediaPlaceholder
-                kind="video"
-                label={step.media}
-                tone={index % 2 ? "ice" : "light"}
-                index={`0${index + 2}`}
-              />
-            </div>
-          </section>
-        ))}
-      </div>
-      <section className={sharedStyles.section} data-header-theme="light">
+      <section
+        id="packaging"
+        className={sharedStyles.section}
+        data-header-theme="light"
+        aria-labelledby="packaging-title"
+      >
         <SectionHeading
-          label="Поставка"
+          label="Фасовка"
           title={
-            <>
-              УПАКОВКА И<br />
-              ПОСТАВКА
-            </>
+            <span id="packaging-title">
+              РАБОЧИЙ ЗАПАС.
+              <br />
+              ОСОБАЯ ПОДАЧА.
+            </span>
           }
         />
-        <div className={productionStyles.deliveryRow}>
+        <div className={styles.deliveryLayout}>
+          <div className={styles.audiences}>
+            {productionPackaging.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
           <p className={sharedStyles.lead}>
-            Готовый лёд становится частью работы бара, ресторана или события.
-            Формат упаковки и условия поставки согласуем под вашу задачу.
+            Упаковка продолжает продукт: помогает работать с большим объёмом или
+            становится частью сервировки.
           </p>
-          <Link className={sharedStyles.button} href="/cooperation">
-            Условия сотрудничества
-          </Link>
+        </div>
+        <div className={styles.photoPair}>
+          <div>
+            <Image
+              src="/media/production/sections/55.webp"
+              alt="Оборудование для упаковки льда"
+              fill
+              sizes="(max-width: 800px) 100vw, 56vw"
+              className={styles.photo}
+            />
+          </div>
+          <div>
+            <Image
+              src="/media/production/sections/66.webp"
+              alt="Кубы льда в прозрачной упаковке"
+              fill
+              sizes="(max-width: 800px) 80vw, 36vw"
+              className={styles.photo}
+            />
+          </div>
         </div>
       </section>
-      <ClosingCta title={"ОБСУДИТЬ\nПОСТАВКУ ЛЬДА"} />
+      <section
+        id="storage"
+        className={sharedStyles.section}
+        data-header-theme="light"
+        aria-labelledby="storage-title"
+      >
+        <SectionHeading
+          label="После производства"
+          title={
+            <span id="storage-title">
+              ХРАНИМ.
+              <br />
+              КОМПЛЕКТУЕМ. ДОСТАВЛЯЕМ.
+            </span>
+          }
+        />
+        <div className={styles.deliveryLayout}>
+          <div className={styles.deliveryPhoto}>
+            <Image
+              src="/media/production/sections/44.webp"
+              alt="Готовый лёд на выходе из производственного оборудования"
+              fill
+              sizes="(max-width: 800px) 100vw, 50vw"
+              className={styles.photo}
+            />
+          </div>
+          <div className={styles.deliveryCopy}>
+            <p className={sharedStyles.lead}>
+              Готовая партия остаётся в нашей системе хранения и логистики до
+              поставки.
+            </p>
+            <p>
+              На собственных складах собираем заказы для заведений и событий.
+              Производство, запас и отгрузка связаны одной командой — с ней
+              можно обсудить и ассортимент, и график получения льда.
+            </p>
+            <div className={styles.productLink}>
+              <Link className={sharedStyles.button} href="/cooperation">
+                Сотрудничество
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      <ClosingCta title={"ЛЁД ВОЙ\nДЛЯ ВАШЕГО ЗАВЕДЕНИЯ"} />
     </main>
   );
 }

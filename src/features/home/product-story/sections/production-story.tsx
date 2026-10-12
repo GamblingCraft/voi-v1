@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import type { ProductStoryContent } from "../story.types";
-import { MediaPlaceholder } from "../components/media-placeholder";
+import { StoryMedia } from "../components/story-media";
 import { ScrollScene } from "../components/scroll-scene";
 import { StoryHeading } from "../components/story-heading";
 import shared from "../product-story.module.css";
@@ -48,7 +48,7 @@ export function ProductionStory({
             </p>
           </article>
           <div className={styles.media}>
-            <MediaPlaceholder label={step.media} className={styles.mediaFill} />
+            <StoryMedia label={step.media} className={styles.mediaFill} />
           </div>
         </div>
       ))}

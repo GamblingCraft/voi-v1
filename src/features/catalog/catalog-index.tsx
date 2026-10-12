@@ -1,8 +1,8 @@
-import { BreadcrumbSeparator } from "@/components/ui/breadcrumb-separator";
 import Image from "next/image";
 import Link from "next/link";
+import { BreadcrumbSeparator } from "@/components/ui/breadcrumb-separator";
 import { localizePath, type Locale } from "@/i18n/config";
-import { iceFormats } from "./ice-formats";
+import { CategoryNavigation } from "./components/category-navigation";
 import { getCatalogProducts } from "./catalog.content";
 import { CatalogCard } from "./components/catalog-card";
 import shellStyles from "./styles/catalog-shell.module.css";
@@ -25,37 +25,7 @@ export function CatalogIndex({ locale }: { locale: Locale }) {
           ЛЁД ИЗ БАЙКАЛЬСКОЙ ВОДЫ<span>ДЛЯ НАПИТКОВ, КУХНИ И СОБЫТИЙ</span>
         </h1>
       </header>
-      <nav
-        id="discover"
-        className={styles.categories}
-        aria-label="Категории льда"
-      >
-        {iceFormats.map((category) => (
-          <Link
-            key={category.id}
-            href={localizePath(category.href, locale)}
-            className={styles.category}
-          >
-            <div
-              className={styles.media}
-              data-format={category.id}
-              aria-hidden="true"
-            >
-              {category.id === "formed" && (
-                <Image
-                  src="/media/products/sphere.png"
-                  alt=""
-                  fill
-                  sizes="(max-width: 700px) 90vw, 33vw"
-                />
-              )}
-            </div>
-            <div className={styles.caption}>
-              <h2>{category.name}</h2>
-            </div>
-          </Link>
-        ))}
-      </nav>
+      <CategoryNavigation locale={locale} />
       <section className={styles.selection} aria-labelledby="selection-title">
         <div className={styles.sectionHeading}>
           <h2 id="selection-title">Лёд для напитков</h2>
@@ -70,22 +40,25 @@ export function CatalogIndex({ locale }: { locale: Locale }) {
           {getCatalogProducts().map((product) => (
             <CatalogCard key={product.id} product={product} compact />
           ))}
-          <aside className={styles.guide}>
-            <h3>
-              Какой лёд
-              <br />
-              подойдёт вам?
-            </h3>
-            <p>
-              Форма льда зависит от напитка и посуды. Сравните куб, сферу и
-              цилиндр перед заказом.
-            </p>
-            <Link
-              className={shellStyles.actionLink}
-              href={localizePath("/product", locale)}
-            >
-              Гид по льду
-            </Link>
+          <aside className={`${styles.photoCard} ${styles.guide}`}>
+            <Image
+              src="/media/product/hero/1.webp"
+              unoptimized
+              alt=""
+              fill
+              sizes="(max-width: 1100px) 100vw, 33vw"
+              className={styles.background}
+            />
+            <div className={styles.cardCopy}>
+              <h3>Журнал ВОЙ</h3>
+              <p>Рецепты, формы льда и тонкости барной подачи.</p>
+              <Link
+                className={`${shellStyles.actionLink} ${shellStyles.actionLight}`}
+                href={localizePath("/blog", locale)}
+              >
+                Читать журнал
+              </Link>
+            </div>
           </aside>
         </div>
       </section>
@@ -93,38 +66,50 @@ export function CatalogIndex({ locale }: { locale: Locale }) {
         className={styles.editorial}
         aria-label="О производстве и заказах"
       >
-        <article className={styles.production}>
-          <div className={styles.editorialMedia} aria-hidden="true" />
-          <div>
+        <article className={styles.photoCard}>
+          <Image
+            src="/media/production/sections/44.webp"
+            alt=""
+            fill
+            sizes="(max-width: 800px) 100vw, 50vw"
+            className={styles.background}
+          />
+          <div className={styles.cardCopy}>
             <h2>
               Производим лёд
               <br />в Иркутске
             </h2>
-            <p>От подготовки воды до упаковки.</p>
+            <p>Байкальская вода. Собственное производство. Лёд ВОЙ.</p>
             <Link
-              className={shellStyles.actionLink}
+              className={`${shellStyles.actionLink} ${shellStyles.actionLight}`}
               href={localizePath("/production", locale)}
             >
               О производстве
             </Link>
           </div>
         </article>
-        <article className={styles.business}>
-          <h2>
-            Лёд для вашего
-            <br />
-            заведения
-          </h2>
-          <p>
-            Обсудим ассортимент, объём и график поставок для бара, ресторана или
-            отеля.
-          </p>
-          <Link
-            className={`${shellStyles.actionLink} ${shellStyles.actionLight}`}
-            href={localizePath("/cooperation", locale)}
-          >
-            Сотрудничество
-          </Link>
+        <article className={styles.photoCard}>
+          <Image
+            src="/media/cooperation/7.webp"
+            alt=""
+            fill
+            sizes="(max-width: 800px) 100vw, 50vw"
+            className={styles.background}
+          />
+          <div className={styles.cardCopy}>
+            <h2>
+              Лёд для вашего
+              <br />
+              заведения
+            </h2>
+            <p>Прямые поставки для баров, ресторанов и отелей.</p>
+            <Link
+              className={`${shellStyles.actionLink} ${shellStyles.actionLight}`}
+              href={localizePath("/cooperation", locale)}
+            >
+              Сотрудничество
+            </Link>
+          </div>
         </article>
       </section>
     </main>

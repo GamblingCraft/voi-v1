@@ -43,7 +43,7 @@
   min-height: 44px;
   min-width: 64px;
   padding: 10px 14px;
-  border-radius: 6px;
+  border-radius: var(--button-radius);
   border: 1px solid transparent;
   background: #f2f4f5;
   font-size: 14px;
@@ -66,15 +66,18 @@
   display: inline-flex;
   align-items: center;
   gap: 20px;
-  min-height: 48px;
-  padding: 12px 22px;
+  min-height: var(--button-height);
+  padding: var(--button-padding);
   background: #10191e;
   border: 0;
-  border-radius: var(--control-radius);
+  border-radius: var(--button-radius);
   color: white;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
+
+  text-align: center;
+  font-family: var(--font-body), sans-serif;
 }
 .buy:hover {
   background: #24485c;
@@ -88,7 +91,7 @@
   align-items: center;
   min-height: 48px;
   border: 1px solid #d4dee8;
-  border-radius: var(--control-radius);
+  border-radius: var(--button-radius);
   background: #fff;
   color: #183342;
   font-family: var(--font-body), sans-serif;

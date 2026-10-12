@@ -2,6 +2,9 @@
 // sticky positions are resolved once; video/canvas become frozen pixel frames.
 // This does not hold a document ViewTransition, which blocks pointer hit testing.
 export function captureMenuViewport(surface: HTMLElement) {
+  // WebGL clears its drawing buffer after presentation; render synchronously
+  // before copying the current frame into the existing menu snapshot.
+  window.dispatchEvent(new Event("voi:capture-frame"));
   const viewport = {
     width: document.documentElement.clientWidth,
     height: innerHeight,
@@ -82,7 +85,8 @@ export function captureMenuViewport(surface: HTMLElement) {
     }
     // Keep offscreen element boxes so preceding sections/flex items retain
     // their layout space. Their descendants and media need not be captured.
-    if (outsideViewport) return clone;
+    if (outsideViewport && !source.hasAttribute("data-snapshot-traverse"))
+      return clone;
     if (
       !(source instanceof HTMLVideoElement) &&
       !(source instanceof HTMLCanvasElement)

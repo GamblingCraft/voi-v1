@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { company } from "@/lib/company";
 import { useEffect, useRef } from "react";
 import { localizePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -9,10 +10,11 @@ import { LanguageSelector } from "./header/language-selector";
 import { SoundToggle } from "./site-audio";
 
 const primaryLinks = [
+  { href: "/catalog", key: "catalog" },
   { href: "/product", key: "product" },
   { href: "/production", key: "production" },
-  { href: "/catalog", key: "catalog" },
   { href: "/cooperation", key: "cooperation" },
+  { href: "/blog", key: "blog" },
   { href: "/contacts", key: "contacts" },
 ] as const;
 
@@ -126,8 +128,8 @@ export function NavigationOverlay({
           ))}
         </div>
         <div className={styles.mobileTools}>
-          <a className={styles.mobilePhone} href="tel:+73952000000">
-            +7 (3952) 00-00-00
+          <a className={styles.mobilePhone} href={company.phoneHref}>
+            {company.phone}
           </a>
           <div className={styles.utilityRow}>
             <SoundToggle />

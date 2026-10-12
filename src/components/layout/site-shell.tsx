@@ -106,6 +106,7 @@ function SiteShellContent({
         ref={surfaceRef}
         className={styles.pageSurface}
         data-menu-hidden={isMenuOpen || undefined}
+        data-menu-revealing={(isNavigating && isClosing) || undefined}
         data-menu-capture={hasSnapshot || undefined}
         inert={isMenuOpen ? true : undefined}
         aria-hidden={isMenuOpen || undefined}

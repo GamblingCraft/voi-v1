@@ -1,4 +1,4 @@
-import type { CatalogProduct } from "./catalog-data";
+import type { CatalogProduct } from "./catalog-model";
 
 export type CatalogQuery = {
   q?: string;

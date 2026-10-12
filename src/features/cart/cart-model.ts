@@ -1,4 +1,4 @@
-import type { ProductId, ProductWeight } from "../catalog/catalog-data";
+import type { ProductId, ProductWeight } from "../catalog/catalog-model";
 export type CartLine = {
   productId: ProductId;
   weight: ProductWeight;

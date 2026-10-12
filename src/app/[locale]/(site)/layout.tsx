@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteFooterPlacement } from "@/components/layout/site-footer-placement";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteShell } from "@/components/layout/site-shell";
 import { hasLocale } from "@/i18n/config";
@@ -27,7 +28,9 @@ export default async function PublicSiteLayout({
     >
       <SiteHeader locale={locale} dictionary={dictionary.header} />
       {children}
-      <SiteFooter locale={locale} dictionary={dictionary.footer} />
+      <SiteFooterPlacement>
+        <SiteFooter locale={locale} dictionary={dictionary.footer} />
+      </SiteFooterPlacement>
     </SiteShell>
   );
 }
