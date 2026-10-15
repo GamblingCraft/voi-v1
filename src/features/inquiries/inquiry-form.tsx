@@ -185,7 +185,7 @@ function InquiryPanel({ topic }: { topic: InquiryTopic }) {
     >
       <InquiryFields topic={topic} />
       <div className={styles.submitRow}>
-        <button type="submit">Отправить</button>
+        <button data-ui-action type="submit">Отправить</button>
       </div>
       <div aria-live="polite" aria-atomic="true">
         {preview && (
@@ -193,7 +193,7 @@ function InquiryPanel({ topic }: { topic: InquiryTopic }) {
             <h3>Обращение подготовлено</h3>
             <p>Не отправлено.</p>
             <pre>{preview}</pre>
-            <button type="button" onClick={download}>
+            <button data-ui-action type="button" onClick={download}>
               Скачать заявку
             </button>
           </div>

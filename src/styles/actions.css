@@ -1,0 +1,59 @@
+/* Shared public text actions. Icon controls, tabs and steppers keep their own UI. */
+html[data-site="public"] [data-ui-action] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 48px;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font: 400 13px/1.45 var(--font-body), sans-serif;
+  font-synthesis: none;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: left;
+  white-space: normal;
+  cursor: pointer;
+  transition: opacity 180ms ease, border-color 180ms ease;
+}
+html[data-site="public"] [data-ui-action]::before,
+html[data-site="public"] [data-ui-action]::after { content: none; }
+html[data-site="public"] [data-ui-action]:hover {
+  color: inherit;
+  background: transparent;
+  box-shadow: none;
+}
+@media (hover: hover) {
+  html[data-site="public"] [data-ui-action]:hover { opacity: .7; }
+}
+html[data-site="public"] [data-ui-action]:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 6px;
+}
+html[data-site="public"] [data-ui-action]:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+/* Share feedback occupies one cell without changing the button's width. */
+html[data-site="public"] [data-ui-action][data-ui-layout="stack"] { display: grid; }
+@media (max-width: 743px) {
+  html[data-site="public"] [data-ui-action] {
+    font-size: 12px;
+    letter-spacing: .04em;
+    gap: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-site="public"] [data-ui-action] { transition: none; }
+}

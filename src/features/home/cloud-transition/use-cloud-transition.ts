@@ -9,6 +9,8 @@ const clamp = (value: number, min = 0, max = 1) =>
 export function useCloudTransition(
   sceneRef: RefObject<HTMLElement | null>,
   mode: "parallax" | "clouds" = "parallax",
+  smoothScroll = mode === "parallax",
+  holdViewports = 0,
 ) {
   useEffect(() => {
     const scene = sceneRef.current;
@@ -17,7 +19,7 @@ export function useCloudTransition(
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     // One scroll controller for the home page; video rotation has its own clock.
     const lenis =
-      mode === "parallax"
+      smoothScroll
         ? new Lenis({
             autoRaf: true,
             lerp: 0.08,
@@ -39,7 +41,7 @@ export function useCloudTransition(
       if (mode === "parallax") {
         scene.style.setProperty(
           "--hero-parallax-y",
-          `${-Math.min(scrolled, height) * 0.22}px`,
+          `${-Math.min(Math.max(0, scrolled - height * holdViewports), height) * 0.22}px`,
         );
       } else {
         const progress = scrolled / Math.max(1, height * 1.5);
@@ -84,5 +86,5 @@ export function useCloudTransition(
       window.removeEventListener("resize", schedule);
       reducedMotion.removeEventListener("change", schedule);
     };
-  }, [sceneRef, mode]);
+  }, [sceneRef, mode, smoothScroll, holdViewports]);
 }

@@ -1,423 +1,150 @@
 .screen {
-  overflow-x: auto;
+  background: var(--story-paper);
 }
 .track {
   position: relative;
-  width: 500vw;
-  height: 100svh;
-  min-height: 600px;
+  display: grid;
 }
-.title {
-  position: absolute;
-  top: 17%;
-  left: 4vw;
-  --story-heading-size: 7vw;
+.chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  align-items: center;
+  gap: 6vw;
+  padding: var(--story-section-space) var(--page-gutter);
 }
-.title em {
-  margin-left: 2vw;
-  font-size: 3.7vw;
+.copy {
+  min-width: 0;
+  container-type: inline-size;
 }
-.intro {
-  position: absolute;
-  top: 55%;
-  left: 4vw;
-  width: 24vw;
-  color: var(--story-muted);
-  line-height: 1.65;
-}
-.number {
-  position: absolute;
-  top: 8%;
-  font:
-    400 24vw/0.9 var(--font-story-display),
-    Georgia,
-    serif;
-  letter-spacing: -0.085em;
-}
-.firstNumber {
-  left: 65vw;
-}
-.lastNumber {
-  left: 244vw;
-}
-.photo {
-  position: absolute;
-  width: 26vw;
-  height: 38svh;
-  border-radius: 4px;
-}
-.product {
-  top: 54%;
-  left: 35vw;
-  --media-tint: #8ca8b8;
-}
-.production {
-  top: 51%;
-  left: 75vw;
-  width: 38vw;
-  height: 42svh;
-  --media-tint: #b6c8ce;
-}
-.detail {
-  position: absolute;
-  top: 62%;
-  left: 118vw;
-  width: 25vw;
-}
-.detail h3 {
+.copy h2 {
   margin: 0;
   font:
-    400 clamp(24px, 2.6vw, 50px)/0.95 var(--font-story-display),
-    Georgia,
-    serif;
-  letter-spacing: -0.045em;
+    400 min(100px, 12cqi)/1.08 var(--font-display),
+    sans-serif;
+  letter-spacing: var(--type-story-heading-tracking);
+  text-wrap: balance;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
-.detail h3 span {
+.copy h2 span {
   display: block;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
-.detail p {
-  margin-top: 24px;
+.copy p {
+  max-width: 38ch;
+  margin: 28px 0 0;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
   color: var(--story-muted);
 }
-.shape {
-  top: 20%;
-  left: 151vw;
-  width: 24vw;
-  height: 63svh;
-  --media-tint: #b7c6c9;
+.media {
+  position: relative;
+  margin: 0;
+  min-width: 0;
+  aspect-ratio: 1.2;
+  overflow: hidden;
+  background: #edf1f2;
 }
-.secondTitle {
-  position: absolute;
-  top: 19%;
-  left: 185vw;
-  --story-heading-size: 7vw;
+.image {
+  object-fit: cover;
 }
-.secondTitle em {
-  margin-top: 12px;
-  font-size: 3.4vw;
+.chapter[data-journey-chapter="form"] .media {
+  background: transparent;
 }
-.drink {
-  top: 22%;
-  left: 225vw;
-  width: 24vw;
-  height: 35svh;
-  --media-tint: #b5c7c8;
-}
-.note {
-  position: absolute;
-  top: 78%;
-  left: 190vw;
-  width: 25vw;
-  color: var(--story-muted);
-  line-height: 1.6;
-}
-.final {
-  top: 55%;
-  left: 267vw;
-  width: 27vw;
-  height: 38svh;
-  --media-tint: #a7c3ce;
-}
-.thirdTitle {
-  position: absolute;
-  top: 19%;
-  left: 310vw;
-  --story-heading-size: 6vw;
-}
-.thirdTitle em {
-  margin-top: 12px;
-  font-size: 3.2vw;
-}
-.formNote {
-  position: absolute;
-  top: 65%;
-  left: 315vw;
-  width: 27vw;
-  color: var(--story-muted);
-  line-height: 1.6;
-}
-.formPhoto {
-  top: 47%;
-  left: 354vw;
-  width: 35vw;
-  height: 45svh;
-  --media-tint: #b6c8ce;
-}
-.thirdNumber {
-  left: 353vw;
-}
-.fourthTitle {
-  position: absolute;
-  top: 19%;
-  left: 405vw;
-  --story-heading-size: 6vw;
-}
-.fourthTitle em {
-  margin-top: 12px;
-  font-size: 3.2vw;
-}
-.glassNote {
-  position: absolute;
-  top: 64%;
-  left: 410vw;
-  width: 27vw;
-  color: var(--story-muted);
-  line-height: 1.6;
-}
-.glassPhoto {
-  top: 55%;
-  left: 462vw;
-  width: 32vw;
-  height: 38svh;
-  --media-tint: #a7c3ce;
-}
-.fourthNumber {
-  left: 450vw;
+.chapter[data-journey-chapter="form"] .image {
+  object-fit: contain;
 }
 .line {
-  position: absolute;
-  z-index: -1;
-  top: 42%;
-  left: 0;
-  width: 500vw;
-  max-width: none;
-  height: 36svh;
-  fill: none;
-  stroke: #a1b5bb;
-  stroke-width: 1;
-}
-:global([data-motion="scroll"]) .screen {
-  overflow: hidden;
+  display: none;
 }
 :global([data-motion="scroll"]) .track {
+  display: flex;
+  align-items: center;
+  gap: 10vw;
+  width: max-content;
+  height: 100%;
+  padding: calc(var(--header-height) + 40px) var(--page-gutter) 48px;
   transform: translateX(var(--journey-x, 0px));
   will-change: transform;
+  isolation: isolate;
 }
-@media (max-width: 43.75rem) {
-  .track {
-    width: 880vw;
-  }
-  .title {
-    top: 19%;
-    --story-heading-size: 14vw;
-  }
-  .title em {
-    font-size: 8vw;
-    max-width: 85vw;
-  }
-  .intro {
-    top: 51%;
-    left: 4vw;
-    width: 34vw;
-    font-size: 11px;
-    line-height: 1.5;
-  }
-  .number {
-    top: 12%;
-    font-size: 42vw;
-  }
-  .firstNumber {
-    left: 115vw;
-  }
-  .product {
-    top: 48%;
-    left: 46vw;
-    width: 43vw;
-    height: 30svh;
-  }
-  .production {
-    left: 119vw;
-    width: 63vw;
-    height: 30svh;
-  }
-  .detail {
-    top: 55%;
-    left: 195vw;
-    width: 43vw;
-  }
-  .detail h3 {
-    font-size: 8vw;
-  }
-  .detail p {
-    font-size: 11px;
-  }
-  .shape {
-    top: 25%;
-    left: 254vw;
-    width: 40vw;
-    height: 48svh;
-  }
-  .secondTitle {
-    top: 20%;
-    left: 320vw;
-    --story-heading-size: 13vw;
-  }
-  .secondTitle em {
-    font-size: 8vw;
-    max-width: 58vw;
-  }
-  .drink {
-    top: 45%;
-    left: 380vw;
-    width: 43vw;
-    height: 30svh;
-  }
-  .note {
-    top: 65%;
-    left: 320vw;
-    width: 48vw;
-    font-size: 11px;
-    line-height: 1.5;
-  }
-  .lastNumber {
-    left: 433vw;
-  }
-  .final {
-    left: 448vw;
-    width: 45vw;
-    height: 30svh;
-  }
-  .thirdTitle {
-    top: 20%;
-    left: 520vw;
-    --story-heading-size: 12vw;
-  }
-  .thirdTitle em {
-    font-size: 7vw;
-    max-width: 60vw;
-  }
-  .formNote {
-    top: 62%;
-    left: 520vw;
-    width: 48vw;
-    font-size: 11px;
-    line-height: 1.5;
-  }
-  .formPhoto {
-    top: 50%;
-    left: 580vw;
-    width: 58vw;
-    height: 32svh;
-  }
-  .thirdNumber {
-    left: 590vw;
-  }
-  .fourthTitle {
-    top: 20%;
-    left: 670vw;
-    --story-heading-size: 12vw;
-  }
-  .fourthTitle em {
-    font-size: 7vw;
-  }
-  .glassNote {
-    top: 57%;
-    left: 670vw;
-    width: 49vw;
-    font-size: 11px;
-    line-height: 1.5;
-  }
-  .glassPhoto {
-    top: 51%;
-    left: 804vw;
-    width: 68vw;
-    height: 34svh;
-  }
-  .fourthNumber {
-    left: 760vw;
-  }
-  .line {
-    width: 880vw;
-  }
+:global([data-motion="scroll"]) .chapter {
+  flex: 0 0 auto;
+  grid-template-columns: 38vw 66vw;
+  gap: 6vw;
+  width: 110vw;
+  height: 100%;
+  padding: 0;
 }
-
-/* Each editorial panel owns one text block, so heading and copy stay together. */
-.introBlock,
-.productionBlock,
-.formBlock,
-.glassBlock {
+:global([data-motion="scroll"]) .media {
+  height: 90%;
+  aspect-ratio: auto;
+}
+:global([data-motion="scroll"]) .chapter:nth-child(even) .media {
+  align-self: end;
+  height: 82%;
+}
+:global([data-motion="scroll"]) .chapter:nth-child(even) .copy {
+  align-self: start;
+  padding-top: 5svh;
+}
+:global([data-motion="scroll"]) .line {
   position: absolute;
-  top: 19%;
-  width: 32vw;
-}
-.introBlock {
-  left: 4vw;
-}
-.productionBlock {
-  left: 185vw;
-}
-.formBlock {
-  left: 310vw;
-}
-.glassBlock {
-  left: 405vw;
-}
-.introBlock .title,
-.productionBlock .secondTitle,
-.formBlock .thirdTitle,
-.glassBlock .fourthTitle {
-  position: static;
-  --story-heading-size: clamp(52px, 7vw, 134px);
-}
-.introBlock .intro,
-.productionBlock .note,
-.formBlock .formNote,
-.glassBlock .glassNote {
-  position: static;
+  display: block;
+  z-index: -1;
+  top: 40%;
+  left: 0;
   width: 100%;
-  max-width: 42ch;
-  margin: 28px 0 0;
-  line-height: 1.5;
-  text-wrap: pretty;
+  max-width: none;
+  height: 36%;
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1;
+  pointer-events: none;
 }
-.title em,
-.secondTitle em {
-  margin: 20px 0 0;
-  font-size: clamp(32px, 3.7vw, 70px);
-}
-@media (max-width: 43.75rem) {
-  .introBlock,
-  .productionBlock,
-  .formBlock,
-  .glassBlock {
-    top: 20%;
-    width: 58vw;
+@media (max-width: 700px) {
+  .chapter {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
   }
-  .introBlock {
-    left: 4vw;
+  .copy h2 {
+    font-size: min(56px, 12cqi);
   }
-  .productionBlock {
-    left: 320vw;
-  }
-  .formBlock {
-    left: 520vw;
-  }
-  .glassBlock {
-    left: 670vw;
-  }
-  .introBlock .title,
-  .productionBlock .secondTitle,
-  .formBlock .thirdTitle,
-  .glassBlock .fourthTitle {
-    --story-heading-size: 13vw;
-  }
-  .introBlock .intro,
-  .productionBlock .note,
-  .formBlock .formNote,
-  .glassBlock .glassNote {
-    max-width: 42vw;
+  .copy p {
     font-size: 16px;
     margin-top: 24px;
   }
-  .title em,
-  .secondTitle em {
-    margin: 16px 0 0;
-    font-size: 8vw;
+  :global([data-motion="scroll"]) .track {
+    gap: 16vw;
+    padding-top: calc(var(--header-height) + 32px);
+    padding-bottom: 40px;
   }
-  .detail p {
+  :global([data-motion="scroll"]) .chapter {
+    width: 180vw;
+    grid-template-columns: 78vw 90vw;
+    gap: 12vw;
+  }
+  :global([data-motion="scroll"]) .chapter:nth-child(even) .copy {
+    align-self: center;
+    padding: 0;
+  }
+  :global([data-motion="scroll"]) .media {
+    height: 90%;
+  }
+}
+@media (max-height: 650px) {
+  .copy h2 {
+    font-size: min(60px, 12cqi, 4.2vw);
+  }
+  .copy p {
     font-size: 16px;
+    margin-top: 20px;
   }
-  .product {
-    left: 70vw;
+  :global([data-motion="scroll"]) .track {
+    padding-top: calc(var(--header-height) + 20px);
+    padding-bottom: 24px;
   }
 }

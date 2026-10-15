@@ -13,15 +13,15 @@ export const iceFormats = [
     id: "loose",
     name: "Рассыпной лёд",
     shortName: "Рассыпной",
-    image: "/media/product/img/section/back1st.jpg",
-    description: "Лёд в зип-упаковке для охлаждения, работы кухни и бара.",
+    image: "/media/products/loose-pack-cutout.png",
+    description: "Лёд в пакете для охлаждения, работы кухни и бара.",
     href: "/catalog/loose",
   },
   {
     id: "block",
     name: "Блочный лёд",
     shortName: "Блочный",
-    image: "/media/product/img/section/back2st1.jpg",
+    image: "/media/products/ice-blocks-cutout.png",
     description:
       "Для ледяной резьбы, оформления подачи и событийных инсталляций.",
     href: "/catalog/block",

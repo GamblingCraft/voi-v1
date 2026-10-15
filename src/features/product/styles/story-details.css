@@ -38,7 +38,7 @@
 .product #hero .hero-description * {
   line-height: 1.5 !important;
 }
-.product #closing-story .voi-catalog-button {
+:where(.product #closing-story) .voi-catalog-button {
   position: relative;
   display: flex;
   align-items: center;
@@ -67,15 +67,15 @@
   text-align: center;
   font-family: var(--font-body), sans-serif;
 }
-.product #closing-story .voi-catalog-button:hover {
+:where(.product #closing-story) .voi-catalog-button:hover {
   background: #fff;
   color: #111;
 }
-.product #closing-story .voi-catalog-button:focus-visible {
+:where(.product #closing-story) .voi-catalog-button:focus-visible {
   outline-color: #fff;
 }
 @media (max-width: 1024px) and ((hover: none) or (max-width: 899px) or (orientation: portrait)) {
-  .product #closing-story .voi-catalog-button {
+  :where(.product #closing-story) .voi-catalog-button {
     margin-top: 36px;
     min-width: 150px;
     padding: 15px 28px;

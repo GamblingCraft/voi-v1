@@ -3,6 +3,7 @@ import type { ModelKind as ProductKind } from "@/lib/three/types";
 import { at } from "./build-config";
 import { mesh, pouchSurface, bottomGusset, iceFill } from "./geometry";
 import { applyMaterials } from "./materials";
+import { zipPanelPoint } from "./zip-profile";
 export { passes, buildPass, setBuildPass } from "./build-config";
 export { packagingBounds } from "./bounds";
 export type { ModelKind as ProductKind } from "@/lib/three/types";
@@ -49,8 +50,7 @@ export function createPackagingModel(kind: ProductKind, kg = 2): THREE.Group {
       iceFill(root, "cup", neutral);
     }
   } else {
-    // Flat stock is 250 × 320 mm; the filled ZIP's photographed front is narrower
-    // because its side gussets consume the stock width (front ratio ≈ 0.64).
+    // Keep the existing artwork proportions; the ZIP opens through a bottom gusset.
     const w = kind === "zip" ? 2.05 : 2.5,
       h = kind === "zip" ? 3.2 : 3.3;
     const shape = new THREE.Shape();
@@ -73,7 +73,7 @@ export function createPackagingModel(kind: ProductKind, kg = 2): THREE.Group {
         group.name = "zip-folds";
         body.add(group);
       }
-      const filledDepth = kind === "pvd" ? 1.2 : kind === "zip" ? 0.65 : 0.8;
+      const filledDepth = kind === "pvd" ? 1.2 : 0.9;
       mesh(
         "front-panel",
         pouchSurface(w, h, filledDepth, 1, kind),
@@ -105,7 +105,8 @@ export function createPackagingModel(kind: ProductKind, kg = 2): THREE.Group {
         for (const p of [front, back])
           edgePositions.push(p.getX(id), p.getY(id), p.getZ(id));
       for (let i = 0; i < perimeter.length - 1; i++) {
-        if (kind !== "pvd" && i >= 113 && i < 162) continue;
+        // ZIP's bottom is closed by the inset gusset, never a second flat cap.
+        if (kind === "zip" && i < 48) continue;
         const a = i * 2;
         edgeIndices.push(a, a + 1, a + 3, a, a + 3, a + 2);
       }
@@ -134,27 +135,29 @@ export function createPackagingModel(kind: ProductKind, kg = 2): THREE.Group {
         seal.userData.explodeWithParent = true;
       }
       if (kind !== "pvd")
-        mesh("bottom-gusset", bottomGusset(w, h, 0.65), neutral, root);
+        mesh("bottom-gusset", bottomGusset(w, h, filledDepth), neutral, root);
       if (kind !== "pvd") {
         for (const y of [h / 2 - 0.35, h / 2 - 0.385]) {
           const points = Array.from({ length: 49 }, (_, i) => {
-            const u = i / 48,
-              v = (y + h / 2) / h,
-              pin =
-                Math.pow(Math.sin(Math.PI * u), 0.55) *
-                Math.pow(Math.sin(Math.PI * v), 0.4);
-            return new THREE.Vector3(
-              (u * 2 - 1) * w * 0.475,
-              y,
-              0.028 + 0.65 * 0.5 * pin * Math.max(0.08, (1 - v) / 0.13),
+            const u = 0.025 + (i / 48) * 0.95;
+            const point = zipPanelPoint(
+              w,
+              h,
+              filledDepth,
+              u,
+              (y + h / 2) / h,
+              1,
+              at("form-refinement"),
             );
+            point.z += 0.004;
+            return point;
           });
           const zipper = mesh(
             "zip-closure",
             new THREE.TubeGeometry(
               new THREE.CatmullRomCurve3(points),
               48,
-              0.014,
+              0.008,
               6,
               false,
             ),
@@ -224,7 +227,11 @@ export function createPackagingModel(kind: ProductKind, kg = 2): THREE.Group {
           size:
             kind === "cup"
               ? [1.8, 2.6, 1.8]
-              : [kind === "zip" ? 2.05 : 2.5, 3.3, kind === "zip" ? 0.65 : 1.2],
+              : [
+                  kind === "zip" ? 2.05 : 2.5,
+                  kind === "zip" ? 3.2 : 3.3,
+                  kind === "zip" ? 0.92 : 1.2,
+                ],
         },
       ],
       destructionGroups: [],

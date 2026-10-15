@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { company } from "@/lib/company";
+import { BrandMark } from "@/components/brand/brand-mark";
 import { useEffect, useRef } from "react";
 import { localizePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import styles from "./navigation-overlay.module.css";
 import { LanguageSelector } from "./header/language-selector";
+import { HeaderCartButton } from "./header/header-cart-button";
+import { HeaderSearchButton } from "./header/header-search-button";
 import { SoundToggle } from "./site-audio";
 
 const primaryLinks = [
@@ -111,7 +113,7 @@ export function NavigationOverlay({
           <span aria-hidden="true">×</span>
         </button>
 
-        <div className={styles.links}>
+        <div className={styles.links} data-ui-navigation>
           {primaryLinks.map((link, index) => (
             <Link
               key={link.href}
@@ -128,9 +130,6 @@ export function NavigationOverlay({
           ))}
         </div>
         <div className={styles.mobileTools}>
-          <a className={styles.mobilePhone} href={company.phoneHref}>
-            {company.phone}
-          </a>
           <div className={styles.utilityRow}>
             <SoundToggle />
             <LanguageSelector
@@ -139,8 +138,34 @@ export function NavigationOverlay({
               label={headerDictionary.languageLabel}
               groupLabel={headerDictionary.languageGroupLabel}
             />
+            <HeaderSearchButton
+              openLabel={headerDictionary.searchOpenLabel}
+              closeLabel={headerDictionary.searchCloseLabel}
+              placeholder={headerDictionary.searchPlaceholder}
+              submitLabel={headerDictionary.searchSubmitLabel}
+              onSearch={(query) =>
+                onNavigate(
+                  `${localizePath("/catalog", locale)}?q=${encodeURIComponent(query)}#discover`,
+                )
+              }
+            />
+            <HeaderCartButton
+              locale={locale}
+              label={headerDictionary.cartLabel}
+            />
           </div>
         </div>
+        <Link
+          className={styles.mobileBrand}
+          href={localizePath("/", locale)}
+          aria-label={headerDictionary.homeLabel}
+          onNavigate={(event) => {
+            event.preventDefault();
+            onNavigate(localizePath("/", locale));
+          }}
+        >
+          <BrandMark />
+        </Link>
       </nav>
     </>
   );

@@ -1,0 +1,9 @@
+Created with the built-in image_gen tool; transparent RGBA outputs copied into this project.
+
+ice-blocks-cutout.png
+Source: C:/Users/Admin/Desktop/bfd74038682d08834b2ca6c28765de42_339f881a-13c8-4e6b-af2f-96cb8d58c461.jpg
+Prompt: Use case: background-extraction. Edit target: attached photo of three clear rectangular ice blocks. Remove ONLY the white studio background and floor, producing a clean genuinely transparent RGBA cutout for a website. Preserve all three ice blocks, their exact positions, geometry, proportions, perspective, natural pale blue highlights, cracks, air bubbles and refraction. Do not redesign or add objects. Remove distant floor droplets; keep small contact detail. Keep whole composition uncut with modest transparent padding. No backdrop, no checkerboard baked in, no text. Save the finished transparent PNG.
+
+loose-pack-cutout.png
+Source: public/media/product/textures/pvd-photo.jpg
+Prompt: Use case: background-extraction. Edit target is the existing product photograph of a clear plastic bag filled with ice. Remove ONLY white exterior background, output genuine transparent RGBA PNG. Preserve exact original packaging shape, transparent plastic, all ice inside and blue printing exactly: 'ЭТО ПРОСТО ЛЁД.', 'Для любого настроения', '2 КГ', smiling face and arrow. Do not redraw, rebrand, retype, distort or alter the bag. Entire bag fully visible with modest transparent padding. No added objects, shadows, floor, backgrounds, or baked-in checkerboard. Clean faithful product cutout for website.

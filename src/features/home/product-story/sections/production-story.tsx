@@ -1,3 +1,4 @@
+import { StoryEyebrow } from "../components/story-eyebrow";
 import type { CSSProperties } from "react";
 import type { ProductStoryContent } from "../story.types";
 import { StoryMedia } from "../components/story-media";
@@ -19,7 +20,9 @@ export function ProductionStory({
       label={content.eyebrow}
       screenClassName={styles.screen}
     >
-      <p className={styles.sectionCaption}>{content.eyebrow}</p>
+      <div className={styles.sectionCaption}>
+        <StoryEyebrow>Собственное производство</StoryEyebrow>
+      </div>
       {content.steps.map((step, index) => (
         <div
           key={step.id}

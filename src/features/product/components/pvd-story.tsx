@@ -3,16 +3,16 @@ export function PvdStory({ children }: { children?: ReactNode }) {
   return (
     <section id="pvd-story">
       <h2 className="section-heading">
-        {"Больше гостей."}
+        {"Больше гостей"}
         <br />
-        {"Больше льда."}
+        {"Больше льда"}
       </h2>
       <p className="interactive">{"ПВД-упаковка"}</p>
       <span aria-hidden="true" className="numdos voi-decor-placeholder"></span>
       <h3 className="section-subheading hotspicy">
-        {"Просто."}
+        {"Просто"}
         <br />
-        {"Холодно."}
+        {"Холодно"}
       </h3>
       <div id="pvd-copy">
         <p className="text">

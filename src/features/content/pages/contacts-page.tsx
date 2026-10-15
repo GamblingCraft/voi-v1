@@ -69,7 +69,7 @@ export function ContactsPage() {
               ))}
             </div>
           )}
-          <a className={shared.textLink} href="#inquiry">
+          <a data-ui-action className={shared.textLink} href="#inquiry">
             Перейти к форме
           </a>
         </div>
@@ -82,7 +82,7 @@ export function ContactsPage() {
             <br />
             обсудим
             <br />
-            детали.
+            детали
           </>
         }
       />

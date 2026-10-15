@@ -37,6 +37,8 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <main id="top" className={styles.page}>
       <CloudTransition
+        mode="clouds"
+        smoothScroll
         hero={
           <Hero
             dictionary={dictionary.home.hero}

@@ -11,7 +11,9 @@ export function ServingRitual({
 }) {
   return (
     <ScrollScene kind="ritual" id="serving-ritual" label={content.title}>
-      <StoryHeading className={styles.title} lines={content.title} />
+      <div className={styles.title}>
+        <StoryHeading lines={content.title} />
+      </div>
       <div className={styles.media}>
         <ViewportVideo
           className={styles.video}

@@ -9,7 +9,7 @@ export function CatalogHeader({ format }: { format: IceFormat }) {
       <h1>{format.name.toLocaleUpperCase("ru")}</h1>
       <div>
         <p>Из байкальской воды — для напитков, гастрономии и событий.</p>
-        <Link className={shellStyles.actionLink} href="/product">
+        <Link data-ui-action className={shellStyles.actionLink} href="/product">
           Как выбрать лёд
         </Link>
       </div>

@@ -1,6 +1,12 @@
 import type { IceCategoryId } from "./ice-formats";
 
-export const productIds = ["cube", "sphere", "cylinder"] as const;
+export const productIds = [
+  "cube",
+  "sphere",
+  "cylinder",
+  "loose",
+  "block",
+] as const;
 export type ProductId = (typeof productIds)[number];
 export type CatalogProduct = {
   id: ProductId;
@@ -25,6 +31,8 @@ export const usageOptions = [
   { id: "cocktails", label: "Коктейли" },
   { id: "spirits", label: "Крепкие напитки" },
   { id: "longdrinks", label: "Высокая подача" },
+  { id: "cooling", label: "Охлаждение и сервис" },
+  { id: "carving", label: "Ледяная резьба и шоу" },
 ];
 
 // Temporary prototype values explicitly requested by the user; not review data.

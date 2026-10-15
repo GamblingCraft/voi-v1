@@ -36,7 +36,11 @@
   },
   "home": {
     "hero": {
-      "title": "Premium bar ice"
+      "catalogAction": "Explore ice",
+      "cooperationAction": "Partnership",
+      "title": "Baikal\nice",
+      "description": "For bars, restaurants and refined presentation",
+      "subtitle": "Produced in Irkutsk, on the shores of Lake Baikal"
     }
   },
   "footer": {

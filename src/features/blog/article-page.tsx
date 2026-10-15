@@ -93,7 +93,7 @@ export function ArticlePage({ article }: { article: Article }) {
                     <p>
                       Посмотрите ассортимент ВОЙ и обсудите подходящий вариант.
                     </p>
-                    <Link href="/catalog" className={shared.button}>
+                    <Link data-ui-action href="/catalog" className={shared.button}>
                       Открыть каталог
                     </Link>
                   </div>

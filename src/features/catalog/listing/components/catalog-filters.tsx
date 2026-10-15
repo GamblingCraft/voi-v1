@@ -7,6 +7,7 @@ import filtersStyles from "./catalog-filters.module.css";
 
 type Option = { id: string; label: string };
 type Props = {
+  categoryHref: string;
   shape: string;
   usage: string;
   q: string;
@@ -15,7 +16,14 @@ type Props = {
   usages: Option[];
 };
 
-export function CatalogFilters({ shape, usage, sort, shapes, usages }: Props) {
+export function CatalogFilters({
+  shape,
+  usage,
+  sort,
+  shapes,
+  usages,
+  categoryHref,
+}: Props) {
   const [expanded, setExpanded] = useState(false);
   return (
     <div className={filtersStyles.filterPanel} data-expanded={expanded}>
@@ -43,7 +51,7 @@ export function CatalogFilters({ shape, usage, sort, shapes, usages }: Props) {
       <div id="catalog-filter-fields" className={filtersStyles.filterContent}>
         <Form
           id="catalog-filters"
-          action="/catalog/formed#discover"
+          action={`${categoryHref}#discover`}
           className={filtersStyles.filters}
           onSubmit={() => setExpanded(false)}
         >
@@ -83,12 +91,12 @@ export function CatalogFilters({ shape, usage, sort, shapes, usages }: Props) {
               <option value="name">По названию</option>
             </select>
           </label>
-          <button className={filtersStyles.apply} type="submit">
+          <button data-ui-action className={filtersStyles.apply} type="submit">
             Применить фильтры
           </button>
           <Link
             className={filtersStyles.resetFilters}
-            href="/catalog/formed#discover"
+            href={`${categoryHref}#discover`}
           >
             Сбросить
           </Link>

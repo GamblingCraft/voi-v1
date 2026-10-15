@@ -36,9 +36,22 @@ html[data-site="public"] body {
   font-synthesis: none;
 }
 
+html[data-site="public"] :is(button, [role="button"], [data-ui-action]),
+html[data-site="public"] :is(nav, [data-ui-navigation]) a {
+  font-weight: var(--type-action-weight);
+  font-synthesis: weight;
+}
+
 html[data-site="public"] :where(h1, h2, h3, h4, h5, h6) {
   overflow-wrap: anywhere;
   text-wrap: balance;
+}
+
+html[data-site="public"] :is(h1, h2, h3, h4, h5, h6, [role="heading"]),
+html[data-site="public"]
+  :is(h1, h2, h3, h4, h5, h6, [role="heading"])
+  :where(*) {
+  text-transform: uppercase;
 }
 
 img,
@@ -57,6 +70,16 @@ a {
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 4px;
+}
+
+html[data-site="public"] :is(input, textarea, select):focus {
+  outline: none;
+  border-color: currentColor;
+  box-shadow: 0 1px 0 currentColor;
+}
+
+html[data-site="public"] input:is([type="radio"], [type="checkbox"]):focus-visible + :is(span, svg) {
+  outline-color: currentColor;
 }
 
 ::selection {

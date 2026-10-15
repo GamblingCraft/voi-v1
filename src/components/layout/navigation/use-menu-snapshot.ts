@@ -106,12 +106,19 @@ export function useMenuSnapshot(
   const navigateFromMenu = useCallback(
     (href: string) => {
       if (phaseRef.current !== "open") return;
-      if (href === pathname) {
+      const destination = new URL(href, location.href);
+      if (destination.pathname === pathname) {
+        if (
+          destination.search !== location.search ||
+          destination.hash !== location.hash
+        ) {
+          router.push(href);
+        }
         closeMenu();
         return;
       }
       phaseRef.current = "navigating";
-      pendingPath.current = href;
+      pendingPath.current = destination.pathname;
       setIsNavigating(true);
       router.push(href, { scroll: false });
     },

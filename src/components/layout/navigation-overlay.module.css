@@ -150,18 +150,6 @@
     justify-content: flex-end;
     gap: 20px;
   }
-  .mobilePhone {
-    display: block;
-    max-width: 100%;
-    min-height: 44px;
-    color: inherit;
-    font:
-      400 clamp(18px, 5.7vw, 28px)/1.3 var(--font-ui),
-      sans-serif;
-    letter-spacing: -0.035em;
-    text-decoration: none;
-    white-space: nowrap;
-  }
   .mobileTools :is(a, input, button):focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
@@ -174,5 +162,81 @@
   .link > span {
     transition-duration: 1ms;
     transition-delay: 0s;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .utilityRow {
+    width: auto;
+    max-width: 100%;
+    gap: 10px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: rgb(20 14 7 / 40%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .utilityRow {
+    flex-wrap: wrap;
+    border-radius: 20px;
+    gap: 8px;
+  }
+  .utilityRow :global(#header-cart-preview) {
+    position: fixed;
+    top: auto;
+    bottom: 20px;
+    right: 20px;
+    max-height: calc(100svh - 100px);
+  }
+}
+
+.mobileBrand {
+  display: none;
+}
+@media (max-width: 47.99rem) {
+  .navigation {
+    padding-bottom: 120px;
+  }
+  .utilityRow {
+    position: relative;
+    isolation: isolate;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .utilityRow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: rgb(20 14 7 / 40%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    pointer-events: none;
+  }
+  .utilityRow :global(#header-cart-preview) {
+    bottom: 110px;
+  }
+  .mobileBrand {
+    position: fixed;
+    left: 50vw;
+    bottom: 20px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 76px;
+    z-index: 2;
+  }
+  .mobileBrand img {
+    width: 64px;
+    height: 76px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
   }
 }

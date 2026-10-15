@@ -5,7 +5,8 @@
   --line: #d4dce1;
   min-height: 100svh;
   padding: calc(var(--header-height) + 18px)
-    max(var(--page-gutter), calc((100vw - 1440px) / 2)) 0;
+    max(var(--page-gutter), calc((100vw - 1440px) / 2))
+    var(--catalog-bottom-spacing, 0px);
   background: var(--paper);
   color: var(--ink);
 }

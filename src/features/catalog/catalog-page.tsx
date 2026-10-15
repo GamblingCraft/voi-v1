@@ -39,10 +39,10 @@ export function CatalogPage({
         className={layoutStyles.collection}
         aria-labelledby="collection-title"
       >
-        {format.id === "formed" ? (
+        {all.length > 0 ? (
           <div className={layoutStyles.shopLayout}>
-            <CatalogSidebar all={all} selection={selection} />
-            <CatalogResults selection={selection} />
+            <CatalogSidebar all={all} selection={selection} format={format} />
+            <CatalogResults selection={selection} format={format} />
           </div>
         ) : (
           <CatalogCategoryInquiry format={format} />

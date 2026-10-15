@@ -76,7 +76,7 @@
 .channel h3 {
   font-size: var(--type-body-size);
   margin: 0 0 16px;
-  text-transform: none;
+  text-transform: uppercase;
 }
 .channel a {
   min-height: 44px;

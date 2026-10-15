@@ -123,7 +123,7 @@
 }
 .inlineBanner p {
   margin: 16px 0 24px;
-  font-size: 18px;
+  font-size: var(--type-body-size);
 }
 .sidebar {
   position: sticky;
@@ -135,8 +135,9 @@
 .sidebar nav h2,
 .topics h2 {
   font:
-    400 18px/1.4 var(--font-body),
+    600 18px/1.4 var(--font-body),
     sans-serif;
+  font-synthesis: weight;
   letter-spacing: normal;
   margin-bottom: 16px;
 }

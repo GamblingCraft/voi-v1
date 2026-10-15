@@ -1,8 +1,6 @@
+import Image from "next/image";
 import type { ProductStoryContent } from "../story.types";
-import { StoryMedia } from "../components/story-media";
 import { ScrollScene } from "../components/scroll-scene";
-import { StoryHeading } from "../components/story-heading";
-import shared from "../product-story.module.css";
 import styles from "./water-journey.module.css";
 
 export function WaterJourney({
@@ -10,78 +8,41 @@ export function WaterJourney({
 }: {
   content: ProductStoryContent["journey"];
 }) {
-  const { baikal, water, production, form, glass } = content;
   return (
     <ScrollScene
       kind="journey"
       id="water-journey"
       label={content.ariaLabel}
+      itemCount={content.chapters.length}
       screenClassName={styles.screen}
     >
       <div className={styles.track} data-story-track>
-        <div className={styles.introBlock}>
-          <StoryHeading className={styles.title} lines={content.title} />
-          <p className={`${shared.copy} ${styles.intro}`}>
-            {baikal.description}
-          </p>
-        </div>
-        <StoryMedia
-          className={`${styles.photo} ${styles.product}`}
-          label={baikal.media}
-        />
-        <StoryMedia
-          className={`${styles.photo} ${styles.production}`}
-          label={water.media}
-        />
-        <div className={styles.detail}>
-          <h3>
-            {water.title.map((line) => (
-              <span key={line}>{line}</span>
-            ))}
-          </h3>
-          <p className={shared.copy}>{water.description}</p>
-        </div>
-        <StoryMedia
-          className={`${styles.photo} ${styles.shape}`}
-          label={production.media}
-        />
-        <div className={styles.productionBlock}>
-          <StoryHeading
-            className={styles.secondTitle}
-            lines={production.title}
-          />
-          <p className={`${shared.copy} ${styles.note}`}>
-            {production.description}
-          </p>
-        </div>
-        <StoryMedia
-          className={`${styles.photo} ${styles.drink}`}
-          label={production.teamMedia}
-        />
-        <StoryMedia
-          className={`${styles.photo} ${styles.final}`}
-          label={form.media}
-        />
-        <div className={styles.formBlock}>
-          <StoryHeading className={styles.thirdTitle} lines={form.title} />
-          <p className={`${shared.copy} ${styles.formNote}`}>
-            {form.description}
-          </p>
-        </div>
-        <StoryMedia
-          className={`${styles.photo} ${styles.formPhoto}`}
-          label={form.detailMedia}
-        />
-        <div className={styles.glassBlock}>
-          <StoryHeading className={styles.fourthTitle} lines={glass.title} />
-          <p className={`${shared.copy} ${styles.glassNote}`}>
-            {glass.description}
-          </p>
-        </div>
-        <StoryMedia
-          className={`${styles.photo} ${styles.glassPhoto}`}
-          label={glass.media}
-        />
+        {content.chapters.map((chapter) => (
+          <article
+            key={chapter.id}
+            className={styles.chapter}
+            data-journey-chapter={chapter.id}
+            aria-labelledby={`journey-${chapter.id}`}
+          >
+            <div className={styles.copy}>
+              <h2 id={`journey-${chapter.id}`}>
+                {chapter.title.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+              </h2>
+              <p>{chapter.description}</p>
+            </div>
+            <figure className={styles.media}>
+              <Image
+                src={chapter.image}
+                alt={chapter.alt}
+                fill
+                sizes="(max-width: 700px) 90vw, 66vw"
+                className={styles.image}
+              />
+            </figure>
+          </article>
+        ))}
         <svg
           className={styles.line}
           viewBox="0 0 5000 300"

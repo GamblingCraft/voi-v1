@@ -1,0 +1,14 @@
+.eyebrow {
+  composes: sectionLabel from "../../../content/components/section-heading.module.css";
+}
+.eyebrow.eyebrow {
+  --type-body-weight: 300;
+  margin: 0 0 24px;
+  padding: 0;
+  color: #526165;
+}
+@media (max-width: 700px) {
+  .eyebrow.eyebrow {
+    margin-bottom: 16px;
+  }
+}

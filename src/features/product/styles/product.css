@@ -103,6 +103,10 @@
 }
 
 @media (max-width: 700px) {
+  .product #closing-story .section-heading {
+    width: 88vw;
+    left: 6vw;
+  }
   .product :is(#zip-story, #pvd-story, #cup-story, #closing-story) h2 {
     font-size: 12vw;
   }
@@ -110,7 +114,7 @@
     :is(#brand-story, #zip-story, #pvd-story, #cup-story, #closing-story)
     p.text,
   .product #hero .hero-description {
-    font-size: 18px;
+    font-size: var(--type-body-size);
   }
 }
 

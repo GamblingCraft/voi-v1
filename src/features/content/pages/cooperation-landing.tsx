@@ -1,11 +1,12 @@
 import Image from "next/image";
+import { CooperationSteps } from "../components/cooperation-steps";
 import Link from "next/link";
 import { company } from "@/lib/company";
 import { InquirySection } from "../components/inquiry-section";
 import { EditorialHero } from "../components/editorial-hero";
 import { SectionHeading } from "../components/section-heading";
 import { Faq } from "../components/faq";
-import { ClosingCta } from "../components/closing-cta";
+import faqStyles from "../components/faq.module.css";
 import {
   cooperationHeroMedia,
   cooperationAudiences,
@@ -22,8 +23,8 @@ export function CooperationLanding() {
       <EditorialHero
         label="Сотрудничество"
         media={cooperationHeroMedia}
-        title={["ВАША ПОДАЧА.", "НАШ ЛЁД."]}
-        introduction={["Станьте партнёром", "ВОЙ."]}
+        title={["ВАША ПОДАЧА", "НАШ ЛЁД"]}
+        introduction={["Станьте партнёром", "ВОЙ"]}
         description="Премиальный лёд из байкальской воды для баров, ресторанов, отелей и событий. За продуктом ВОЙ стоят собственное производство в Иркутске, склады хранения и логистика. Объединяем их, чтобы работать с партнёрами напрямую — от выбора льда до поставки."
         href="#inquiry"
         cta="Начать сотрудничество"
@@ -80,8 +81,8 @@ export function CooperationLanding() {
           label="Почему ВОЙ"
           title={
             <span id="advantages-title">
-              ПРОДУКТ И ПОСТАВКА.
-              <br />В ОДНИХ РУКАХ.
+              ПРОДУКТ И ПОСТАВКА
+              <br />В ОДНИХ РУКАХ
             </span>
           }
         />
@@ -115,7 +116,7 @@ export function CooperationLanding() {
           </div>
         </div>
         <div className={styles.productLink}>
-          <Link href="/product" className={sharedStyles.button}>
+          <Link data-ui-action href="/product" className={sharedStyles.button}>
             О нашем льде
           </Link>
         </div>
@@ -136,15 +137,7 @@ export function CooperationLanding() {
             </span>
           }
         />
-        <ol className={styles.steps}>
-          {cooperationSteps.map((step, index) => (
-            <li key={step.title}>
-              <span className={styles.index}>0{index + 1}</span>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
-            </li>
-          ))}
-        </ol>
+        <CooperationSteps steps={cooperationSteps} />
       </section>
       <section
         id="delivery"
@@ -186,7 +179,7 @@ export function CooperationLanding() {
           </div>
         </div>
       </section>
-      <section className={styles.faqSection} data-header-theme="light">
+      <section className={faqStyles.section} data-header-theme="light">
         <h2>
           О СОТРУДНИЧЕСТВЕ
           <br />В ДЕТАЛЯХ
@@ -196,16 +189,11 @@ export function CooperationLanding() {
       <InquirySection
         title={
           <>
-            НАЧНЁМ
+            СТАНЬТЕ
             <br />
-            СОТРУДНИЧЕСТВО
+            ПАРТНЁРОМ ВОЙ
           </>
         }
-      />
-      <ClosingCta
-        title={"СТАНЬТЕ\nПАРТНЁРОМ ВОЙ"}
-        href="#inquiry"
-        action="Начать сотрудничество"
       />
     </main>
   );

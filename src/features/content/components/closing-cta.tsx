@@ -24,7 +24,7 @@ export function ClosingCta({
           <span key={line}>{line}</span>
         ))}
       </h2>
-      <Link className={sharedStyles.lightButton} href={href}>
+      <Link data-ui-action className={sharedStyles.button} href={href}>
         {action}
       </Link>
     </section>

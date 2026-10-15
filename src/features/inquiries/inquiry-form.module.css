@@ -87,11 +87,12 @@
 .form textarea:hover {
   border-color: #111;
 }
-.form input:focus-visible,
-.form select:focus-visible,
-.form textarea:focus-visible {
-  outline: 2px solid var(--control-focus);
-  outline-offset: 4px;
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  outline: none;
+  border-bottom-color: #111;
+  box-shadow: 0 1px 0 #111;
 }
 .form input::placeholder,
 .form textarea::placeholder {

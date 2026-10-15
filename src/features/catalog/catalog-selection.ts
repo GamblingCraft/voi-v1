@@ -49,9 +49,10 @@ export type CatalogSelection = ReturnType<typeof selectCatalogProducts>;
 export function catalogFilterHref(
   selection: Pick<CatalogSelection, "shape" | "usage" | "q" | "sort">,
   removedKey?: ActiveFilter["key"],
+  categoryHref = "/catalog/formed",
 ) {
   const { shape, usage, q, sort } = selection;
   const params = new URLSearchParams({ shape, usage, q, sort });
   if (removedKey) params.delete(removedKey);
-  return `/catalog/formed?${params.toString()}#discover`;
+  return `${categoryHref}?${params.toString()}#discover`;
 }

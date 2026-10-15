@@ -90,7 +90,7 @@ export function useVideoScrubber({
       syncPlayback();
     };
     const pointerDown = (event: PointerEvent) => {
-      if (event.target instanceof Element && event.target.closest("button"))
+      if (event.target instanceof Element && event.target.closest("button, a"))
         return;
       if (event.button !== 0 || !enabledRef.current || duration <= 0) return;
       dragging = true;
@@ -119,7 +119,7 @@ export function useVideoScrubber({
         hero.releasePointerCapture(event.pointerId);
     };
     const keyboard = (event: KeyboardEvent) => {
-      if (event.target instanceof Element && event.target.closest("button"))
+      if (event.target instanceof Element && event.target.closest("button, a"))
         return;
       if (
         !enabledRef.current ||

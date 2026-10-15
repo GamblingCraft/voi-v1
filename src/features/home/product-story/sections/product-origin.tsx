@@ -1,27 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import type { CatalogProduct } from "@/features/catalog/catalog-model";
 import type { ProductStoryContent } from "../story.types";
-import { ProductCarousel } from "../components/product-carousel";
-import { CloudTransition } from "../../cloud-transition/cloud-transition";
 import { StoryHeading } from "../components/story-heading";
 import shared from "../product-story.module.css";
 import styles from "./product-origin.module.css";
 
 export function ProductOrigin({
   content,
-  products,
 }: {
   content: ProductStoryContent["origin"];
-  products: CatalogProduct[];
 }) {
   return (
-    <CloudTransition
-      mode="clouds"
-      id="product-story"
-      hero={<ProductCarousel products={products} compact={false} />}
-    >
       <div className={styles.baikalTrack}>
         <section
           className={styles.baikal}
@@ -50,15 +40,27 @@ export function ProductOrigin({
             sizes="100vw"
             className={styles.landscape}
           />
-          <div className={styles.title}>
-            <StoryHeading
-              lines={content.title.join(" ")}
-              className={styles.heading}
-            />
-            <p className={`${shared.copy} ${styles.note}`}>{content.note}</p>
+          <div className={styles.editorial}>
+            <div className={styles.title}>
+              <StoryHeading
+                lines={content.title.join(" ")}
+                className={styles.heading}
+              />
+              <p className={`${shared.copy} ${styles.note}`}>{content.note}</p>
+            </div>
+            <figure className={styles.quotation}>
+              <span className={styles.quoteMark} aria-hidden="true">
+                “
+              </span>
+              <blockquote className={styles.quote}>
+                <p>{content.quote.text}</p>
+              </blockquote>
+              <figcaption className={styles.author}>
+                {content.quote.author}
+              </figcaption>
+            </figure>
           </div>
         </section>
       </div>
-    </CloudTransition>
   );
 }

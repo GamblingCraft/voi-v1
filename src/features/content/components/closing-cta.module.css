@@ -22,6 +22,17 @@
 }
 .closing a {
   flex-shrink: 0;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--button-ink);
+}
+.closing a:hover {
+  background: var(--button-paper);
+  border-color: var(--button-paper);
+  color: var(--button-ink);
+}
+.closing a:focus-visible {
+  outline-color: var(--color-accent);
 }
 .closing[data-compact] {
   flex-direction: column;

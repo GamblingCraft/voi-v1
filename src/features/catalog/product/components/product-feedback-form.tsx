@@ -90,7 +90,7 @@ export function ProductFeedbackForm({
             </label>
           </fieldset>
           <div className={formStyles.actions}>
-            <button type="submit" disabled={requiresSignIn}>
+            <button data-ui-action type="submit" disabled={requiresSignIn}>
               Отправить
             </button>
           </div>

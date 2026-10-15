@@ -21,18 +21,18 @@ export function ClosingStory() {
         }}
       ></div>
       <h2 id="closing-heading">
-        {"Холодный характер."}
+        {"Холодный характер"}
         <br />
-        {"Чистый вкус."}
+        {"Чистый вкус"}
         <br />
-        {"Ваш ритм. Ваш лёд."}
+        {"Ваш ритм Ваш лёд"}
       </h2>
       <h2 className="section-heading">
-        {"Холодный характер."}
+        {"Холодный характер"}
         <br />
-        {"Чистый вкус."}
+        {"Чистый вкус"}
         <br />
-        {"Ваш ритм. Ваш лёд."}
+        {"Ваш ритм Ваш лёд"}
       </h2>
       <div id="closing-copy">
         <p className="text">
@@ -47,6 +47,7 @@ export function ClosingStory() {
         </p>
       </div>
       <AppLink
+        data-ui-action
         aria-label="Каталог"
         className="voi-catalog-button"
         href="/catalog"

@@ -155,3 +155,19 @@
     transition: none;
   }
 }
+
+.form {background:transparent;border:0;border-radius:8px;backdrop-filter:none;isolation:isolate}
+.form::before {content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:rgb(20 14 7 / 40%);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);pointer-events:none}
+.input,.fieldIcon,.search[data-open="true"] .toggle {color:#f6f8f8}
+.input::placeholder {color:#ffffffb3}
+
+html[data-site="public"] .search .input {
+  font:400 10px/1.4 var(--font-ui),sans-serif;
+  letter-spacing:.02em;
+}
+html[data-site="public"] .search .input::placeholder {font:inherit;letter-spacing:inherit}
+
+/* The expanding field shares the header pill's existing glass. */
+.form {background:transparent;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.form::before {content:none}
+.toggle:hover,.search[data-open="true"] .toggle {background:transparent}

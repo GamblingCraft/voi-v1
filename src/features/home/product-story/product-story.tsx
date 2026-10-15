@@ -1,7 +1,7 @@
 import { getCatalogProducts } from "@/features/catalog/catalog.content";
 import type { ProductStoryContent } from "./story.types";
+import { ProductShowcase } from "./components/product-showcase";
 import { ProductOrigin } from "./sections/product-origin";
-import { ProductionStory } from "./sections/production-story";
 import { ServingRitual } from "./sections/serving-ritual";
 import { StoryText } from "./sections/story-text";
 import { WaterJourney } from "./sections/water-journey";
@@ -14,8 +14,8 @@ import styles from "./product-story.module.css";
 export function ProductStory({ content }: { content: ProductStoryContent }) {
   return (
     <div className={styles.story} role="region" aria-label={content.ariaLabel}>
-      <ProductOrigin content={content.origin} products={getCatalogProducts()} />
-      <ProductionStory content={content.production} />
+      <ProductOrigin content={content.origin} />
+      <ProductShowcase products={getCatalogProducts()} />
       <ServingRitual content={content.ritual} />
       <StoryText content={content.text} />
       <WaterJourney content={content.journey} />

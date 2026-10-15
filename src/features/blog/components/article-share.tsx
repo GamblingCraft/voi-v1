@@ -34,7 +34,7 @@ export function ArticleShare() {
   const copied = status === "copied";
   return (
     <div className={styles.share}>
-      <button
+      <button data-ui-action data-ui-layout="stack"
         type="button"
         className={styles.button}
         data-copied={copied || undefined}

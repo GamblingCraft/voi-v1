@@ -149,6 +149,13 @@
 .compactCard .productMedia[data-shape="cylinder"] img {
   padding: 8px 20%;
 }
+.productMedia[data-shape="loose"] img {
+  padding: 4px 5%;
+}
+.productMedia[data-shape="block"] img {
+  padding: 0;
+  object-fit: contain;
+}
 
 @media (max-width: 47.99rem) {
   .card.horizontalMobile {

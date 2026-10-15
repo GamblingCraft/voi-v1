@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Globe } from "@deemlol/next-icons";
+import { ChevronDown } from "@deemlol/next-icons";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import {
@@ -10,6 +10,7 @@ import {
   type Locale,
 } from "@/i18n/config";
 import styles from "./language-selector.module.css";
+import { GlobeIcon } from "./globe-icon";
 
 type LanguageSelectorProps = {
   currentLocale: Locale;
@@ -77,7 +78,7 @@ export function LanguageSelector({
         aria-expanded={isOpen}
         onClick={() => setIsOpen((current) => !current)}
       >
-        <Globe size={20} strokeWidth={1.5} aria-hidden="true" />
+        <GlobeIcon className={styles.globe} />
         <span>{localeConfig[currentLocale].shortLabel}</span>
         <ChevronDown
           className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
@@ -111,7 +112,7 @@ export function LanguageSelector({
             <span>{localeConfig[locale].label}</span>
             <span className={styles.optionCode}>
               {locales.includes(locale)
-                ? localeConfig[locale].shortLabel
+                ? currentLocale === locale ? "✓" : ""
                 : "Скоро"}
             </span>
           </button>

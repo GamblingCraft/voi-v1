@@ -19,7 +19,7 @@ export function ProductionLanding() {
         label="Производство"
         media={productionHeroMedia}
         title={["ПРОИЗВОДСТВО ЛЬДА", "В ИРКУТСКЕ"]}
-        introduction={["Вода Байкала.", "Характер ВОЙ."]}
+        introduction={["Вода Байкала", "Характер ВОЙ"]}
         description="Мы создаём лёд для баров, ресторанов и домашней подачи. Собственное производство, склады и логистика позволяют нам работать с продуктом на всём пути — от воды до поставки."
         href="#water"
         cta="О производстве"
@@ -40,9 +40,9 @@ export function ProductionLanding() {
           label="Основа продукта"
           title={
             <span id="water-title">
-              ПРОЗРАЧНЫЙ ЛЁД.
+              ПРОЗРАЧНЫЙ ЛЁД
               <br />
-              ВЫРАЗИТЕЛЬНАЯ ПОДАЧА.
+              ВЫРАЗИТЕЛЬНАЯ ПОДАЧА
             </span>
           }
         />
@@ -63,7 +63,7 @@ export function ProductionLanding() {
                 <p>{item.text}</p>
               </article>
             ))}
-            <Link className={sharedStyles.button} href="/product">
+            <Link data-ui-action className={sharedStyles.button} href="/product">
               О продукте
             </Link>
           </div>
@@ -105,9 +105,9 @@ export function ProductionLanding() {
           label="Фасовка"
           title={
             <span id="packaging-title">
-              РАБОЧИЙ ЗАПАС.
+              РАБОЧИЙ ЗАПАС
               <br />
-              ОСОБАЯ ПОДАЧА.
+              ОСОБАЯ ПОДАЧА
             </span>
           }
         />
@@ -156,9 +156,9 @@ export function ProductionLanding() {
           label="После производства"
           title={
             <span id="storage-title">
-              ХРАНИМ.
+              ХРАНИМ
               <br />
-              КОМПЛЕКТУЕМ. ДОСТАВЛЯЕМ.
+              КОМПЛЕКТУЕМ ДОСТАВЛЯЕМ
             </span>
           }
         />
@@ -183,7 +183,7 @@ export function ProductionLanding() {
               можно обсудить и ассортимент, и график получения льда.
             </p>
             <div className={styles.productLink}>
-              <Link className={sharedStyles.button} href="/cooperation">
+              <Link data-ui-action className={sharedStyles.button} href="/cooperation">
                 Сотрудничество
               </Link>
             </div>

@@ -1,0 +1,279 @@
+.delta-header {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  top: 30px;
+  height: 46px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  pointer-events: none;
+}
+.delta-header a,
+.delta-header button {
+  pointer-events: auto;
+}
+.delta-logo {
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 76px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 2px 8px #0004);
+}
+.delta-logo img {
+  width: 80px;
+  height: 64px;
+  object-fit: contain;
+}
+.delta-sound,
+.delta-header-tools {
+  border-radius: 40px;
+  background: #02030488;
+  backdrop-filter: blur(16px);
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+.delta-header-tools {
+  gap: 0;
+  padding: 0 8px;
+}
+.delta-header-tools > button {
+  color: #ffffff !important;
+  border: 0 !important;
+  background: transparent !important;
+  width: auto;
+  min-width: 32px;
+}
+.delta-menu-trigger {
+  font:
+    700 12px var(--font-tt-norms-expanded),
+    sans-serif !important;
+  text-transform: uppercase;
+  padding: 12px 8px;
+  cursor: pointer;
+}
+.delta-header-tools svg {
+  width: 17px;
+  height: 17px;
+}
+@media (max-width: 1150px) {
+  .delta-logo {
+    width: 65px;
+  }
+  .delta-logo img {
+    width: 60px;
+  }
+}
+@media (max-width: 800px) {
+  .delta-header {
+    top: 30px;
+  }
+  .delta-logo {
+    top: -7px;
+    width: 80px;
+  }
+  .delta-logo img {
+    width: 80px;
+  }
+}
+.delta-logo img {
+  filter: invert(91%) sepia(15%) saturate(420%) hue-rotate(335deg)
+    brightness(100%);
+}
+.delta-header {
+  top: 30px;
+}
+@media (max-width: 1290px) {
+  .delta-header {
+    top: 42px;
+  }
+  .delta-logo {
+    top: -14px;
+  }
+}
+.delta-header,
+.delta-nav {
+  font-family: var(--font-ui), sans-serif;
+}
+.delta-logo {
+  filter: none;
+}
+.delta-logo img,
+.delta-footer-mark img {
+  filter: brightness(0) invert(1) !important;
+}
+.delta-header-tools,
+.delta-sound,
+.delta-nav > div {
+  background: #020304c9;
+}
+.delta-header a:focus-visible,
+.delta-header button:focus-visible {
+  outline: 2px solid #58c8ed;
+  outline-offset: 4px;
+}
+.delta-header[data-surface="light"] .delta-logo img {
+  filter: brightness(0) !important;
+}
+.delta-header-phone {
+  font:
+    400 12px/1.4 var(--font-ui),
+    sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  color: inherit;
+  text-shadow: 0 1px 8px #0004;
+}
+.delta-header[data-surface="light"] .delta-header-phone {
+  color: #122a38;
+  text-shadow: none;
+}
+.delta-header-tools {
+  margin-left: auto;
+  gap: 3px;
+}
+@media (max-width: 700px) {
+  .delta-header {
+    left: 12px;
+    right: 12px;
+    top: 18px;
+    height: auto;
+    align-items: flex-start;
+  }
+  .delta-header-phone {
+    font-size: 10px;
+    max-width: 110px;
+    padding-top: 12px;
+  }
+  .delta-header-tools {
+    margin-top: 62px;
+    min-height: 42px;
+    padding: 0 5px;
+    gap: 0;
+  }
+  .delta-header .delta-logo {
+    top: 0;
+  }
+}
+@media (max-width: 700px) {
+  .delta-header-tools {
+    position: absolute;
+    right: 0;
+    top: 62px;
+    margin-top: 0;
+  }
+}
+
+.delta-header .delta-header-phone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font:
+    400 16px/1.4 var(--font-ui),
+    sans-serif;
+  max-width: none;
+  padding-top: 0;
+}
+@media (max-width: 700px) {
+  .delta-header .delta-header-phone {
+    font-size: 12px;
+  }
+}
+.delta-header {
+  justify-content: flex-end;
+}
+html[data-site="public"] .delta-header :is(button, a) {
+  font-weight: 400 !important;
+  font-synthesis: none;
+}
+
+/* Slightly larger navigation, shared by both VOI versions. */
+.delta-header {
+  height: 52px;
+}
+.delta-header-tools {
+  min-height: 52px;
+  padding: 0 10px;
+  gap: 5px;
+}
+.delta-header-tools svg {
+  width: 20px;
+  height: 20px;
+}
+.delta-header .delta-menu-trigger {
+  font-size: 13px !important;
+  padding: 14px 10px;
+}
+.delta-header .delta-header-phone {
+  font-size: 18px;
+}
+@media (max-width: 700px) {
+  .delta-header {
+    height: auto;
+  }
+  .delta-header-tools {
+    min-height: 48px;
+    padding: 0 7px;
+    gap: 2px;
+  }
+  .delta-header .delta-header-phone {
+    font-size: 13px;
+  }
+  .delta-header .delta-menu-trigger {
+    font-size: 12px !important;
+    padding: 12px 7px;
+  }
+}
+
+.delta-header {
+  left: clamp(24px, 3vw, 56px);
+  right: clamp(24px, 3vw, 56px);
+}
+@media (max-width: 700px) {
+  .delta-header {
+    left: 20px;
+    right: 20px;
+  }
+}
+
+.delta-header-desktop-tools {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+@media (max-width: 767px) {
+  .delta-header .delta-header-phone,
+  .delta-header .delta-header-desktop-tools {
+    display: none;
+  }
+  .delta-header {
+    top: 18px;
+    height: 48px;
+    align-items: center;
+  }
+  .delta-header .delta-header-tools {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 0;
+  }
+  .delta-header .delta-logo {
+    top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .delta-header .delta-logo {
+    display: none;
+  }
+}

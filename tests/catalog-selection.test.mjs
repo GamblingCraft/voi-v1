@@ -75,3 +75,17 @@ test("removing one filter preserves and safely encodes the other selections", ()
   assert.equal(url.searchParams.get("q"), "Куб & лёд");
   assert.equal(url.searchParams.get("usage"), "spirits");
 });
+
+test("removing a filter stays in the loose or block category", () => {
+  for (const category of ["loose", "block"]) {
+    const href = catalogFilterHref(
+      { shape: category, usage: "all", q: "лёд", sort: "name" },
+      "shape",
+      `/catalog/${category}`,
+    );
+    const url = new URL(href, "https://example.com");
+    assert.equal(url.pathname, `/catalog/${category}`);
+    assert.equal(url.searchParams.has("shape"), false);
+    assert.equal(url.searchParams.get("q"), "лёд");
+  }
+});

@@ -29,11 +29,17 @@
 }
 .ritual {
   --scene-height: 240svh;
+  z-index: 4;
+  margin-top: -100svh;
+  background: var(--story-paper);
 }
 .journey {
   --scene-height: 650svh;
 }
 @media (prefers-reduced-motion: reduce) {
+  .ritual {
+    margin-top: 0;
+  }
   .scene[data-motion="scroll"] {
     height: auto;
   }

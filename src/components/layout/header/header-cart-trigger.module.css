@@ -50,3 +50,7 @@
     display: none;
   }
 }
+
+.cartButton {border-radius:999px;transition:background-color 180ms ease}
+
+@media(prefers-reduced-motion:reduce){.cartButton{transition:none}}

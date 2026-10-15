@@ -15,7 +15,7 @@ export function CatalogContact() {
           Для заведения, события или личного заказа. Расскажите о формате подачи
           и объёме — обсудим подходящий вариант.
         </p>
-        <Link className={shellStyles.actionLink} href="/contacts#inquiry">
+        <Link data-ui-action className={shellStyles.actionLink} href="/contacts#inquiry">
           Обсудить заказ
         </Link>
       </div>

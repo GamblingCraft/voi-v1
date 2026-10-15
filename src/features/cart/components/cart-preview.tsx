@@ -21,6 +21,7 @@ export function CartPreview({
       className={cartStyles.preview}
       aria-label="Корзина"
     >
+      <div className={cartStyles.content}>
       <div className={cartStyles.previewTitle}>
         <h2>Корзина</h2>
         <button type="button" aria-label="Закрыть корзину" onClick={onClose}>
@@ -30,7 +31,7 @@ export function CartPreview({
       {items.length === 0 ? (
         <div className={cartStyles.empty}>
           <p>В корзине пока нет товаров</p>
-          <Link href={localizePath("/catalog", locale)} onClick={onClose}>
+          <Link data-ui-action href={localizePath("/catalog", locale)} onClick={onClose}>
             Перейти в каталог
           </Link>
         </div>
@@ -50,11 +51,12 @@ export function CartPreview({
             <span>Упаковок: {count}</span>
             <strong>{total.toLocaleString("ru-RU")} ₽</strong>
           </div>
-          <button type="button" className={cartStyles.checkout} disabled>
+          <button data-ui-action type="button" className={cartStyles.checkout} disabled>
             Оформить заказ
           </button>
         </>
       )}
+      </div>
     </section>
   );
 }

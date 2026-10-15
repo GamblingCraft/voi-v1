@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef, type ReactNode } from "react";
+import Image from "next/image";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { useHeroIntroAnimation } from "./use-hero-intro-animation";
 import styles from "./hero-loader.module.css";
@@ -14,12 +15,12 @@ type HeroLoaderProps = {
 };
 
 const openingShots = [
-  "#f6f8f8",
-  "#d4d8da",
-  "#a1a8ac",
-  "#687279",
-  "#303a40",
-  "#000000",
+  "/media/cooperation/1.webp",
+  "/media/cooperation/2.webp",
+  "/media/cooperation/3.webp",
+  "/media/cooperation/5.webp",
+  "/media/cooperation/6.webp",
+  "/media/cooperation/7.webp",
 ];
 
 export function HeroLoader({
@@ -88,15 +89,22 @@ export function HeroLoader({
           <video ref={videoRef} muted playsInline preload="auto">
             <source src="/media/hero/main.mp4" type="video/mp4" />
           </video>
-          {openingShots.map((color, index) => (
+          {openingShots.map((src, index) => (
             <div
-              key={color}
+              key={src}
               ref={(node) => {
                 shotRefs.current[index] = node;
               }}
               className={styles.openingShot}
-              style={{ backgroundColor: color }}
-            />
+            >
+              <Image
+                src={src}
+                alt=""
+                fill
+                sizes="(max-width: 767px) 24vw, 18vw"
+                loading="eager"
+              />
+            </div>
           ))}
         </div>
       </div>

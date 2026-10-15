@@ -33,7 +33,7 @@ export function EditorialHero({
         </h2>
         <div className={styles.bottom}>
           <p>{description}</p>
-          <Link className={sharedStyles.button} href={href}>
+          <Link data-ui-action className={sharedStyles.button} href={href}>
             {cta}
           </Link>
         </div>

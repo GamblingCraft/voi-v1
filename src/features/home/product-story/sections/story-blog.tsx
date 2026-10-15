@@ -1,3 +1,4 @@
+import { StoryEyebrow } from "../components/story-eyebrow";
 import Image from "next/image";
 import Link from "next/link";
 import { getArticles } from "@/features/blog/articles";
@@ -14,13 +15,16 @@ export function StoryBlog() {
       data-header-theme="light"
     >
       <div className={styles.heading}>
-        <h2 id="story-blog-title">Журнал ВОЙ</h2>
+        <div>
+          <StoryEyebrow>Культура льда</StoryEyebrow>
+          <h2 id="story-blog-title">Журнал ВОЙ</h2>
+        </div>
         <div>
           <p>
             Лёд, рецепты и культура подачи. Практика для бара и вашего
             следующего события.
           </p>
-          <Link className={styles.allArticles} href="/blog">
+          <Link data-ui-action className={styles.allArticles} href="/blog">
             Все статьи
           </Link>
         </div>

@@ -92,7 +92,7 @@ export function ProductPurchase({
           </div>
         ) : (
           <button
-            className={styles.buy}
+            data-ui-action className={styles.buy}
             type="button"
             onClick={() => addToCart(product.id, weight)}
             aria-label={`Купить ${productTitle(product, weight)} за ${previewPackPrice} рублей`}

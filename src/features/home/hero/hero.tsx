@@ -1,14 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import {
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
   useSyncExternalStore,
 } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { SoundToggle, useSiteAudio } from "@/components/layout/site-audio";
+import { useSiteAudio } from "@/components/layout/site-audio";
 import { HeroLoader } from "./hero-loader";
 import { useVideoScrubber } from "@/components/media/use-video-scrubber";
 import styles from "@/components/media/video-hero.module.css";
@@ -51,6 +53,9 @@ export function Hero({ dictionary, introDictionary }: HeroProps) {
     serverReady,
   );
   const introComplete = finished || previouslyCompleted;
+  useEffect(() => {
+    if (introComplete) playSound();
+  }, [introComplete, playSound]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const videoReady = useVideoScrubber({
@@ -104,10 +109,6 @@ export function Hero({ dictionary, introDictionary }: HeroProps) {
     playSound();
   }, [playSound]);
 
-  const soundControl = (revealed || introComplete) && (
-    <SoundToggle className={styles.soundControl} />
-  );
-
   return (
     <section
       ref={heroRef}
@@ -116,6 +117,7 @@ export function Hero({ dictionary, introDictionary }: HeroProps) {
       aria-describedby="hero-interaction"
       tabIndex={0}
       data-hero-intro-active={!introComplete || undefined}
+      data-hero-revealed={revealed || introComplete || undefined}
     >
       <video
         ref={videoRef}
@@ -127,12 +129,25 @@ export function Hero({ dictionary, introDictionary }: HeroProps) {
         preload="auto"
       />
 
-      <h1 id="hero-title" className={styles.seoTitle}>
-        {dictionary.title}
-      </h1>
+      <div className={styles.caption}>
+        <h1 id="hero-title" className={styles.title}>
+          {dictionary.title}
+        </h1>
+        <div className={styles.details}>
+          <p className={styles.subtitle}>{dictionary.description}</p>
+          <div className={styles.actions}>
+            <Link data-ui-action className={styles.secondaryAction} href="/catalog">{dictionary.catalogAction}</Link>
+            <Link data-ui-action className={styles.secondaryAction} href="/cooperation">{dictionary.cooperationAction}</Link>
+          </div>
+        </div>
+      </div>
+      <div className={styles.scrollCue} aria-hidden="true">
+        <span className={styles.scrollLine} />
+        <span className={styles.scrollLabel}>Погрузиться</span>
+      </div>
       <p id="hero-interaction" className={styles.seoTitle}>
         Вращайте объект перетаскиванием влево или вправо или стрелками
-        клавиатуры.
+        клавиатуры. Прокрутите вниз, чтобы продолжить.
       </p>
 
       {introChecked && !introComplete && (
@@ -141,10 +156,9 @@ export function Hero({ dictionary, introDictionary }: HeroProps) {
           dictionary={introDictionary}
           onComplete={completeIntro}
           onReveal={revealHero}
-          soundControl={soundControl}
+          soundControl={null}
         />
       )}
-      {introComplete && soundControl}
     </section>
   );
 }

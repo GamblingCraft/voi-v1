@@ -73,9 +73,9 @@ export function BlogPage({ query, topic }: { query: string; topic: string }) {
                 <aside className={styles.banner}>
                   <div>
                     <p>От идеи — к выбору</p>
-                    <h2>Лёд, который подходит вашей подаче.</h2>
+                    <h2>Лёд, который подходит вашей подаче</h2>
                   </div>
-                  <Link href="/catalog" className={styles.button}>
+                  <Link data-ui-action href="/catalog" className={styles.button}>
                     Перейти в каталог
                   </Link>
                 </aside>

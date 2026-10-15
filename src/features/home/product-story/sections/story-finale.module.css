@@ -50,6 +50,6 @@
   .note {
     bottom: 45%;
     left: 6%;
-    font-size: 18px;
+    font-size: var(--type-body-size);
   }
 }

@@ -24,14 +24,17 @@
   margin: 0;
   font-family: var(--font-tt-norms-expanded), sans-serif;
   font-size: 6.5vw;
-  font-weight: 400;
+  font-weight: 600;
+  font-synthesis: weight;
   line-height: 1.05;
   letter-spacing: -0.025em;
   perspective: 800px;
   text-transform: uppercase;
 }
 
-.openingWord {
+.loader .openingWord {
+  font-weight: 600;
+  font-synthesis: weight;
   position: absolute;
   display: block;
   margin: 0;
@@ -106,6 +109,10 @@
   display: none;
   background: #000;
   transform: translateZ(0);
+}
+
+.openingShot img {
+  object-fit: cover;
 }
 
 @media (max-width: 47.99rem) {

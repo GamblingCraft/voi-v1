@@ -8,7 +8,15 @@ const media = "Lorem ipsum";
 // Placeholder copy for the Russian prototype; CMS content will replace it later.
 export const productStoryContent = {
   ariaLabel: "Lorem ipsum",
-  origin: { title: heading, note: paragraph, waterMedia: media },
+  origin: {
+    title: ["Сотворён Байкалом"],
+    note: "Воплощён в гастрономическое искусство.",
+    quote: {
+      text: "Байкал — это не просто озеро, а настоящее море. Оно поражает своей красотой, величием и таинственностью",
+      author: "Антон Павлович Чехов",
+    },
+    waterMedia: media,
+  },
   production: {
     eyebrow: "Lorem ipsum",
     steps: [
@@ -41,20 +49,37 @@ export const productStoryContent = {
     ],
   },
   journey: {
-    title: "Lorem ipsum",
-
-    ariaLabel: "Lorem ipsum",
-    baikal: { description: paragraph, media },
-    water: { title: heading, description: paragraph, media },
-    production: {
-      title: heading,
-
-      description: paragraph,
-      media,
-      teamMedia: media,
-    },
-    form: { title: heading, description: paragraph, media, detailMedia: media },
-    glass: { title: heading, description: paragraph, media },
+    ariaLabel: "Путь льда ВОЙ — от воды до подачи",
+    chapters: [
+      {
+        id: "water",
+        title: ["В основе", "Байкал"],
+        description: paragraph,
+        image: "/media/cooperation/2.webp",
+        alt: "Прозрачные кубы льда крупным планом",
+      },
+      {
+        id: "production",
+        title: ["Характер", "рождается здесь"],
+        description: paragraph,
+        image: "/media/production/sections/33.webp",
+        alt: "Формование льда на производственной линии",
+      },
+      {
+        id: "form",
+        title: ["У каждой формы", "своя роль"],
+        description: paragraph,
+        image: "/media/products/ice-blocks-cutout.png",
+        alt: "Прозрачные ледяные блоки разного размера",
+      },
+      {
+        id: "serving",
+        title: ["Лёд становится", "частью подачи"],
+        description: paragraph,
+        image: "/media/product/hero/1.webp",
+        alt: "Сфера льда в бокале с напитком на барной стойке",
+      },
+    ],
   },
   finale: { title: heading, media, note: paragraph },
   faq: {

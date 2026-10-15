@@ -7,6 +7,7 @@ import { ProductDetails } from "./components/product-details";
 import { RecentlyViewed } from "./components/recently-viewed";
 import { getProductArticles } from "@/features/blog/articles";
 import { CatalogCard } from "../components/catalog-card";
+import { iceFormats } from "../ice-formats";
 import shellStyles from "../styles/catalog-shell.module.css";
 import pageStyles from "../styles/product-page.module.css";
 import recommendationsStyles from "./components/product-recommendations.module.css";
@@ -17,6 +18,7 @@ export function ProductPage({
   locale: Locale;
 }) {
   const products = getCatalogProducts();
+  const format = iceFormats.find((item) => item.id === product.category)!;
   return (
     <main
       id="top"
@@ -27,7 +29,7 @@ export function ProductPage({
         items={[
           { name: "ВОЙ", path: "/" },
           { name: "Каталог", path: "/catalog" },
-          { name: "Формованный лёд", path: "/catalog/formed" },
+          { name: format.name, path: format.href },
           { name: product.name, path: product.catalogHref },
         ]}
       />
@@ -36,7 +38,7 @@ export function ProductPage({
         <BreadcrumbSeparator />
         <Link href="/catalog">Каталог</Link>
         <BreadcrumbSeparator />
-        <Link href="/catalog/formed">Формованный лёд</Link>
+        <Link href={format.href}>{format.name}</Link>
         <BreadcrumbSeparator />
         <span aria-current="page">{product.form}</span>
       </nav>

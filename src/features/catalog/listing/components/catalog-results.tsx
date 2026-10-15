@@ -3,34 +3,53 @@ import resultsStyles from "./catalog-results.module.css";
 import shellStyles from "../../styles/catalog-shell.module.css";
 import { CatalogCard } from "../../components/catalog-card";
 import { usageOptions } from "../../catalog-model";
+import type { IceFormat } from "../../ice-formats";
+import { getCatalogProducts } from "../../catalog.content";
 import {
   catalogFilterHref,
   type CatalogSelection,
 } from "../../catalog-selection";
 
-export function CatalogResults({ selection }: { selection: CatalogSelection }) {
+export function CatalogResults({
+  selection,
+  format,
+}: {
+  selection: CatalogSelection;
+  format: IceFormat;
+}) {
   const { products, shape, usage, q, sort, filters } = selection;
   const withoutFilter = (key: "shape" | "usage" | "q") =>
-    catalogFilterHref(selection, key);
+    catalogFilterHref(selection, key, format.href);
+  const categoryProducts = getCatalogProducts().filter(
+    (product) => product.category === format.id,
+  );
   return (
     <div className={resultsStyles.results}>
       <div className={resultsStyles.resultsHeading}>
-        <h2 id="collection-title">Формованный лёд</h2>
-        <p>Куб, сфера и цилиндр — формы для разных бокалов и рецептов.</p>
+        <h2 id="collection-title">{format.name}</h2>
+        <p>{format.description}</p>
       </div>
       <nav
         className={resultsStyles.quickFilters}
         aria-label="Быстрый подбор по подаче"
       >
-        {usageOptions.map((item) => (
-          <Link
-            key={item.id}
-            href={`/catalog/formed?${new URLSearchParams({ shape, usage: item.id, q, sort }).toString()}#discover`}
-            aria-current={usage === item.id ? "page" : undefined}
-          >
-            {item.label}
-          </Link>
-        ))}
+        {usageOptions
+          .filter(
+            (option) =>
+              option.id === "all" ||
+              categoryProducts.some((product) =>
+                product.usage.includes(option.id),
+              ),
+          )
+          .map((item) => (
+            <Link
+              key={item.id}
+              href={`${format.href}?${new URLSearchParams({ shape, usage: item.id, q, sort }).toString()}#discover`}
+              aria-current={usage === item.id ? "page" : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
       </nav>
       <div className={resultsStyles.resultBar}>
         <p role="status">
@@ -75,7 +94,10 @@ export function CatalogResults({ selection }: { selection: CatalogSelection }) {
               <span aria-hidden="true">×</span>
             </Link>
           ))}
-          <Link className={resultsStyles.clear} href="/catalog/formed#discover">
+          <Link
+            className={resultsStyles.clear}
+            href={`${format.href}#discover`}
+          >
             Сбросить всё
           </Link>
         </div>
@@ -91,7 +113,7 @@ export function CatalogResults({ selection }: { selection: CatalogSelection }) {
           <p>
             Измените запрос или снимите фильтры, чтобы увидеть все формы льда.
           </p>
-          <Link className={shellStyles.button} href="/catalog/formed#discover">
+          <Link data-ui-action className={shellStyles.button} href={`${format.href}#discover`}>
             Показать все формы
           </Link>
         </div>

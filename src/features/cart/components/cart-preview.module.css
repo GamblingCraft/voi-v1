@@ -183,3 +183,14 @@
     gap: 8px;
   }
 }
+
+/* The same separate glass layer as the footer and hero controls. */
+.preview {background:transparent;color:#f6f8f8;border:0;border-radius:8px;box-shadow:none;isolation:isolate;z-index:5}
+.preview::before {content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:rgb(20 14 7 / 40%);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.items li,.quantity {border-color:#ffffff30}
+.photo {background:#ffffff14}
+.checkout {background:#ffffff12;color:#f6f8f8;border:1px solid #ffffff30}
+.preview :is(button,a):focus-visible {outline-color:currentColor}
+
+.preview {padding:8px}
+.content {position:relative;padding:12px;background:rgb(0 0 0 / 28%);border-radius:6px}

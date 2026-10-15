@@ -10,6 +10,7 @@ type CloudTransitionProps = {
   hero: ReactNode;
   mode?: "parallax" | "clouds";
   id?: string;
+  smoothScroll?: boolean;
   children?: ReactNode;
 };
 
@@ -18,15 +19,16 @@ export function CloudTransition({
   children,
   mode = "parallax",
   id,
+  smoothScroll = mode === "parallax",
 }: CloudTransitionProps) {
   const styles = mode === "clouds" ? cloudStyles : parallaxStyles;
   const sceneRef = useRef<HTMLElement>(null);
 
-  useCloudTransition(sceneRef, mode);
+  useCloudTransition(sceneRef, mode, smoothScroll);
 
   return (
     <>
-      <section id={id} ref={sceneRef} className={styles.scene} data-cloud-scene>
+      <section id={id} ref={sceneRef} className={styles.scene} data-cloud-scene data-cloud-mode={mode}>
         <div className={styles.stage} data-cloud-stage>
           <div className={styles.hero}>{hero}</div>
           {mode === "clouds" && (
@@ -64,7 +66,7 @@ export function CloudTransition({
       <section
         className={styles.contentSection}
         data-cloud-transition-content
-        data-hero-following={mode === "parallax" || undefined}
+        data-hero-following={smoothScroll || undefined}
       >
         {children ? <div className={styles.content}>{children}</div> : null}
       </section>

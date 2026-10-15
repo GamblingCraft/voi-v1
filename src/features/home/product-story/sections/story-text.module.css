@@ -1,22 +1,49 @@
 .section {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
-  align-items: start;
-  gap: 10%;
-  padding: clamp(80px, 12vw, 180px) var(--page-gutter);
+  padding: var(--story-section-space) var(--page-gutter);
   background: var(--story-paper);
 }
-.section h2 {
+.heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 36px;
+  margin-bottom: 56px;
+}
+.heading h2 {
+  grid-column: 2 / -1;
   margin: 0;
   font:
-    400 clamp(40px, 5vw, 80px)/1.05 var(--font-story-display),
+    400 var(--story-editorial-title)/1.1 var(--font-story-display),
     sans-serif;
-  letter-spacing: -0.035em;
-  overflow-wrap: anywhere;
+  letter-spacing: var(--type-heading-tracking);
+  text-transform: uppercase;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--story-column-gap);
+  align-items: stretch;
+}
+.mainImage,
+.detailImage {
+  position: relative;
+  overflow: hidden;
+}
+.mainImage {
+  min-height: 580px;
+}
+.mainImage img,
+.detailImage img {
+  object-fit: cover;
+}
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 .copy {
-  max-width: 55ch;
-  font-size: clamp(18px, 1.4vw, 20px);
+  max-width: 48ch;
+  font-size: var(--type-body-size);
   line-height: 1.5;
   color: var(--story-muted);
 }
@@ -26,9 +53,38 @@
 .copy p + p {
   margin-top: 24px;
 }
-@media (max-width: 700px) {
-  .section {
-    grid-template-columns: 1fr;
+.detailImage {
+  width: 100%;
+  aspect-ratio: 1.5;
+  margin-top: auto;
+}
+@media (max-width: 1000px) {
+  .heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .heading h2 {
+    grid-column: auto;
+  }
+}
+@media (max-width: 800px) {
+  .heading {
+    margin-bottom: 32px;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
+  }
+  .mainImage {
+    min-height: 0;
+    aspect-ratio: 1.1;
+  }
+  .detail {
+    gap: 32px;
+  }
+  .detailImage {
+    width: 80%;
+    align-self: flex-end;
+    aspect-ratio: 1.25;
   }
 }

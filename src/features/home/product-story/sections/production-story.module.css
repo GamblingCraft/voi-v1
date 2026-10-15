@@ -6,14 +6,15 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 .sectionCaption {
-  display: none;
-  position: absolute;
+  display: block;
+  position: relative;
+  padding: 48px var(--page-gutter) 0;
   top: 18%;
   left: 0;
-  width: 50%;
+  width: 100%;
   margin: 0;
   color: var(--story-muted);
-  text-align: center;
+  text-align: left;
 
   font-family: var(--font-display), sans-serif;
   font-size: var(--type-eyebrow-size);
@@ -24,11 +25,11 @@
 .step {
   display: flex;
   min-height: 75svh;
-  padding: 96px 16%;
+  padding: var(--story-section-space) var(--page-gutter);
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  text-align: center;
+  text-align: left;
 }
 .icon {
   width: 64px;
@@ -40,7 +41,9 @@
   stroke-width: 1.2;
 }
 .heading {
-  --story-heading-size: clamp(40px, 4.4vw, 80px);
+  --story-heading-size: var(--story-editorial-title);
+  text-transform: uppercase;
+  text-wrap: pretty;
   max-width: 100%;
 }
 .description {
@@ -67,19 +70,22 @@
 }
 :global([data-motion="scroll"]) .step {
   position: absolute;
-  inset: 29% 58% 12% 8%;
+  inset: 27% 57% 12% var(--page-gutter);
   min-height: 0;
   padding: 0;
   opacity: var(--step-opacity);
 }
 :global([data-motion="scroll"]) .media {
   position: absolute;
-  inset: 0 0 0 50%;
+  inset: calc(var(--header-height) + 40px) var(--page-gutter) 64px 50%;
   min-height: 0;
   opacity: var(--step-opacity);
 }
 :global([data-motion="scroll"]) .sectionCaption {
-  display: block;
+  position: absolute;
+  left: var(--page-gutter);
+  width: calc(45% - var(--page-gutter));
+  padding: 0;
 }
 @media (max-width: 43.75rem) {
   .stage {
@@ -87,21 +93,24 @@
   }
   .step {
     min-height: 52svh;
-    padding: 48px 6%;
+    padding: 48px var(--page-gutter);
   }
   .media {
     min-height: 48svh;
   }
   .sectionCaption {
     top: 11.44%;
-    width: 100%;
+    width: calc(100% - 2 * var(--page-gutter));
     font-size: var(--type-eyebrow-size);
   }
+  :global([data-motion="scroll"]) .sectionCaption {
+    width: calc(100% - 2 * var(--page-gutter));
+  }
   :global([data-motion="scroll"]) .step {
-    inset: 16.64% 8% 50.6%;
+    inset: 16.64% var(--page-gutter) 50.6%;
   }
   :global([data-motion="scroll"]) .media {
-    inset: 52% 0 0;
+    inset: 52% var(--page-gutter) 24px;
   }
   .icon {
     width: 32px;
@@ -122,10 +131,10 @@
     font-size: var(--type-eyebrow-size);
   }
   :global([data-motion="scroll"]) .step {
-    inset: calc(var(--header-height) + 32px) 8% 46%;
+    inset: calc(var(--header-height) + 32px) var(--page-gutter) 46%;
   }
   :global([data-motion="scroll"]) .media {
-    inset: 56% 0 0;
+    inset: 56% var(--page-gutter) 24px;
   }
   .icon {
     width: 24px;
@@ -149,7 +158,7 @@
     position: relative;
     inset: auto;
     min-height: 75svh;
-    padding: 96px 16%;
+    padding: var(--story-section-space) var(--page-gutter);
     opacity: 1;
   }
   :global([data-motion="scroll"]) .media {
@@ -159,13 +168,16 @@
     opacity: 1;
   }
   .sectionCaption {
-    display: none !important;
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    padding: 48px var(--page-gutter) 0 !important;
   }
 }
 @media (prefers-reduced-motion: reduce) and (max-width: 43.75rem) {
   :global([data-motion="scroll"]) .step {
     min-height: 52svh;
-    padding: 48px 6%;
+    padding: 48px var(--page-gutter);
   }
   :global([data-motion="scroll"]) .media {
     min-height: 48svh;

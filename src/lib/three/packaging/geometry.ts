@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import type { ModelKind as ProductKind } from "@/lib/three/types";
 import { at } from "./build-config";
+import { zipPanelPoint } from "./zip-profile";
 export function mesh(
   name: string,
   geometry: THREE.BufferGeometry,
@@ -32,6 +33,20 @@ export function pouchSurface(
         v = y / ny,
         a = u * 2 - 1,
         b = v * 2 - 1;
+      if (kind === "zip") {
+        const point = zipPanelPoint(
+          w,
+          h,
+          depth,
+          u,
+          v,
+          side,
+          at("form-refinement"),
+        );
+        positions.push(point.x, point.y, point.z);
+        uvs.push(u, v);
+        continue;
+      }
       const waist =
         kind === "pvd"
           ? 1 - 0.1 * Math.sin(Math.PI * v)
@@ -43,14 +58,6 @@ export function pouchSurface(
       let z = 0.008 + depth * 0.5 * pin;
       if (kind !== "pvd" && v > 0.87)
         z = 0.008 + depth * 0.5 * pin * Math.max(0.08, (1 - v) / 0.13);
-      const standup = kind === "zip";
-      const baseOpening = standup
-        ? depth * 0.58 * Math.sqrt(Math.max(0, 1 - a * a)) * Math.exp(-v * 10)
-        : 0;
-      z += baseOpening;
-      const bottomHem = standup
-        ? 0.18 * Math.sin(Math.PI * u) * Math.exp(-v * 16)
-        : 0;
       if (at("form-refinement")) {
         const edge = Math.exp(-Math.min(u, 1 - u) * 13),
           shoulder = Math.exp(-Math.abs(v - 0.86) * 25);
@@ -68,11 +75,7 @@ export function pouchSurface(
           diagonal +
           shoulder * Math.sin(u * 56) * 0.008;
       }
-      positions.push(
-        a * w * 0.5 * waist * corner,
-        b * h * 0.5 + bottomHem,
-        side * z,
-      );
+      positions.push(a * w * 0.5 * waist * corner, b * h * 0.5, side * z);
       uvs.push(u, v);
     }
   for (let y = 0; y < ny; y++)
@@ -101,13 +104,13 @@ export function bottomGusset(w: number, h: number, depth: number) {
     for (let x = 0; x <= nx; x++) {
       const u = x / nx,
         v = z / nz,
-        a = u * 2 - 1,
         b = v * 2 - 1,
-        arc = Math.sqrt(Math.max(0, 1 - a * a));
+        arc = Math.sin(Math.PI * u);
+      const rim = zipPanelPoint(w, h, depth, u, 0, 1);
       positions.push(
-        a * w * 0.5 * 0.955,
-        -h * 0.5 + 0.18 * Math.sin(Math.PI * u) * Math.abs(b),
-        b * (0.008 + depth * 0.58 * arc),
+        rim.x,
+        rim.y + 0.16 * arc * (1 - Math.abs(b)) ** 1.4,
+        b * rim.z,
       );
       uvs.push(u, v);
     }
@@ -117,7 +120,7 @@ export function bottomGusset(w: number, h: number, depth: number) {
         b = a + 1,
         c = a + nx + 1,
         d = c + 1;
-      indices.push(a, d, b, a, c, d);
+      indices.push(a, b, d, a, d, c);
     }
   const geo = new THREE.BufferGeometry();
   geo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));

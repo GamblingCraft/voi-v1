@@ -2,6 +2,7 @@ import Link from "next/link";
 import { iceFormats } from "@/features/catalog/ice-formats";
 import { productFaq } from "@/features/content/landing.content";
 import { Faq } from "@/features/content/components/faq";
+import faqStyles from "@/features/content/components/faq.module.css";
 import { ClosingCta } from "@/features/content/components/closing-cta";
 import shared from "@/features/content/styles/landing.module.css";
 import styles from "./product-guide.module.css";
@@ -13,9 +14,9 @@ export function ProductGuide() {
         <div className={styles.heading}>
           <p>Выбор льда</p>
           <h2 id="ice-choice-heading">
-            Сначала задача.
+            Сначала задача
             <br />
-            Затем форма.
+            Затем форма
           </h2>
         </div>
         <div className={styles.formats}>
@@ -28,7 +29,7 @@ export function ProductGuide() {
           ))}
         </div>
       </section>
-      <section className={styles.questions}>
+      <section className={faqStyles.section} data-header-theme="light">
         <h2>
           Перед
           <br />

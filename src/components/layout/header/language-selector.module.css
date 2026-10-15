@@ -115,3 +115,25 @@
   cursor: default;
   background: transparent;
 }
+
+/* Compact globe control and soft dropdown, matching the reference utilities. */
+.trigger {gap:8px;min-height:44px;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.options {border-radius:10px;padding:6px;background:rgba(246,248,248,.94);backdrop-filter:blur(12px);box-shadow:0 8px 28px #00000012;transform:translateY(-6px) scale(.97);transform-origin:top right}
+.optionsOpen {transform:translateY(0) scale(1)}
+.option {border-radius:6px;font-size:12px;transition:background .2s}
+.optionCode {font-size:12px}
+.languageSelector[data-theme="dark"] .options {background:rgba(25,30,32,.9)}
+
+.globe {display:block;flex-shrink:0}
+.continents {animation:continentsDrift 5s linear infinite;animation-play-state:paused}
+.trigger[aria-expanded="true"] .continents {animation-play-state:running}
+@media(hover:hover){.trigger:hover .continents {animation-play-state:running}}
+@keyframes continentsDrift {to{transform:translateX(-48px)}}
+@media(prefers-reduced-motion:reduce){.continents{animation:none}}
+
+.options,.languageSelector[data-theme="dark"] .options {background:transparent;color:#f6f8f8;backdrop-filter:none;box-shadow:none;isolation:isolate}
+.options::before {content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:rgb(20 14 7 / 40%);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);pointer-events:none}
+.option:hover,.option[aria-pressed="true"] {background:#ffffff18}
+
+.options .option[aria-pressed="true"],
+.languageSelector[data-theme="dark"] .options .option[aria-pressed="true"] {background:rgb(0 0 0 / 28%)}

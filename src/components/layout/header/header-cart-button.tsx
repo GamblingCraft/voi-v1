@@ -62,6 +62,7 @@ export function HeaderCartButton({
       <button
         ref={trigger}
         className={triggerStyles.cartButton}
+        data-has-items={count > 0 ? "true" : undefined}
         type="button"
         aria-label={`${label.replace("{count}", String(count))}. Сумма ${total} рублей`}
         aria-expanded={open}
@@ -70,15 +71,12 @@ export function HeaderCartButton({
       >
         <span className={triggerStyles.iconWrap}>
           <ShoppingCart size={22} strokeWidth={1.6} aria-hidden="true" />
-          <span className={triggerStyles.badge} aria-hidden="true">
-            {count > 99 ? "99+" : count}
-          </span>
+          {count >= 1 && (
+            <span className={triggerStyles.badge} aria-hidden="true">
+              {count > 99 ? "99+" : count}
+            </span>
+          )}
         </span>
-        {count > 0 && (
-          <span className={triggerStyles.total}>
-            {total.toLocaleString("ru-RU")} ₽
-          </span>
-        )}
       </button>
       {open && (
         <CartPreview

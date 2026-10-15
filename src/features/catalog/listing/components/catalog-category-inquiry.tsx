@@ -35,7 +35,7 @@ export function CatalogCategoryInquiry({ format }: { format: IceFormat }) {
         <p className={categoryStyles.muted}>
           Размеры, фасовку и стоимость согласуем при обращении.
         </p>
-        <Link className={shellStyles.button} href="/contacts#inquiry">
+        <Link data-ui-action className={shellStyles.button} href="/contacts#inquiry">
           Обсудить поставку
         </Link>
       </div>

@@ -51,6 +51,39 @@ const productRecords: Omit<CatalogProduct, "slug" | "catalogHref">[] = [
       "Для хайболов и лонг-дринков. При подборе учитывайте высоту и внутренний диаметр бокала.",
     glass: "Хайбол / коллинз",
   },
+  {
+    id: "loose",
+    category: "loose",
+    code: "04",
+    name: "Рассыпной лёд",
+    form: "Рассыпной",
+    image: "/media/products/loose-pack-cutout.png",
+    packImage: "/media/products/loose-pack-cutout.png",
+    description:
+      "Лёд в пакете «ЭТО ПРОСТО ЛЁД» для охлаждения и быстрого сервиса.",
+    serving: "Для охлаждения",
+    usage: ["cooling"],
+    tags: ["cooling", "service", "loose"],
+    occasion:
+      "Для работы кухни и бара, охлаждения напитков и сервиса на мероприятиях.",
+    glass: "Для охлаждения и сервиса",
+  },
+  {
+    id: "block",
+    category: "block",
+    code: "05",
+    name: "Блочный лёд",
+    form: "Блок",
+    image: "/media/products/ice-blocks-cutout.png",
+    packImage: "/media/products/ice-blocks-cutout.png",
+    description: "Глыбы льда для ледяной резьбы, шоу и эффектной подачи.",
+    serving: "Для ледяной резьбы",
+    usage: ["carving"],
+    tags: ["carving", "events", "block"],
+    occasion:
+      "Для работы с формой, оформления ресторанной подачи и ледяных композиций.",
+    glass: "Для подачи и ледяной резьбы",
+  },
 ];
 
 const products: CatalogProduct[] = productRecords.map((product) => {

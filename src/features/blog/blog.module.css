@@ -1,3 +1,11 @@
+.page,
+:global(body):has(.page) {
+  --font-body: var(--font-tt-norms-expanded);
+  --type-body-weight: 400;
+  font-family: var(--font-tt-norms-expanded), Arial, sans-serif;
+  font-weight: 400;
+}
+
 .page {
   --ink: #182e3a;
   --muted: #53666e;
@@ -151,6 +159,8 @@
 }
 .news h2 {
   font-size: var(--type-card-title-size);
+  font-weight: 600;
+  font-synthesis: weight;
   margin-bottom: 12px;
 }
 .news > a {

@@ -9,6 +9,7 @@ import shellStyles from "./styles/catalog-shell.module.css";
 import styles from "./catalog-index.module.css";
 
 export function CatalogIndex({ locale }: { locale: Locale }) {
+  const products = getCatalogProducts();
   return (
     <main
       id="top"
@@ -29,7 +30,7 @@ export function CatalogIndex({ locale }: { locale: Locale }) {
       <section className={styles.selection} aria-labelledby="selection-title">
         <div className={styles.sectionHeading}>
           <h2 id="selection-title">Лёд для напитков</h2>
-          <Link
+          <Link data-ui-action
             className={shellStyles.actionLink}
             href={localizePath("/catalog/formed", locale)}
           >
@@ -37,9 +38,11 @@ export function CatalogIndex({ locale }: { locale: Locale }) {
           </Link>
         </div>
         <div className={styles.shopGrid}>
-          {getCatalogProducts().map((product) => (
-            <CatalogCard key={product.id} product={product} compact />
-          ))}
+          {products
+            .filter((product) => product.category === "formed")
+            .map((product) => (
+              <CatalogCard key={product.id} product={product} compact />
+            ))}
           <aside className={`${styles.photoCard} ${styles.guide}`}>
             <Image
               src="/media/product/hero/1.webp"
@@ -52,7 +55,7 @@ export function CatalogIndex({ locale }: { locale: Locale }) {
             <div className={styles.cardCopy}>
               <h3>Журнал ВОЙ</h3>
               <p>Рецепты, формы льда и тонкости барной подачи.</p>
-              <Link
+              <Link data-ui-action
                 className={`${shellStyles.actionLink} ${shellStyles.actionLight}`}
                 href={localizePath("/blog", locale)}
               >
@@ -60,6 +63,11 @@ export function CatalogIndex({ locale }: { locale: Locale }) {
               </Link>
             </div>
           </aside>
+          {products
+            .filter((product) => product.category !== "formed")
+            .map((product) => (
+              <CatalogCard key={product.id} product={product} compact />
+            ))}
         </div>
       </section>
       <section
@@ -80,7 +88,7 @@ export function CatalogIndex({ locale }: { locale: Locale }) {
               <br />в Иркутске
             </h2>
             <p>Байкальская вода. Собственное производство. Лёд ВОЙ.</p>
-            <Link
+            <Link data-ui-action
               className={`${shellStyles.actionLink} ${shellStyles.actionLight}`}
               href={localizePath("/production", locale)}
             >
@@ -103,7 +111,7 @@ export function CatalogIndex({ locale }: { locale: Locale }) {
               заведения
             </h2>
             <p>Прямые поставки для баров, ресторанов и отелей.</p>
-            <Link
+            <Link data-ui-action
               className={`${shellStyles.actionLink} ${shellStyles.actionLight}`}
               href={localizePath("/cooperation", locale)}
             >

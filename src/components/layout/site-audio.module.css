@@ -1,24 +1,11 @@
-.control {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-}
-.control svg {
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.control:hover {
-  opacity: 0.7;
-}
-.control:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
-}
+.control {display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:0;padding:0 8px;background:transparent;color:inherit;cursor:pointer;font:400 10px/1 var(--font-ui),sans-serif;letter-spacing:.04em;white-space:nowrap}
+.wave {display:flex;align-items:center;justify-content:center;gap:3px;width:32px;height:32px}
+.wave i {display:block;width:2px;height:3px;background:currentColor;border-radius:2px;transition:height .25s;transform-origin:center}
+.control[aria-pressed="true"] .wave i {height:18px;animation:pulse .85s ease-in-out infinite alternate}
+.control[aria-pressed="true"] .wave i:nth-child(2n) {animation-delay:-.5s;height:26px}
+.control[aria-pressed="true"] .wave i:nth-child(3n) {animation-delay:-.2s}
+.label span {opacity:.6}
+.control:focus-visible {outline:1px solid currentColor;outline-offset:3px;border-radius:6px}
+.control:hover .label {opacity:.7}
+@keyframes pulse {from{transform:scaleY(.25)}to{transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.control[aria-pressed="true"] .wave i{animation:none}}
